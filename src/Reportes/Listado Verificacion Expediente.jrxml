@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.4641000000000064"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="37"/>
+	<parameter name="CODIGO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FECHA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT NOMBRE FROM EMPLEADOS WHERE CODIGO IN(SELECT CODIGO FROM EMPLEADOS WHERE ESTADO = $P{CODIGO})]]>
+	</queryString>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="160" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="140" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nombre del Empleado]]></text>
+			</staticText>
+			<line>
+				<reportElement x="103" y="154" width="248" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="356" y="140" width="32" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<line>
+				<reportElement x="390" y="154" width="151" height="1"/>
+			</line>
+			<line>
+				<reportElement x="145" y="1" width="1" height="79"/>
+			</line>
+			<line>
+				<reportElement x="395" y="1" width="1" height="79"/>
+			</line>
+			<line>
+				<reportElement x="396" y="19" width="160" height="1"/>
+			</line>
+			<line>
+				<reportElement x="395" y="37" width="160" height="1"/>
+			</line>
+			<line>
+				<reportElement x="395" y="56" width="160" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="157" y="6" width="226" height="69"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18"/>
+				</textElement>
+				<text><![CDATA[Lista de Verificación de Expediente Laboral]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="1" width="142" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Version 03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="18" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Pagina 1 de 1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="38" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Nombre del Proceso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="57" width="159" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recursos Humanos]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="79" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="79"/>
+			</line>
+			<image>
+				<reportElement x="13" y="0" width="122" height="77"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\jluis\\Desktop\\logo2.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="555" y="0" width="1" height="80"/>
+			</line>
+			<textField>
+				<reportElement x="108" y="134" width="248" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMBRE}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="134" width="146" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{FECHA}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="416" splitType="Stretch">
+			<staticText>
+				<reportElement x="88" y="396" width="282" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Revisado Por:]]></text>
+			</staticText>
+			<elementGroup/>
+			<staticText>
+				<reportElement x="167" y="43" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Solicitud de empleo   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="63" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Hoja de vida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="83" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Constancias laborales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="103" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Cartas de recomendación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="123" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ Constancias de estudios realizados
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="143" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Carné IGSS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="163" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Carné IRTRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="183" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[NIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="203" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Cuenta bancaria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="223" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Copia DPI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="243" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Recibo de agua o luz]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="263" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[2 fotografías tamaño cédula a color]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="283" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Boleto de ornato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="303" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Examen de la vista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="323" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Contrato laboral]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="356" y="46" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="66" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="86" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="106" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="126" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="146" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="166" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="186" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="206" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="226" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="246" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="266" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="286" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="307" width="14" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="356" y="327" width="14" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="167" y="343" width="206" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Otros ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="153" y="411" width="217" height="1"/>
+			</line>
+			<line>
+				<reportElement x="200" y="358" width="162" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
