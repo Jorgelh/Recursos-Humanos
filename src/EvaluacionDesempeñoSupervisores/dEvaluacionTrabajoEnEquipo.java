@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EvaluacionDesmpeñoSupervisores;
+package EvaluacionDesempeñoSupervisores;
 
 import groovyjarjarantlr.StringUtils;
 import java.awt.Color;
@@ -13,23 +13,20 @@ import java.awt.Color;
  *
  * @author jluis
  */
-public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
+public class dEvaluacionTrabajoEnEquipo extends javax.swing.JInternalFrame {
      int total;
     /**
      * Creates new form EvaluacionD
      */
-    public fEvaluacionLiderazgo() {
+    public dEvaluacionTrabajoEnEquipo() {
         initComponents();
-        jLabel1.setText("<html><b>Fomenta la integración de los miembros de su equipo</b></html>");
-        jLabel2.setText("<html><b>Guía y dirige a sus subordinados cuando estos necesitan de ayuda</b></html>");
-        jLabel3.setText("<html><b>Permite la libertad de autonomía de sus subordinados</b></html>");
-        jLabel4.setText("<html><b>Permite retroalimentación para realizar las tareas cuando surgen\n" +
-"nuevas ideas por parte de sus colaboradores</b></html>");
-        jLabel5.setText("<html><b>Actúa rápida y eficazmente pero sin llegar a ser de una manera\n" +
-"reactiva</b></html>");
+        jLabel1.setText("<html><b>Los errores del equipo los asume como propios</b></html>");
+        jLabel2.setText("<html><b>Aporta ideas entre departamentos para mejorar continuamente</b></html>");
+        jLabel3.setText("<html><b>Apoya a otros departamentos en caso de que se le solicite</b></html>");
+        jLabel4.setText("<html><b>Fomenta la fluida comunicación entre todas las partes</b></html>");
+        jLabel5.setText("<html><b>Construye una confianza entre todos las partes</b></html>");
         
-        jLabel6.setText("<html><b>6.Liderazgo: Sabe influir positivamente en sus colaboradores, permitiendo que estos desarrollen sus competencias mediante una guía\n" +
-"e influencia en los mismos.</b></html>");
+        jLabel6.setText("<html><b>4. Trabajo en equipo: fomentar y trabajar conjuntamente con otros departamentos, desarrollando la mejora continua.</b></html>");
     
     }
     
@@ -1248,7 +1245,8 @@ public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("EVALUACION DESEMPEÑO -LIDERAZGO-");
+        setTitle("EVALUACION DESEMPEÑO -TRABAJO EN EQUIPO-");
+        setToolTipText("");
 
         jPanel1.setBackground(new java.awt.Color(102, 204, 255));
 
@@ -2758,6 +2756,8 @@ public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel53, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator5)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -2771,9 +2771,7 @@ public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator5)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2781,9 +2779,9 @@ public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
-                        .addGap(9, 9, 9)))
+                        .addGap(26, 26, 26)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -2828,13 +2826,13 @@ public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -4335,30 +4333,14 @@ public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fEvaluacionLiderazgo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dEvaluacionTrabajoEnEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fEvaluacionLiderazgo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dEvaluacionTrabajoEnEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fEvaluacionLiderazgo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dEvaluacionTrabajoEnEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fEvaluacionLiderazgo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dEvaluacionTrabajoEnEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -4379,7 +4361,7 @@ public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fEvaluacionLiderazgo().setVisible(true);
+                new dEvaluacionTrabajoEnEquipo().setVisible(true);
             }
         });
     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EvaluacionDesmpeñoSupervisores;
+package EvaluacionDesempeñoSupervisores;
 
 import groovyjarjarantlr.StringUtils;
 import java.awt.Color;
@@ -13,21 +13,23 @@ import java.awt.Color;
  *
  * @author jluis
  */
-public class eEvaluacionOrganizacion extends javax.swing.JInternalFrame {
+public class cEvaluacionResolucionDeconflictos extends javax.swing.JInternalFrame {
      int total;
     /**
      * Creates new form EvaluacionD
      */
-    public eEvaluacionOrganizacion() {
+    public cEvaluacionResolucionDeconflictos() {
         initComponents();
-        jLabel1.setText("<html><b>Define roles y responsabilidades entre los miembros del\n" +
-"depadepartamento</b></html>");
-        jLabel2.setText("<html><b>Resdristribuye equitativamente las responsabilidades</b></html>");
-        jLabel3.setText("<html><b>Coordina adecuadamente</b></html>");
-        jLabel4.setText("<html><b>Prioriza las actividades</b></html>");
-        jLabel5.setText("<html><b>Puede llevar registros sin mucha demora para entrega de los mismos</b></html>");
+        jLabel1.setText("<html><b>Maneja adecuadamente los conflictos y con mucha confidencialidad</b></html>");
+        jLabel2.setText("<html><b>Tiene la capacidad de identificar a los actores principales de un\n" +
+"conflicto</b></html>");
+        jLabel3.setText("<html><b>Trabaja junto a su equipo para resolver los conflictos</b></html>");
+        jLabel4.setText("<html><b>Acepta los diferentes puntos de vista y los toma en cuenta para\n" +
+"lograr acuerdos</b></html>");
+        jLabel5.setText("<html><b>Pide apoyo en el momento oportuno para resolver un conflicto</b></html>");
         
-        jLabel6.setText("<html><b>5.Organización: Mantener el orden de las actividades mediante una correcta toma de decisiones.</b></html>");
+        jLabel6.setText("<html><b>3.Resolución de conflictos: capacidad de determinar eficazmente las metas y prioridades de su tarea estipulando la acción, los\n" +
+"plazos y los recursos requeridos.</b></html>");
     
     }
     
@@ -1246,7 +1248,7 @@ public class eEvaluacionOrganizacion extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("EVALUACION DESEMPEÑO -ORGANIZACION-");
+        setTitle("EVALUACION DESEMPEÑO -RESOLUCION DE CONFLICTOS-");
 
         jPanel1.setBackground(new java.awt.Color(102, 204, 255));
 
@@ -2778,10 +2780,10 @@ public class eEvaluacionOrganizacion extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(punteo, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
-                        .addGap(8, 8, 8)))
+                        .addGap(17, 17, 17)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -2829,13 +2831,14 @@ public class eEvaluacionOrganizacion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtTotal)
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(17, 17, 17))
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                        .addGap(13, 13, 13))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -4335,38 +4338,14 @@ public class eEvaluacionOrganizacion extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(eEvaluacionOrganizacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cEvaluacionResolucionDeconflictos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(eEvaluacionOrganizacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cEvaluacionResolucionDeconflictos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(eEvaluacionOrganizacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cEvaluacionResolucionDeconflictos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(eEvaluacionOrganizacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cEvaluacionResolucionDeconflictos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -4379,7 +4358,7 @@ public class eEvaluacionOrganizacion extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new eEvaluacionOrganizacion().setVisible(true);
+                new cEvaluacionResolucionDeconflictos().setVisible(true);
             }
         });
     }

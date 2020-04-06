@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EvaluacionDesmpeñoSupervisores;
+package EvaluacionDesempeñoSupervisores;
 
 import groovyjarjarantlr.StringUtils;
 import java.awt.Color;
@@ -13,21 +13,23 @@ import java.awt.Color;
  *
  * @author jluis
  */
-public class hEvaluacionIniciativa extends javax.swing.JInternalFrame {
+public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
      int total;
     /**
      * Creates new form EvaluacionD
      */
-    public hEvaluacionIniciativa() {
+    public fEvaluacionLiderazgo() {
         initComponents();
-        jLabel1.setText("<html><b>Se adelanta a actividades provechosas del departamento</b></html>");
-        jLabel2.setText("<html><b>Fomenta la iniciativa activa en sus colaboradores</b></html>");
-        jLabel3.setText("<html><b>Toma decisiones basadas en buen razonamiento de juicio</b></html>");
-        jLabel4.setText("<html><b>Consulta cuando sea necesario para llevar actividades que surgieron\n" +
-"por iniciativa propia</b></html>");
-        jLabel5.setText("<html><b>Inventa nuevas formas para facilitar las actividades del departamento</b></html>");
+        jLabel1.setText("<html><b>Fomenta la integración de los miembros de su equipo</b></html>");
+        jLabel2.setText("<html><b>Guía y dirige a sus subordinados cuando estos necesitan de ayuda</b></html>");
+        jLabel3.setText("<html><b>Permite la libertad de autonomía de sus subordinados</b></html>");
+        jLabel4.setText("<html><b>Permite retroalimentación para realizar las tareas cuando surgen\n" +
+"nuevas ideas por parte de sus colaboradores</b></html>");
+        jLabel5.setText("<html><b>Actúa rápida y eficazmente pero sin llegar a ser de una manera\n" +
+"reactiva</b></html>");
         
-        jLabel6.setText("<html><b>8. Iniciativa: Capacidad para idear, inventar o emprender en distintas actividades.</b></html>");
+        jLabel6.setText("<html><b>6.Liderazgo: Sabe influir positivamente en sus colaboradores, permitiendo que estos desarrollen sus competencias mediante una guía\n" +
+"e influencia en los mismos.</b></html>");
     
     }
     
@@ -1246,7 +1248,7 @@ public class hEvaluacionIniciativa extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("EVALUACION DESEMPEÑO -INICIATIVA-");
+        setTitle("EVALUACION DESEMPEÑO -LIDERAZGO-");
 
         jPanel1.setBackground(new java.awt.Color(102, 204, 255));
 
@@ -2709,7 +2711,7 @@ public class hEvaluacionIniciativa extends javax.swing.JInternalFrame {
         jLabel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel14.setText("TOTAL");
+        jLabel14.setText("TOTAL:");
 
         TxtTotal.setEditable(false);
         TxtTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -2775,13 +2777,13 @@ public class hEvaluacionIniciativa extends javax.swing.JInternalFrame {
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
-                        .addGap(5, 5, 5)))
+                        .addGap(9, 9, 9)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -2826,18 +2828,14 @@ public class hEvaluacionIniciativa extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(punteo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TxtTotal)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -4337,13 +4335,13 @@ public class hEvaluacionIniciativa extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(hEvaluacionIniciativa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fEvaluacionLiderazgo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(hEvaluacionIniciativa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fEvaluacionLiderazgo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(hEvaluacionIniciativa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fEvaluacionLiderazgo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(hEvaluacionIniciativa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fEvaluacionLiderazgo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -4381,7 +4379,7 @@ public class hEvaluacionIniciativa extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new hEvaluacionIniciativa().setVisible(true);
+                new fEvaluacionLiderazgo().setVisible(true);
             }
         });
     }

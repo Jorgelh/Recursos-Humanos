@@ -7,8 +7,8 @@ package Formuarios;
 
 import Aspirantes.SolicitudEmpleo;
 import BD.BD;
-import EvaluacionDesmpeñoSupervisores.InicioEvaluacion;
-import EvaluacionDesmpeñoSupervisores.aEvaluacionPlanificacion;
+import EvaluacionDesempeñoSupervisores.InicioEvaluacion;
+import EvaluacionDesempeñoSupervisores.aEvaluacionPlanificacion;
 import Formularios_Maestro_empleados.FormularioMaestro;
 import java.awt.Dimension;
 import java.sql.Connection;

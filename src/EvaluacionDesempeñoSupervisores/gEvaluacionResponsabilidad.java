@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EvaluacionDesmpeñoSupervisores;
+package EvaluacionDesempeñoSupervisores;
 
 import groovyjarjarantlr.StringUtils;
 import java.awt.Color;
@@ -13,23 +13,22 @@ import java.awt.Color;
  *
  * @author jluis
  */
-public class cEvaluacionResolucionDeconflictos extends javax.swing.JInternalFrame {
+public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
      int total;
     /**
      * Creates new form EvaluacionD
      */
-    public cEvaluacionResolucionDeconflictos() {
+    public gEvaluacionResponsabilidad() {
         initComponents();
-        jLabel1.setText("<html><b>Maneja adecuadamente los conflictos y con mucha confidencialidad</b></html>");
-        jLabel2.setText("<html><b>Tiene la capacidad de identificar a los actores principales de un\n" +
-"conflicto</b></html>");
-        jLabel3.setText("<html><b>Trabaja junto a su equipo para resolver los conflictos</b></html>");
-        jLabel4.setText("<html><b>Acepta los diferentes puntos de vista y los toma en cuenta para\n" +
-"lograr acuerdos</b></html>");
-        jLabel5.setText("<html><b>Pide apoyo en el momento oportuno para resolver un conflicto</b></html>");
+        jLabel1.setText("<html><b>Fomenta la responsabilidad de sus colaboradores en sus actividades\n" +
+"continuamente</b></html>");
+        jLabel2.setText("<html><b>Compromete a sus colaboradores a la excelencia en su trabajo diario\n" +
+"(conocimiento de política, entre otros)</b></html>");
+        jLabel3.setText("<html><b>Cumple en tiempo las entregas de las piezas a sus destinatarios</b></html>");
+        jLabel4.setText("<html><b>Cumple sus metas propuestas</b></html>");
+        jLabel5.setText("<html><b>Realiza sus trabajo eficasmente, procurando mejorar constantemente</b></html>");
         
-        jLabel6.setText("<html><b>3.Resolución de conflictos: capacidad de determinar eficazmente las metas y prioridades de su tarea estipulando la acción, los\n" +
-"plazos y los recursos requeridos.</b></html>");
+        jLabel6.setText("<html><b>7.Responsabilidad: Mantener un grado de compromiso y cumplimiento hacia las obligaciones que tiene.</b></html>");
     
     }
     
@@ -1248,7 +1247,7 @@ public class cEvaluacionResolucionDeconflictos extends javax.swing.JInternalFram
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("EVALUACION DESEMPEÑO -RESOLUCION DE CONFLICTOS-");
+        setTitle("EVALUACION DESEMPEÑO -RESPONSABILIDAD-");
 
         jPanel1.setBackground(new java.awt.Color(102, 204, 255));
 
@@ -2777,13 +2776,13 @@ public class cEvaluacionResolucionDeconflictos extends javax.swing.JInternalFram
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
-                        .addGap(17, 17, 17)))
+                        .addGap(9, 9, 9)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -2827,18 +2826,15 @@ public class cEvaluacionResolucionDeconflictos extends javax.swing.JInternalFram
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TxtTotal)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
-                        .addGap(13, 13, 13))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -2849,7 +2845,9 @@ public class cEvaluacionResolucionDeconflictos extends javax.swing.JInternalFram
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -4338,14 +4336,38 @@ public class cEvaluacionResolucionDeconflictos extends javax.swing.JInternalFram
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(cEvaluacionResolucionDeconflictos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(gEvaluacionResponsabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(cEvaluacionResolucionDeconflictos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(gEvaluacionResponsabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(cEvaluacionResolucionDeconflictos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(gEvaluacionResponsabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(cEvaluacionResolucionDeconflictos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(gEvaluacionResponsabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -4358,7 +4380,7 @@ public class cEvaluacionResolucionDeconflictos extends javax.swing.JInternalFram
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new cEvaluacionResolucionDeconflictos().setVisible(true);
+                new gEvaluacionResponsabilidad().setVisible(true);
             }
         });
     }

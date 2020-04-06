@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EvaluacionDesmpeñoSupervisores;
+package EvaluacionDesempeñoSupervisores;
 
 import groovyjarjarantlr.StringUtils;
 import java.awt.Color;
@@ -13,22 +13,21 @@ import java.awt.Color;
  *
  * @author jluis
  */
-public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
+public class hEvaluacionIniciativa extends javax.swing.JInternalFrame {
      int total;
     /**
      * Creates new form EvaluacionD
      */
-    public gEvaluacionResponsabilidad() {
+    public hEvaluacionIniciativa() {
         initComponents();
-        jLabel1.setText("<html><b>Fomenta la responsabilidad de sus colaboradores en sus actividades\n" +
-"continuamente</b></html>");
-        jLabel2.setText("<html><b>Compromete a sus colaboradores a la excelencia en su trabajo diario\n" +
-"(conocimiento de política, entre otros)</b></html>");
-        jLabel3.setText("<html><b>Cumple en tiempo las entregas de las piezas a sus destinatarios</b></html>");
-        jLabel4.setText("<html><b>Cumple sus metas propuestas</b></html>");
-        jLabel5.setText("<html><b>Realiza sus trabajo eficasmente, procurando mejorar constantemente</b></html>");
+        jLabel1.setText("<html><b>Se adelanta a actividades provechosas del departamento</b></html>");
+        jLabel2.setText("<html><b>Fomenta la iniciativa activa en sus colaboradores</b></html>");
+        jLabel3.setText("<html><b>Toma decisiones basadas en buen razonamiento de juicio</b></html>");
+        jLabel4.setText("<html><b>Consulta cuando sea necesario para llevar actividades que surgieron\n" +
+"por iniciativa propia</b></html>");
+        jLabel5.setText("<html><b>Inventa nuevas formas para facilitar las actividades del departamento</b></html>");
         
-        jLabel6.setText("<html><b>7.Responsabilidad: Mantener un grado de compromiso y cumplimiento hacia las obligaciones que tiene.</b></html>");
+        jLabel6.setText("<html><b>8. Iniciativa: Capacidad para idear, inventar o emprender en distintas actividades.</b></html>");
     
     }
     
@@ -1247,7 +1246,7 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("EVALUACION DESEMPEÑO -RESPONSABILIDAD-");
+        setTitle("EVALUACION DESEMPEÑO -INICIATIVA-");
 
         jPanel1.setBackground(new java.awt.Color(102, 204, 255));
 
@@ -2710,7 +2709,7 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         jLabel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel14.setText("TOTAL:");
+        jLabel14.setText("TOTAL");
 
         TxtTotal.setEditable(false);
         TxtTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -2776,13 +2775,13 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(8, 8, 8)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
-                        .addGap(9, 9, 9)))
+                        .addGap(5, 5, 5)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -2826,15 +2825,19 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(punteo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel15))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(TxtTotal)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -2845,9 +2848,7 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -4336,13 +4337,13 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(gEvaluacionResponsabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(hEvaluacionIniciativa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(gEvaluacionResponsabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(hEvaluacionIniciativa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(gEvaluacionResponsabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(hEvaluacionIniciativa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(gEvaluacionResponsabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(hEvaluacionIniciativa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -4380,7 +4381,7 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new gEvaluacionResponsabilidad().setVisible(true);
+                new hEvaluacionIniciativa().setVisible(true);
             }
         });
     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EvaluacionDesmpeñoSupervisores;
+package EvaluacionDesempeñoSupervisores;
 
 import groovyjarjarantlr.StringUtils;
 import java.awt.Color;
@@ -13,23 +13,24 @@ import java.awt.Color;
  *
  * @author jluis
  */
-public class bEvaluacionOrientacionAresultados extends javax.swing.JInternalFrame {
+public class aEvaluacionPlanificacion extends javax.swing.JInternalFrame {
      int total;
     /**
      * Creates new form EvaluacionD
      */
-    public bEvaluacionOrientacionAresultados() {
+    public aEvaluacionPlanificacion() {
         initComponents();
-        jLabel1.setText("<html><b>Define prioridades y orienta a su equipo a lograr los objetivos</b></html>");
-        jLabel2.setText("<html><b>Acuerda con su equipo la entrega de los resultados en el tiempo\n" +
-"establecido</b></html>");
-        jLabel3.setText("<html><b>Promueve con su equipo la utilización adecuada de los recursos para\n" +
-"realizar su trabajo</b></html>");
-        jLabel4.setText("<html><b>Investiga y busca conocimiento sobre temas relacionados con su\n" +
-"trabajo</b></html>");
-        jLabel5.setText("<html><b>Incorpora mejoras en los procesos bajo su responsabilidad</b></html>");
+        jLabel1.setText("<html><b>Define metas y objetivos claros con los miembros de su equipo</b></html>");
+        jLabel2.setText("<html><b>Brinda seguimiento y verifica el cumplimiento de los objetivos\n" +
+"periódicamente</b></html>");
+        jLabel3.setText("<html><b>Brinda el apoyo y los recursos necesarios para el logro de los\n" +
+"objetivos del equipo</b></html>");
+        jLabel4.setText("<html><b>Se preocupa en incorporar mejores prácticas para una adecuada\n" +
+"planificación</b></html>");
+        jLabel5.setText("<html><b>Identifica y soluciona problemas</b></html>");
         
-        jLabel6.setText("<html><b>2.Orientación a resultados: realizar las funciones y cumplir los compromisos organizacionales con eficacia y calidad.</b></html>");
+        jLabel6.setText("<html><b>1.Planificación: capacidad de determinar eficazmente las metas y prioridades de su tarea estipulando la acción, los plazos y los\n" +
+"recursos requeridos.</b></html>");
     
     }
     
@@ -1248,7 +1249,7 @@ public class bEvaluacionOrientacionAresultados extends javax.swing.JInternalFram
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("EVALUACION DESEMPEÑO -ORIENTACION A RESULTADOS-");
+        setTitle("EVALUACION DESEMPEÑO -PLANIFICACION-");
 
         jPanel1.setBackground(new java.awt.Color(102, 204, 255));
 
@@ -2780,10 +2781,10 @@ public class bEvaluacionOrientacionAresultados extends javax.swing.JInternalFram
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(punteo, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(10, 10, 10)))
+                        .addGap(9, 9, 9)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -2828,14 +2829,18 @@ public class bEvaluacionOrientacionAresultados extends javax.swing.JInternalFram
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -4335,18 +4340,14 @@ public class bEvaluacionOrientacionAresultados extends javax.swing.JInternalFram
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(bEvaluacionOrientacionAresultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(aEvaluacionPlanificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(bEvaluacionOrientacionAresultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(aEvaluacionPlanificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(bEvaluacionOrientacionAresultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(aEvaluacionPlanificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(bEvaluacionOrientacionAresultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(aEvaluacionPlanificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -4355,7 +4356,7 @@ public class bEvaluacionOrientacionAresultados extends javax.swing.JInternalFram
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new bEvaluacionOrientacionAresultados().setVisible(true);
+                new aEvaluacionPlanificacion().setVisible(true);
             }
         });
     }
