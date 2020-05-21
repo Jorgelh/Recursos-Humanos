@@ -7,6 +7,7 @@ package Formuarios;
 
 import Aspirantes.SolicitudEmpleo;
 import BD.BD;
+import EvaluacionDesempeñoOperativo.InicioEvaluacioOperativos;
 import EvaluacionDesempeñoSupervisores.InicioEvaluacion;
 import EvaluacionDesempeñoSupervisores.aEvaluacionPlanificacion;
 import Formularios_Maestro_empleados.FormularioMaestro;
@@ -73,7 +74,9 @@ public class Inicio extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
+        jMenu11 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -98,23 +101,24 @@ public class Inicio extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));
         jLabel1.setText("RRHH");
 
+        Pane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout Pane1Layout = new javax.swing.GroupLayout(Pane1);
         Pane1.setLayout(Pane1Layout);
         Pane1Layout.setHorizontalGroup(
             Pane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pane1Layout.createSequentialGroup()
-                .addContainerGap(306, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addContainerGap(679, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
         Pane1Layout.setVerticalGroup(
             Pane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pane1Layout.createSequentialGroup()
-                .addContainerGap(498, Short.MAX_VALUE)
+                .addContainerGap(502, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26))
+                .addGap(22, 22, 22))
         );
-        Pane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 35));
 
@@ -196,15 +200,27 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem12.setMargin(new java.awt.Insets(5, 5, 5, 5));
         jMenu2.add(jMenuItem12);
 
+        jMenu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ComponenteImagenes/Clipboard.png"))); // NOI18N
+        jMenu11.setText("EVALUACION DE DESEMPEÑO");
+        jMenu11.setMargin(new java.awt.Insets(5, 5, 5, 5));
+
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
-        jMenuItem3.setText("EVALUACION DE DESEMPEÑO");
+        jMenuItem3.setText("OPERATIVOS");
         jMenuItem3.setMargin(new java.awt.Insets(5, 5, 5, 5));
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jMenu11.add(jMenuItem3);
+
+        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
+        jMenuItem14.setText("SUPERVISORES");
+        jMenuItem14.setEnabled(false);
+        jMenuItem14.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenu11.add(jMenuItem14);
+
+        jMenu2.add(jMenu11);
 
         jMenuBar1.add(jMenu2);
 
@@ -341,7 +357,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
             
-        InicioEvaluaciones tra = new InicioEvaluaciones();
+        InicioEvaluacioOperativos tra = new InicioEvaluacioOperativos();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();
@@ -457,6 +473,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -471,6 +488,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

@@ -113,7 +113,7 @@ public class InicioEvaluaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        NuevaEvaluacion tra = new NuevaEvaluacion();
+        InicioEvaluacioOperativos tra = new InicioEvaluacioOperativos();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();

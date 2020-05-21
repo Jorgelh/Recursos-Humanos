@@ -48,7 +48,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
         this.codigoin = c;
         initComponents();
         codigo.requestFocus();
-        actualizar();
+        BuscarEmpleado();
         //jLabel23.setIcon(new ImageIcon(((new ImageIcon("‪C:\\\\Users\\jluis\\Documents\\NetBeansProjects\\Recursos Humanos\\src\\img\\usuario.jpg" + (String) imagenes.elementAt(0)).getImage()).getScaledInstance(72, 18, java.awt.Image.SCALE_SMOOTH))));
         
     }
@@ -662,7 +662,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-      public void actualizar() throws SQLException{
+      public void BuscarEmpleado() throws SQLException{
       
           try {
           
@@ -742,6 +742,49 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
             LabelFoto.setIcon(new ImageIcon("src/img/usuario.png"));
             
             }
+      
+      
+      
+      
+     /* private void actualizar(){
+      
+      try {
+            ListaMaestro l = new ListaMaestro();
+            l.setCODIGO(Integer.parseInt(codigo.getText()));
+            l.setNOMBRES(nombre.getText());
+            l.setAPELLIDOS(apellido.getText());
+            l.setF_NACIMIENTO(nacimiento.getDate());
+            l.setDPI(Integer.parseInt(dpi.getText()));
+            l.setDPIEXTENDIDO(lugarnacimiento.getText());
+            l.setDIRECCION(direccion.getText());
+            l.setNIT(nit.getText());
+            l.setTELEFONO(tel1.getText());
+            l.setT_SANGRE(tiposanbre.getText());
+            l.setCORREO_ELECTRO(correo.getText());
+            l.setESTUDIOS_ULTIMOS(profesion.getText());
+            l.setIGSS(igss.getText());
+            l.setIRTRA(irtra.getText());
+            l.setESTADO_CIVIL(estadociv);
+            l.setSEXO(sexo);
+            l.setCUENTA_BANCO(cuentabanco.getText());
+            l.setDEPARTAMENTO(depa);
+            l.setPUESTO(puesto.getText());
+            l.setFECHA_INGRESO(fechain.getDate());
+            l.setORDINARIO(Double.parseDouble(ordinario.getText()));
+            l.setBONIFICACION(Double.parseDouble(bonificacion.getText()));
+            l.setFOTOGRAFIA(foto);
+            l.setLongitudBytes(longitudBytes);
+            IngresoEmpleado.insertarEmpleado(l);
+            JOptionPane.showMessageDialog(null, "EMPLEADO INGRESADO");
+            limpiar();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR INGRESO EMPLEADOS"+e);
+        }
+      
+      
+      
+      
+      }*/
      
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
      
@@ -761,7 +804,12 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-    
+           try {
+               BuscarEmpleado();
+           } catch (SQLException ex) {
+               Logger.getLogger(FormularioMaestroEditar.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           
     }//GEN-LAST:event_guardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -6,17 +6,16 @@
 package EvaluacionDesempeñoOperativo;
 
 import BD.BD;
-import BDQueryEmpleados.IngresoEmpleado;
 import Clases.Evaluacion.BDEvaluacion;
 import Clases.Evaluacion.ClassEvaluacion;
-import Clases.empleados.ListaMaestro;
 import static Formuarios.Inicio.Pane1;
-import Formularios_Maestro_empleados.FormularioMaestroEditar;
 import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,8 +25,10 @@ import javax.swing.JOptionPane;
 public class NuevaEvaluacion extends javax.swing.JInternalFrame {
 
     int idlistaempleado;
-    int face;
+    int face = 1;
     int codigo;
+    int año;
+    int evaluacion;
 
     /**
      * Creates new form NuevaEvaluacion
@@ -36,26 +37,35 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-    private void buscar(){
-    
-     try {
-            ClassEvaluacion p = BDEvaluacion.buscarEmple(codigo);
-            nombre.setText(p.getNombres()+' '+p.getApellidos());
+    private void buscar() {
+
+        try {
+            ClassEvaluacion p = BDEvaluacion.buscarEmpleado(Integer.parseInt(CODIGO.getText()));
+            nombre.setText(p.getNombres() + ' ' + p.getApellidos());
             PUESTO.setText(p.getPuesto());
             DEPTO.setText(p.getDepto());
-           ;
-      } catch (Exception e) { JOptionPane.showMessageDialog(null, "ERROR AL OBTENER EL EMPLEADO A EDITAR "+e);
-          }
-    
-    
+            idlistaempleado = p.getId_listaempleados();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRORRRR" + e);
+        }
     }
-    
-    
-    
-    
-    
-    
-    
+
+    private void next() {
+
+        BuscarCodigo tra = new BuscarCodigo();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+        try {
+            this.dispose();
+        } catch (Exception e) {
+            System.out.println("F " + e);
+        }
+
+    }
+
     private void ValidarExistencia() {
 
         try {
@@ -68,7 +78,11 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
             if (CODIGO.getText() == "") {
                 JOptionPane.showMessageDialog(null, "INGRESE EL CODIGO");
             } else if (c == 1) {
-               
+                buscar();
+                fechaEvaluacion.setEnabled(true);
+                nuevo.setEnabled(true);
+                guardar.setEnabled(true);
+                fechaEvaluacion.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(null, "EL CODIGO EMPLEADO NO EXITE INTENTE DE NUEVO...");
             }
@@ -79,27 +93,103 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
 
     }
 
+/*    private void ValidarExistenciaFaceporAño() {
+
+        
+        try {
+            if (fechaEvaluacion.getDate() != null && face != 0 && CODIGO.getText().compareTo("") != 0) {
+                Date date = fechaEvaluacion.getDate();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+                String fecha = sdf.format(date);
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select COUNT(codigo) as cantidaFace from alistaempleados e inner join bevaluacion_desempeno d on e.id_listaempleados = d.id_listaempleados where e.codigo = " + CODIGO.getText() + " and d.face = " + face + " and TO_CHAR(d.fecha,'yyyy') = '" + fecha + "'");
+                rs.next();
+                int c = rs.getInt("cantidaFace");
+                if (c == 1) {
+                    JOptionPane.showMessageDialog(null, "LA FACE No. " + face + " PARA EL AÑO = " + fecha + " YA FUE CREADA");
+                } else {
+                    guardarEvaluacion();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "LLENE TODOS LOS DATOS");
+            }
+
+        } catch (Exception e) {
+            System.out.println("ERROR " + e);
+        }
+
+    }*/
+    
+    private void ValidarNodeEvaluacion() {
+
+        
+        try {
+            
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select max(d.evaluacion) evaluacion from alistaempleados e inner join bevaluacion_desempeno d on e.id_listaempleados = d.id_listaempleados where e.codigo ="+CODIGO.getText());
+                rs.next();
+                int c = rs.getInt("evaluacion");
+                evaluacion = c+1;
+                
+        } catch (Exception e) {
+            System.out.println("ERROR " + e);
+        }
+
+    }
+    
+    
+
+    private void limpiar() {
+        CODIGO.setText("");
+        nombre.setText("");
+        PUESTO.setText("");
+        DEPTO.setText("");
+        fechaEvaluacion.setDate(null);
+        fechaEvaluacion.setEnabled(false);
+        nuevo.setEnabled(false);
+        guardar.setEnabled(false);
+        CODIGO.requestFocus();
+
+    }
+    
+   
+
     private void guardarEvaluacion() {
         try {
+            ValidarNodeEvaluacion();
             ClassEvaluacion l = new ClassEvaluacion();
             l.setId_listaempleados(idlistaempleado);
-            if (face1.isSelected()) {
-                face = 1;
-            } else if (face2.isSelected()) {
-                face = 2;
-            } else if (face3.isSelected()) {
-                face = 3;
-            }
             l.setFace(face);
             l.setFecha(fechaEvaluacion.getDate());
+            l.setNoEvaluacion(evaluacion);
             Clases.Evaluacion.BDEvaluacion.insertarEvaluacion(l);
-            JOptionPane.showMessageDialog(null, "EMPLEADO INGRESADO");
-            //limpiar();
+            JOptionPane.showMessageDialog(null, "EVALUACION ASIGNADA");
+            crearEvaluaciones();
+            this.dispose();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERROR INGRESO EMPLEADOS" + e);
         }
     }
 
+    
+    public void crearEvaluaciones(){
+        
+         Date date = fechaEvaluacion.getDate();
+         SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yyyy");
+         String fecha = sdf.format(date);
+        try {
+            Connection c = BD.getConnection();
+            Statement ps = c.createStatement();
+            ps.executeUpdate("BEGIN CREAREVALUACIONES(NID_EMPLEADO=>"+idlistaempleado+",NFECHA=>'"+fecha+"',NEVALUACION=>"+evaluacion+"); COMMIT; END;");
+            c.close();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error"+e);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -120,14 +210,30 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         PUESTO = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        face1 = new javax.swing.JCheckBox();
-        face2 = new javax.swing.JCheckBox();
-        face3 = new javax.swing.JCheckBox();
         fechaEvaluacion = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        guardar = new javax.swing.JButton();
+        nuevo = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("INGRESO NUEVA EVALUACION");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -135,6 +241,11 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
         jLabel1.setText("CODIGO DEL EMPLEADO");
 
         CODIGO.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        CODIGO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CODIGOActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS DEL EMPLEADO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -196,52 +307,24 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("FECHA ");
 
-        face1.setText("FACE 1");
-        face1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                face1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                face1MouseEntered(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                face1MousePressed(evt);
-            }
-        });
-
-        face2.setText("FACE 2");
-        face2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                face2MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                face2MouseEntered(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                face2MousePressed(evt);
-            }
-        });
-
-        face3.setText("FACE 3");
-        face3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                face3MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                face3MouseEntered(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                face3MousePressed(evt);
-            }
-        });
-
+        fechaEvaluacion.setEnabled(false);
         fechaEvaluacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save2.png"))); // NOI18N
-        jButton1.setText("GUARDAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save2.png"))); // NOI18N
+        guardar.setText("GUARDAR");
+        guardar.setEnabled(false);
+        guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                guardarActionPerformed(evt);
+            }
+        });
+
+        nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
+        nuevo.setText("NUEVO");
+        nuevo.setEnabled(false);
+        nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoActionPerformed(evt);
             }
         });
 
@@ -252,25 +335,24 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(CODIGO, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(fechaEvaluacion, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(face1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(face2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(face3))
-                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(90, 90, 90)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(guardar)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(nuevo))
+                                        .addComponent(fechaEvaluacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(94, 94, 94))))))
                 .addContainerGap(18, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(164, 164, 164))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,18 +363,15 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
                 .addComponent(CODIGO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fechaEvaluacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(face1)
-                        .addComponent(face2)
-                        .addComponent(face3)))
+                .addComponent(fechaEvaluacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -303,69 +382,53 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        //ValidarExistenciaFaceporAño();
+        guardarEvaluacion();
+    }//GEN-LAST:event_guardarActionPerformed
 
+    private void CODIGOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CODIGOActionPerformed
+        ValidarExistencia();
+    }//GEN-LAST:event_CODIGOActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
+        limpiar();
+    }//GEN-LAST:event_nuevoActionPerformed
 
-    private void face1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_face1MouseClicked
-        face2.setSelected(false);
-        face3.setSelected(false);
-    }//GEN-LAST:event_face1MouseClicked
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        InicioEvaluacioOperativos tra = new InicioEvaluacioOperativos();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
 
-    private void face2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_face2MouseClicked
-        face1.setSelected(false);
-        face3.setSelected(false);
-    }//GEN-LAST:event_face2MouseClicked
+    }//GEN-LAST:event_formInternalFrameClosing
 
-    private void face3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_face3MouseClicked
-        face2.setSelected(false);
-        face1.setSelected(false);
-    }//GEN-LAST:event_face3MouseClicked
-
-    private void face1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_face1MouseEntered
-
-    }//GEN-LAST:event_face1MouseEntered
-
-    private void face2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_face2MouseEntered
-
-    }//GEN-LAST:event_face2MouseEntered
-
-    private void face3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_face3MouseEntered
-
-    }//GEN-LAST:event_face3MouseEntered
-
-    private void face1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_face1MousePressed
-        face2.setSelected(false);
-        face3.setSelected(false);
-    }//GEN-LAST:event_face1MousePressed
-
-    private void face2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_face2MousePressed
-        face1.setSelected(false);
-        face3.setSelected(false);
-    }//GEN-LAST:event_face2MousePressed
-
-    private void face3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_face3MousePressed
-        face2.setSelected(false);
-        face1.setSelected(false);
-    }//GEN-LAST:event_face3MousePressed
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        InicioEvaluacioOperativos tra = new InicioEvaluacioOperativos();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+    }//GEN-LAST:event_formInternalFrameClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CODIGO;
     private javax.swing.JTextField DEPTO;
     private javax.swing.JTextField PUESTO;
-    private javax.swing.JCheckBox face1;
-    private javax.swing.JCheckBox face2;
-    private javax.swing.JCheckBox face3;
     private com.toedter.calendar.JDateChooser fechaEvaluacion;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -374,5 +437,6 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField nombre;
+    private javax.swing.JButton nuevo;
     // End of variables declaration//GEN-END:variables
 }
