@@ -27,7 +27,7 @@ private FileInputStream FOTOGRAFIA;
 private Date F_NACIMIENTO;	
 private String T_SANGRE;	
 private String IRTRA;
-private int DPI;
+private String DPI;
 private String DPIEXTENDIDO;	
 private String ESTUDIOS_ULTIMOS;	
 private String ESTUDIOS_ACTUALES;
@@ -180,11 +180,11 @@ private String f_ingreso;
         this.IRTRA = IRTRA;
     }
 
-    public int getDPI() {
+    public String getDPI() {
         return DPI;
     }
 
-    public void setDPI(int DPI) {
+    public void setDPI(String DPI) {
         this.DPI = DPI;
     }
 

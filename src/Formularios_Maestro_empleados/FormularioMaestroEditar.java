@@ -37,7 +37,9 @@ import javax.swing.JOptionPane;
  * @author jluis
  */
 public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
-   
+       String sexo;
+        String estadociv;
+        int depa;
        int codigoin;
        FileInputStream foto;
        int longitudBytes;
@@ -97,7 +99,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
         jLabel22 = new javax.swing.JLabel();
         bonificacion = new javax.swing.JTextField();
         fechaingre = new com.toedter.calendar.JDateChooser();
-        depto = new javax.swing.JComboBox<>();
+        depar = new javax.swing.JComboBox<>();
         jPanel9 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
@@ -224,11 +226,21 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
         jLabel10.setText("ESTADO CIVIL:");
 
         estadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "SOLTERO", "CASADO" }));
+        estadocivil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadocivilActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("GENERO");
 
         genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "MASCULINO", "FEMENINO" }));
+        genero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generoActionPerformed(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setText("CUENTA DE BANCO");
@@ -296,7 +308,12 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel22.setText("BONIFICACION INCENTIVO");
 
-        depto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "STRIP Y POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "ADMINISTRACION", "GERENCIA" }));
+        depar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "STRIP Y POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "ADMINISTRACION", "GERENCIA" }));
+        depar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -317,7 +334,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
                             .addComponent(jLabel19)
                             .addComponent(jLabel20))
                         .addGap(0, 111, Short.MAX_VALUE))
-                    .addComponent(depto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(depar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -326,7 +343,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(depto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(depar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -674,7 +691,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
             Date datenaci = sdf.parse(p.getF_nacimiento());
             nacimiento.setDate(datenaci);
-            dpi.setText(String.valueOf(p.getDPI()));
+            dpi.setText(p.getDPI());
             lugarnacimiento.setText(p.getDPIEXTENDIDO());
             direccion.setText(p.getDIRECCION());
             nit.setText(p.getNIT());
@@ -697,7 +714,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
                 genero.setSelectedItem("FEMENINO");
             }
             cuentabanco.setText(p.getCUENTA_BANCO());
-            depto.setSelectedItem(p.getDepto());
+            depar.setSelectedItem(p.getDepto());
             puesto.setText(p.getPUESTO());
             SimpleDateFormat s = new SimpleDateFormat("dd/MM/yy");
             Date in = s.parse(p.getF_ingreso());
@@ -736,17 +753,13 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
             correo.setText("");profesion.setText("");
             igss.setText("");irtra.setText("");
             estadocivil.setSelectedItem("SELECCIONAR...");genero.setSelectedItem("SELECCIONAR...");
-            cuentabanco.setText("");depto.setSelectedItem("SELECCIONAR...");
+            cuentabanco.setText("");depar.setSelectedItem("SELECCIONAR...");
             puesto.setText("");fechaingre.setDate(null);
             ordinario.setText("");bonificacion.setText("");
             LabelFoto.setIcon(new ImageIcon("src/img/usuario.png"));
-            
             }
-      
-      
-      
-      
-     /* private void actualizar(){
+
+      private void actualizar(){
       
       try {
             ListaMaestro l = new ListaMaestro();
@@ -754,7 +767,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
             l.setNOMBRES(nombre.getText());
             l.setAPELLIDOS(apellido.getText());
             l.setF_NACIMIENTO(nacimiento.getDate());
-            l.setDPI(Integer.parseInt(dpi.getText()));
+            l.setDPI(dpi.getText());
             l.setDPIEXTENDIDO(lugarnacimiento.getText());
             l.setDIRECCION(direccion.getText());
             l.setNIT(nit.getText());
@@ -769,7 +782,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
             l.setCUENTA_BANCO(cuentabanco.getText());
             l.setDEPARTAMENTO(depa);
             l.setPUESTO(puesto.getText());
-            l.setFECHA_INGRESO(fechain.getDate());
+            l.setFECHA_INGRESO(fechaingre.getDate());
             l.setORDINARIO(Double.parseDouble(ordinario.getText()));
             l.setBONIFICACION(Double.parseDouble(bonificacion.getText()));
             l.setFOTOGRAFIA(foto);
@@ -780,11 +793,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERROR INGRESO EMPLEADOS"+e);
         }
-      
-      
-      
-      
-      }*/
+      }
      
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
      
@@ -894,6 +903,50 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void deparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deparActionPerformed
+       
+        
+        if (depar.getSelectedItem().toString().equalsIgnoreCase("INSPECCION")) {
+            depa = 1;
+        } else if (depar.getSelectedItem().toString().equalsIgnoreCase("TESTING")) {
+            depa = 2;
+        } else if (depar.getSelectedItem().toString().equalsIgnoreCase("CHIPS")) {
+            depa = 3;
+        } else if (depar.getSelectedItem().toString().equalsIgnoreCase("STRIP Y POTTING")) {
+            depa = 4;
+        } else if (depar.getSelectedItem().toString().equalsIgnoreCase("TRANSFORMADORES")) {
+            depa = 5;
+        } else if (depar.getSelectedItem().toString().equalsIgnoreCase("TALLER")) {
+            depa = 6;
+        } else if (depar.getSelectedItem().toString().equalsIgnoreCase("BODEGA")) {
+            depa = 7;
+        }else if (depar.getSelectedItem().toString().equalsIgnoreCase("ADMINISTRACION")) {
+            depa = 8;
+        }else if (depar.getSelectedItem().toString().equalsIgnoreCase("GERENCIA")) {
+            depa = 9;
+        }else if (depar.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){depa = 0;}
+        
+    }//GEN-LAST:event_deparActionPerformed
+
+    private void estadocivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadocivilActionPerformed
+       
+        if (estadocivil.getSelectedItem().toString().equalsIgnoreCase("SOLTERO")) {
+            estadociv = "S";
+        } else if (estadocivil.getSelectedItem().toString().equalsIgnoreCase("CASADO")) {
+            estadociv = "C";
+        } else if (estadocivil.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){estadociv = "N";}
+        genero.requestFocus();
+        
+    }//GEN-LAST:event_estadocivilActionPerformed
+
+    private void generoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generoActionPerformed
+       if (genero.getSelectedItem().toString().equalsIgnoreCase("MASCULINO")) {
+            sexo = "M";
+        } else if (genero.getSelectedItem().toString().equalsIgnoreCase("FEMENINO")) {
+            sexo = "F";
+        }
+    }//GEN-LAST:event_generoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -943,7 +996,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
     private javax.swing.JTextField codigo;
     private javax.swing.JTextField correo;
     private javax.swing.JTextField cuentabanco;
-    private javax.swing.JComboBox<String> depto;
+    private javax.swing.JComboBox<String> depar;
     private javax.swing.JTextField direccion;
     private javax.swing.JTextField dpi;
     private javax.swing.JComboBox<String> estadocivil;

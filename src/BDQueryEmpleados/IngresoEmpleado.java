@@ -32,7 +32,7 @@ public class IngresoEmpleado {
         p.setString(2, c.getNOMBRES());
         p.setString(3, c.getAPELLIDOS());
         p.setDate(4, new java.sql.Date(c.getF_NACIMIENTO().getTime()));
-        p.setInt(5, c.getDPI());
+        p.setString(5, c.getDPI());
         p.setString(6, c.getDPIEXTENDIDO());
         p.setString(7, c.getDIRECCION());
         p.setString(8, c.getNIT());
@@ -78,7 +78,7 @@ public class IngresoEmpleado {
                 p.setNOMBRES(rs.getString("NOMBRES"));
                 p.setAPELLIDOS(rs.getString("APELLIDOS"));
                 p.setF_nacimiento(rs.getString("F_NACIMIENTO"));
-                p.setDPI(rs.getInt("DPI"));
+                p.setDPI(rs.getString("DPI"));
                 p.setDPIEXTENDIDO(rs.getString("DPIEXTENDIDO"));
                 p.setDIRECCION(rs.getString("DIRECCION"));
                 p.setNIT(rs.getString("NIT"));

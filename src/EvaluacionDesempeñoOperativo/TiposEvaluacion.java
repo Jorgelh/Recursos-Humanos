@@ -411,7 +411,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     private void trabajoEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trabajoEquipoActionPerformed
 
         if (estado1 == 0) {
-            aEvaluacionTrabajoEnEquipo ma = new aEvaluacionTrabajoEnEquipo(id_evaluacion);
+            aEvaluacionTrabajoEnEquipo ma = new aEvaluacionTrabajoEnEquipo(id_evaluacion, Integer.parseInt(CODIGO.getText()));
             Pane1.add(ma);
             Dimension desktopSize = Pane1.getSize();
             Dimension FrameSize = ma.getSize();

@@ -155,7 +155,7 @@ public class ListaAspirantesConfirmar extends javax.swing.JInternalFrame {
        
         if (evt.getClickCount() > 1) {
             
-        FormularioMaestro2 tra = new FormularioMaestro2();
+        FormularioMaestro tra = new FormularioMaestro();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();
@@ -173,7 +173,7 @@ public class ListaAspirantesConfirmar extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        FormularioMaestro2 tra = new FormularioMaestro2();
+        FormularioMaestro tra = new FormularioMaestro();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();
