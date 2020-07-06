@@ -5,11 +5,11 @@
  */
 package ERROR;
 
+import Clases.EvaluacionOperativo.ClassEvaluacionOperativo;
 import EvaluacionDesempeñoOperativo.*;
 import static Formuarios.Inicio.Pane1;
 import java.awt.Color;
 import java.awt.Dimension;
-import Clases.Evaluacion.*;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 //import javax.xml.bind.annotation.XmlElement;
@@ -4412,7 +4412,7 @@ public class aEvaluacionTrabajoEnEquipo extends javax.swing.JInternalFrame {
                  (UNO4.getText().compareTo("0") != 0 || DOS4.getText().compareTo("0")!= 0 || TRES4.getText().compareTo("0")!= 0 || CUATRO4.getText().compareTo("0")!= 0) )
          {
           try {
-            ClassEvaluacion l = new ClassEvaluacion();
+            ClassEvaluacionOperativo l = new ClassEvaluacionOperativo();
             l.setId_evaluacion(id_evaluacion);
             l.setUNO(Integer.parseInt(UNO.getText()));
             l.setDOS(Integer.parseInt(DOS.getText()));
@@ -4439,7 +4439,7 @@ public class aEvaluacionTrabajoEnEquipo extends javax.swing.JInternalFrame {
             l.setTRES4(Integer.parseInt(TRES4.getText()));
             l.setCUATRO4(Integer.parseInt(CUATRO4.getText()));
             l.setNOTA(NOTA.getText());
-            Clases.Evaluacion.BDEvaluacion.insertarTrabajoEnEquipo(l);
+                Clases.EvaluacionOperativo.BDEvaluacion.insertarTrabajoEnEquipo(l);
             JOptionPane.showMessageDialog(null, "EVALUACION TERMINADA CORRECTAMENTE");
             this.dispose();
           

@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EvaluacionDesempeñoOperativo;
+package EvaluacionDesempeñoSupervisores;
 
+import EvaluacionDesempeñoOperativo.*;
 import BD.BD;
-import Clases.EvaluacionOperativo.BDEvaluacion;
-import Clases.EvaluacionOperativo.ClassEvaluacionOperativo;
+import Clases.EvaluacionSupervisores.BDEvaluacionSupervisores;
+import Clases.EvaluacionSupervisores.ClassEvaluacionSupervisores;
 import static Formuarios.Inicio.Pane1;
 import java.awt.Dimension;
 import java.sql.Connection;
@@ -27,7 +28,7 @@ import javax.swing.JOptionPane;
  *
  * @author jluis
  */
-public class TiposEvaluacion extends javax.swing.JInternalFrame {
+public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
 
     int id_listaempleados;
     int id_evaluacion;
@@ -35,6 +36,10 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     int estado2;
     int estado3;
     int estado4;
+    int estado5;
+    int estado6;
+    int estado7;
+    int estado8;
     int face;
     int no_evaluacion;
     String FechaProxima;
@@ -43,7 +48,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     /**
      * Creates new form TiposEvaluacion
      */
-    public TiposEvaluacion(int id) {
+    public TiposEvaluacionSupervisores(int id) {
         this.id_evaluacion = id;
         initComponents();
         buscar();
@@ -53,7 +58,9 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
 
     private void actualizarEstado() {
         
-            if (estado1 == 1 && estado2 == 1 && estado3 == 1 && estado4 == 1) {
+            if (estado1 == 1 && estado2 == 1 && estado3 == 1 && estado4 == 1 && 
+                estado5 == 1 && estado6 == 1 && estado7 == 1 && estado8 == 1) 
+            {
             
             try {
             int meses = 4; 
@@ -77,7 +84,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
             } catch (SQLException error) {
                System.out.print(" ERROR QUE OBTIENE EL ULTIMO ID DE INGRESO  " + error );
             } catch (ParseException ex) {
-                Logger.getLogger(TiposEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TiposEvaluacionSupervisores.class.getName()).log(Level.SEVERE, null, ex);
             }
             } 
          //System.out.println("1 = "+FechaProxima+ "2 = "+id_listaempleados+" 3 = "+no_evaluacion+" FACE ="+(face+1));
@@ -86,7 +93,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     private void buscar() {
 
         try {
-            ClassEvaluacionOperativo p = BDEvaluacion.buscarEmpleadoIDEvaluacion(id_evaluacion);
+            ClassEvaluacionSupervisores p = BDEvaluacionSupervisores.buscarEmpleadoIDEvaluacion(id_evaluacion);
             CODIGO.setText(String.valueOf(p.getCodigo()));
             NOMBRE.setText(p.getNombres() + ' ' + p.getApellidos());
             PUESTO.setText(p.getPuesto());
@@ -163,6 +170,10 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
         Organizacion = new javax.swing.JButton();
         orientacionResultados = new javax.swing.JButton();
         responsabilidad = new javax.swing.JButton();
+        trabajoEquipo1 = new javax.swing.JButton();
+        responsabilidad1 = new javax.swing.JButton();
+        Organizacion1 = new javax.swing.JButton();
+        orientacionResultados1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         CODIGO = new javax.swing.JTextField();
@@ -204,31 +215,59 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
 
-        trabajoEquipo.setText("1. Trabajo en equipo");
+        trabajoEquipo.setText("1. Planificacion");
         trabajoEquipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trabajoEquipoActionPerformed(evt);
             }
         });
 
-        Organizacion.setText("3. Organización");
+        Organizacion.setText("5. Organización");
         Organizacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OrganizacionActionPerformed(evt);
             }
         });
 
-        orientacionResultados.setText("2. Orientación a resultados");
+        orientacionResultados.setText("6. Liderazgo");
         orientacionResultados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 orientacionResultadosActionPerformed(evt);
             }
         });
 
-        responsabilidad.setText("4. Responsabilidad");
+        responsabilidad.setText("2. Orientacion a Resultados");
         responsabilidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 responsabilidadActionPerformed(evt);
+            }
+        });
+
+        trabajoEquipo1.setText("3. Resolucion de Conflictos");
+        trabajoEquipo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trabajoEquipo1ActionPerformed(evt);
+            }
+        });
+
+        responsabilidad1.setText("4. Trabajo en Equipo");
+        responsabilidad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                responsabilidad1ActionPerformed(evt);
+            }
+        });
+
+        Organizacion1.setText("8. Iniciativa");
+        Organizacion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Organizacion1ActionPerformed(evt);
+            }
+        });
+
+        orientacionResultados1.setText("7. Responsabilidad");
+        orientacionResultados1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orientacionResultados1ActionPerformed(evt);
             }
         });
 
@@ -238,27 +277,40 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(trabajoEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(responsabilidad, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(trabajoEquipo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(responsabilidad1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(trabajoEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Organizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(orientacionResultados)
-                    .addComponent(responsabilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Organizacion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(orientacionResultados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(orientacionResultados1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
+                    .addComponent(Organizacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(trabajoEquipo)
-                    .addComponent(orientacionResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Organizacion)
-                    .addComponent(responsabilidad))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(trabajoEquipo)
+                    .addComponent(Organizacion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(responsabilidad)
+                    .addComponent(orientacionResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(trabajoEquipo1)
+                    .addComponent(orientacionResultados1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(responsabilidad1)
+                    .addComponent(Organizacion1))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jLabel1.setText("CODIGO:");
@@ -345,7 +397,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
                             .addComponent(jLabel5))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 162, Short.MAX_VALUE))
                     .addComponent(DEPTO))
                 .addContainerGap())
         );
@@ -377,10 +429,10 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addGap(72, 72, 72))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,9 +441,9 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -423,6 +475,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
 
     private void OrganizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrganizacionActionPerformed
         if (estado3 == 0){
+            
             cEvaluacionOrganizacion ma = new cEvaluacionOrganizacion(id_evaluacion,Integer.parseInt(CODIGO.getText()));
             Pane1.add(ma);
             Dimension desktopSize = Pane1.getSize();
@@ -459,11 +512,13 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_responsabilidadActionPerformed
 
     private void DEPTOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DEPTOActionPerformed
-        // TODO add your handling code here:
+       
+        
     }//GEN-LAST:event_DEPTOActionPerformed
 
     private void PUESTOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PUESTOActionPerformed
-        // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_PUESTOActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
@@ -475,6 +530,26 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
         tra.show();       
     }//GEN-LAST:event_formInternalFrameClosing
 
+    private void trabajoEquipo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trabajoEquipo1ActionPerformed
+        
+        
+    }//GEN-LAST:event_trabajoEquipo1ActionPerformed
+
+    private void responsabilidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responsabilidad1ActionPerformed
+       
+        
+    }//GEN-LAST:event_responsabilidad1ActionPerformed
+
+    private void Organizacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Organizacion1ActionPerformed
+        
+        
+    }//GEN-LAST:event_Organizacion1ActionPerformed
+
+    private void orientacionResultados1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orientacionResultados1ActionPerformed
+        
+        
+    }//GEN-LAST:event_orientacionResultados1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CODIGO;
@@ -483,6 +558,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField FECHA;
     private javax.swing.JTextField NOMBRE;
     private javax.swing.JButton Organizacion;
+    private javax.swing.JButton Organizacion1;
     private javax.swing.JTextField PUESTO;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -496,7 +572,10 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton orientacionResultados;
+    private javax.swing.JButton orientacionResultados1;
     private javax.swing.JButton responsabilidad;
+    private javax.swing.JButton responsabilidad1;
     private javax.swing.JButton trabajoEquipo;
+    private javax.swing.JButton trabajoEquipo1;
     // End of variables declaration//GEN-END:variables
 }

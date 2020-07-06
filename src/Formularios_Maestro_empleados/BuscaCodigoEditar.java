@@ -120,7 +120,6 @@ public class BuscaCodigoEditar extends javax.swing.JInternalFrame {
             rs.next();
             int c = rs.getInt("count(codigo)");
         if(codigo.getText()==""){JOptionPane.showMessageDialog(null, "INGRESE EL CODIGO");} else if (c == 1){
-            System.out.println("entra");
         FormularioMaestroEditar tra = new FormularioMaestroEditar(Integer.valueOf(codigo.getText()));
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();

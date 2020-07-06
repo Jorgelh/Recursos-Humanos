@@ -9,6 +9,7 @@ import BD.BD;
 import BDQueryEmpleados.IngresoEmpleado;
 import Clases.empleados.ListaMaestro;
 import static Formuarios.Inicio.Pane1;
+import groovy.xml.Entity;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -43,6 +44,9 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
        int codigoin;
        FileInputStream foto;
        int longitudBytes;
+       int id_listaempleado;
+       int guardafoto = 2;
+       
     /**
      * Creates new form SolicitudEmpleo
      */
@@ -393,6 +397,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setText("CODIGO");
 
+        codigo.setEditable(false);
         codigo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         codigo.setForeground(new java.awt.Color(255, 0, 0));
         codigo.addActionListener(new java.awt.event.ActionListener() {
@@ -685,6 +690,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
           
          
             ListaMaestro p = IngresoEmpleado.buscarEmpleado(codigoin);
+            id_listaempleado = p.getID_LISTAEMPLEADOS();
             codigo.setText(String.valueOf(p.getCODIGO()));
             nombre.setText(p.getNOMBRES());
             apellido.setText(p.getAPELLIDOS());
@@ -741,6 +747,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
               }
       } catch (Exception e) { JOptionPane.showMessageDialog(null, "ERROR AL OBTENER EL EMPLEADO A EDITAR "+e);
           }
+          
       }
       
       private void limpiar(){
@@ -763,6 +770,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
       
       try {
             ListaMaestro l = new ListaMaestro();
+            l.setID_LISTAEMPLEADOS(id_listaempleado);
             l.setCODIGO(Integer.parseInt(codigo.getText()));
             l.setNOMBRES(nombre.getText());
             l.setAPELLIDOS(apellido.getText());
@@ -787,10 +795,46 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
             l.setBONIFICACION(Double.parseDouble(bonificacion.getText()));
             l.setFOTOGRAFIA(foto);
             l.setLongitudBytes(longitudBytes);
-            IngresoEmpleado.insertarEmpleado(l);
-            JOptionPane.showMessageDialog(null, "EMPLEADO INGRESADO");
+            IngresoEmpleado.ActualizarEmpleado(l);
+            JOptionPane.showMessageDialog(null, "EMPLEADO ACTUALIZADO...");
             limpiar();
-        } catch (SQLException e) {
+        }catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR INGRESO EMPLEADOS"+e);
+        }
+      }
+      
+      
+       private void actualizarsinfoto(){
+      
+      try {
+            ListaMaestro l = new ListaMaestro();
+            l.setID_LISTAEMPLEADOS(id_listaempleado);
+            l.setCODIGO(Integer.parseInt(codigo.getText()));
+            l.setNOMBRES(nombre.getText());
+            l.setAPELLIDOS(apellido.getText());
+            l.setF_NACIMIENTO(nacimiento.getDate());
+            l.setDPI(dpi.getText());
+            l.setDPIEXTENDIDO(lugarnacimiento.getText());
+            l.setDIRECCION(direccion.getText());
+            l.setNIT(nit.getText());
+            l.setTELEFONO(tel1.getText());
+            l.setT_SANGRE(tiposanbre.getText());
+            l.setCORREO_ELECTRO(correo.getText());
+            l.setESTUDIOS_ULTIMOS(profesion.getText());
+            l.setIGSS(igss.getText());
+            l.setIRTRA(irtra.getText());
+            l.setESTADO_CIVIL(estadociv);
+            l.setSEXO(sexo);
+            l.setCUENTA_BANCO(cuentabanco.getText());
+            l.setDEPARTAMENTO(depa);
+            l.setPUESTO(puesto.getText());
+            l.setFECHA_INGRESO(fechaingre.getDate());
+            l.setORDINARIO(Double.parseDouble(ordinario.getText()));
+            l.setBONIFICACION(Double.parseDouble(bonificacion.getText()));
+            IngresoEmpleado.ActualizarEmpleadoSinfoto(l);
+            JOptionPane.showMessageDialog(null, "EMPLEADO ACTUALIZADO...");
+            limpiar();
+        }catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERROR INGRESO EMPLEADOS"+e);
         }
       }
@@ -813,12 +857,8 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-           try {
-               BuscarEmpleado();
-           } catch (SQLException ex) {
-               Logger.getLogger(FormularioMaestroEditar.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           
+       
+        if(guardafoto == 1){actualizar();}else{actualizarsinfoto();}
     }//GEN-LAST:event_guardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -863,7 +903,8 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
     private void LabelFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelFotoMouseClicked
 
         if (evt.getClickCount() > 1) {
-
+            guardafoto = 1;
+            LabelFoto.setIcon(new ImageIcon("src/img/usuario.png"));
             JFileChooser j = new JFileChooser();
             j.setFileSelectionMode(JFileChooser.FILES_ONLY);//solo archivos y no carpetas
             int estado = j.showOpenDialog(null);
@@ -925,7 +966,6 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
         }else if (depar.getSelectedItem().toString().equalsIgnoreCase("GERENCIA")) {
             depa = 9;
         }else if (depar.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){depa = 0;}
-        
     }//GEN-LAST:event_deparActionPerformed
 
     private void estadocivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadocivilActionPerformed

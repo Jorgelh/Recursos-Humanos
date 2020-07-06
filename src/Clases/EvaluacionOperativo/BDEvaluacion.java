@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Clases.Evaluacion;
+package Clases.EvaluacionOperativo;
 
 import BD.BD;
 import Clases.empleados.ListaMaestro;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class BDEvaluacion {
     
-    public static void insertarEvaluacion(ClassEvaluacion c) throws SQLException {
+    public static void insertarEvaluacion(ClassEvaluacionOperativo c) throws SQLException {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
@@ -36,10 +36,10 @@ public class BDEvaluacion {
  
     
     
-public static ClassEvaluacion buscarEmpleado(int id) throws SQLException {
+public static ClassEvaluacionOperativo buscarEmpleado(int id) throws SQLException {
         return buscarEmple(id, null);
     }    
- public static ClassEvaluacion buscarEmple(int id,ClassEvaluacion p) throws SQLException {
+ public static ClassEvaluacionOperativo buscarEmple(int id,ClassEvaluacionOperativo p) throws SQLException {
         Connection cnn = BD.getConnection();
         
         try {
@@ -49,7 +49,7 @@ public static ClassEvaluacion buscarEmpleado(int id) throws SQLException {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 if (p == null) {
-                    p = new ClassEvaluacion(){
+                    p = new ClassEvaluacionOperativo(){
                     };
                 }
                 p.setId_listaempleados(rs.getInt("ID_LISTAEMPLEADOS"));
@@ -70,10 +70,10 @@ public static ClassEvaluacion buscarEmpleado(int id) throws SQLException {
 
     }   
  
- public static ClassEvaluacion buscarEmpleadoID(int id) throws SQLException {
+ public static ClassEvaluacionOperativo buscarEmpleadoID(int id) throws SQLException {
         return buscarEmpleID(id, null);
     }    
- public static ClassEvaluacion buscarEmpleID(int id,ClassEvaluacion p) throws SQLException {
+ public static ClassEvaluacionOperativo buscarEmpleID(int id,ClassEvaluacionOperativo p) throws SQLException {
         Connection cnn = BD.getConnection();
         try {
             PreparedStatement ps = null;
@@ -82,7 +82,7 @@ public static ClassEvaluacion buscarEmpleado(int id) throws SQLException {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 if (p == null) {
-                    p = new ClassEvaluacion(){
+                    p = new ClassEvaluacionOperativo(){
                     };
                 }
                 p.setCodigo(rs.getInt("CODIGO"));
@@ -101,28 +101,28 @@ public static ClassEvaluacion buscarEmpleado(int id) throws SQLException {
         return null;
     }   
  
- public static ArrayList<ClassEvaluacion> ListarEvaluacionesPendientes(String a ,int depto) {
+ public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesPendientes(String a ,int depto) {
                    
         return SQL1("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA') as DEPTO,\n" +
 "E.PUESTO,TO_CHAR(V.FECHA,'dd/mm/yy') as FECHA,v.evaluacion,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE \n" +
 "FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 1 and e.departamento = "+depto+" and upper(e.codigo) like upper('"+a+"%')");
     }
  
- public static ArrayList<ClassEvaluacion> ListarEvaluacionesTerminadas(String B,int depto) {
+ public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesTerminadas(String B,int depto) {
                    
         return SQL1("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION','GERENCIA',9) as DEPTO,\n" +
 "E.PUESTO,TO_CHAR(V.FECHA,'dd/mm/yy') as FECHA,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE,v.evaluacion \n" +
 "FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2 and e.departamento = "+depto+" and upper(e.codigo) like upper('"+B+"%') order by v.id_evaluacion");
     }
-    private static ArrayList<ClassEvaluacion> SQL1(String sql){
-    ArrayList<ClassEvaluacion> list = new ArrayList<ClassEvaluacion>();
+    private static ArrayList<ClassEvaluacionOperativo> SQL1(String sql){
+    ArrayList<ClassEvaluacionOperativo> list = new ArrayList<ClassEvaluacionOperativo>();
     Connection cn = BD.getConnection();
         try {
-            ClassEvaluacion b;
+            ClassEvaluacionOperativo b;
             Statement stmt = cn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()){
-                 b = new ClassEvaluacion();
+                 b = new ClassEvaluacionOperativo();
                  b.setId_evaluacion(rs.getInt("id_evaluacion"));
                  b.setCodigo(rs.getInt("codigo"));
                  b.setNombres(rs.getString("nombres"));
@@ -142,10 +142,10 @@ public static ClassEvaluacion buscarEmpleado(int id) throws SQLException {
         return list;
 }
   
-public static ClassEvaluacion buscarEmpleadoIDEvaluacion(int id) throws SQLException {
+public static ClassEvaluacionOperativo buscarEmpleadoIDEvaluacion(int id) throws SQLException {
         return buscarEmpleIDeva(id, null);
     }    
- public static ClassEvaluacion buscarEmpleIDeva(int id,ClassEvaluacion p) throws SQLException {
+ public static ClassEvaluacionOperativo buscarEmpleIDeva(int id,ClassEvaluacionOperativo p) throws SQLException {
         Connection cnn = BD.getConnection();
         try {
             PreparedStatement ps = null;
@@ -155,7 +155,7 @@ public static ClassEvaluacion buscarEmpleadoIDEvaluacion(int id) throws SQLExcep
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 if (p == null) {
-                    p = new ClassEvaluacion(){
+                    p = new ClassEvaluacionOperativo(){
                     };
                 }
                 p.setCodigo(rs.getInt("CODIGO"));
@@ -180,7 +180,7 @@ public static ClassEvaluacion buscarEmpleadoIDEvaluacion(int id) throws SQLExcep
     }       
     
  
- public static void insertarTrabajoEnEquipo(ClassEvaluacion c) throws SQLException {
+ public static void insertarTrabajoEnEquipo(ClassEvaluacionOperativo c) throws SQLException {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
@@ -212,7 +212,7 @@ public static ClassEvaluacion buscarEmpleadoIDEvaluacion(int id) throws SQLExcep
         p.close();
     }
  
- public static void insertarOrientacionResultados(ClassEvaluacion c) throws SQLException {
+ public static void insertarOrientacionResultados(ClassEvaluacionOperativo c) throws SQLException {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
@@ -245,7 +245,7 @@ public static ClassEvaluacion buscarEmpleadoIDEvaluacion(int id) throws SQLExcep
     }
  
  
- public static void insertarOrganizacion(ClassEvaluacion c) throws SQLException {
+ public static void insertarOrganizacion(ClassEvaluacionOperativo c) throws SQLException {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
@@ -277,7 +277,7 @@ public static ClassEvaluacion buscarEmpleadoIDEvaluacion(int id) throws SQLExcep
         p.close();
     }
  
- public static void insertarResponsabilidad(ClassEvaluacion c) throws SQLException {
+ public static void insertarResponsabilidad(ClassEvaluacionOperativo c) throws SQLException {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
@@ -308,13 +308,5 @@ public static ClassEvaluacion buscarEmpleadoIDEvaluacion(int id) throws SQLExcep
         cnn.close();
         p.close();
     }
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
 }

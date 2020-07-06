@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Clases.Evaluacion;
+package Clases.EvaluacionOperativo;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Jorge Luis
  */
-public class ClassEvaluacion {
+public class ClassEvaluacionOperativo {
     
     private int id_listaempleados;
     private Date fecha;

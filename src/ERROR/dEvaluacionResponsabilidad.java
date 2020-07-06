@@ -6,7 +6,7 @@
 package ERROR;
 
 import EvaluacionDesempeñoOperativo.*;
-import Clases.Evaluacion.ClassEvaluacion;
+import Clases.EvaluacionOperativo.ClassEvaluacionOperativo;
 import static Formuarios.Inicio.Pane1;
 import groovyjarjarantlr.StringUtils;
 import java.awt.Color;
@@ -4418,7 +4418,7 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
          {
         
         try {
-            ClassEvaluacion l = new ClassEvaluacion();
+            ClassEvaluacionOperativo l = new ClassEvaluacionOperativo();
             l.setId_evaluacion(id_evaluacion);
             l.setUNO(Integer.parseInt(UNO.getText()));
             l.setDOS(Integer.parseInt(DOS.getText()));
@@ -4445,7 +4445,7 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
             l.setTRES4(Integer.parseInt(TRES4.getText()));
             l.setCUATRO4(Integer.parseInt(CUATRO4.getText()));
             l.setNOTA(NOTA.getText());
-            Clases.Evaluacion.BDEvaluacion.insertarResponsabilidad(l);
+                Clases.EvaluacionOperativo.BDEvaluacion.insertarResponsabilidad(l);
             JOptionPane.showMessageDialog(null, "EVALUACION TERMINADA CORRECTAMENTE");
             this.dispose();
         } catch (SQLException e) {

@@ -5,12 +5,21 @@
  */
 package EvaluacionDesempeñoOperativo;
 
-import Clases.Evaluacion.ClassEvaluacion;
+import BD.BD;
+import Clases.EvaluacionOperativo.ClassEvaluacionOperativo;
 import static Formuarios.Inicio.Pane1;
 import groovyjarjarantlr.StringUtils;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 //import javax.xml.bind.annotation.XmlElement;
 
@@ -21,11 +30,13 @@ import javax.swing.JOptionPane;
 public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
      int total;
      int id_evaluacion;
+     int codigo;
     /**
      * Creates new form EvaluacionD
      */
-    public dEvaluacionResponsabilidad(int i) {
-         this.id_evaluacion = i;
+    public dEvaluacionResponsabilidad(int i,int c) {
+        this.codigo = c;
+        this.id_evaluacion = i;
         initComponents();
         jLabel1.setText("<html><b>Cumple con el horario establecido.</b></html>");
         jLabel2.setText("<html><b>Maneja adecuadamente los insumos y materia prima que se otorga</b></html>");
@@ -37,6 +48,7 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         l2.setText("<html><b><center> A mejorar <br> 51 - 65 </center></b></html>");
         l3.setText("<html><b><center> Aceptable <br> 66 - 84 </center></b></html>");
         l4.setText("<html><b><center> Destacado <br> 85 - 100 </center></b></html>");
+        foto();
     }
     
      private void suma(){
@@ -76,6 +88,28 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
     else if((total >= 85 && total<=100)){punteo.setText("Destacado");}
     
      } 
+   
+     private void foto(){
+    
+    try {
+                String sql = "select fotografia from alistaempleados where codigo = " + codigo;
+                ImageIcon foto;
+                InputStream is;
+                Connection cnn = BD.getConnection();
+                PreparedStatement ps = null;
+                ps = cnn.prepareStatement(sql);
+                ResultSet r = ps.executeQuery();
+                while (r.next()) {
+                    is = r.getBinaryStream(1);
+                    BufferedImage bi = ImageIO.read(is);
+                    foto = new ImageIcon(bi);
+                    Image img = foto.getImage();
+                    Image newimg = img.getScaledInstance(163, 151, java.awt.Image.SCALE_SMOOTH);
+                    ImageIcon newicon = new ImageIcon(newimg);
+                    LabelFoto1.setIcon(newicon);
+                }} catch (Exception e) {
+              }
+    }
    
     
     /**
@@ -177,6 +211,16 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         NOTA1 = new javax.swing.JTextArea();
         jLabel17 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
+        TxtTotal1 = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        punteo1 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        NOTA2 = new javax.swing.JTextArea();
+        jLabel31 = new javax.swing.JLabel();
+        LabelFoto = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -298,15 +342,16 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         l3 = new javax.swing.JLabel();
         l4 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel32 = new javax.swing.JLabel();
         TxtTotal = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
         punteo = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane7 = new javax.swing.JScrollPane();
         NOTA = new javax.swing.JTextArea();
-        jLabel18 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        LabelFoto1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         uno19.setMargin(new java.awt.Insets(1, 1, 1, 1));
         uno19.addActionListener(new java.awt.event.ActionListener() {
@@ -1261,6 +1306,85 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setText("COMENTARIO(Opcional)");
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel29.setText("DESCRIPCION:");
+
+        TxtTotal1.setEditable(false);
+        TxtTotal1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TxtTotal1.setForeground(new java.awt.Color(255, 0, 0));
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel30.setText("TOTAL:");
+
+        punteo1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        punteo1.setForeground(new java.awt.Color(0, 0, 255));
+
+        NOTA2.setColumns(20);
+        NOTA2.setRows(5);
+        jScrollPane6.setViewportView(NOTA2);
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel31.setText("COMENTARIO(Opcional)");
+
+        LabelFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelFoto.setText("FOTO");
+        LabelFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save2.png"))); // NOI18N
+        jButton2.setText("GUARDAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel30)
+                    .addComponent(jLabel29)
+                    .addComponent(TxtTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(punteo1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2))
+                    .addComponent(jLabel31))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(punteo1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TxtTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41))))
+        );
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -2750,6 +2874,30 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         l4.setToolTipText("");
         l4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel32.setText("DESCRIPCION:");
+
+        TxtTotal.setEditable(false);
+        TxtTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TxtTotal.setForeground(new java.awt.Color(255, 0, 0));
+
+        jLabel33.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel33.setText("TOTAL:");
+
+        punteo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        punteo.setForeground(new java.awt.Color(0, 0, 255));
+
+        NOTA.setColumns(20);
+        NOTA.setRows(5);
+        jScrollPane7.setViewportView(NOTA);
+
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel34.setText("COMENTARIO(Opcional)");
+
+        LabelFoto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelFoto1.setText("FOTO");
+        LabelFoto1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save2.png"))); // NOI18N
         jButton1.setText("GUARDAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -2758,55 +2906,55 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel15.setText("DESCRIPCION:");
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel14.setText("TOTAL:");
-
-        TxtTotal.setEditable(false);
-        TxtTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        TxtTotal.setForeground(new java.awt.Color(255, 0, 0));
-
-        punteo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        punteo.setForeground(new java.awt.Color(0, 0, 255));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel14)
-                            .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 240, Short.MAX_VALUE))
-                    .addComponent(punteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel32)
+                            .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(punteo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel34))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(LabelFoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(punteo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LabelFoto1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(punteo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))))
         );
-
-        NOTA.setColumns(20);
-        NOTA.setRows(5);
-        jScrollPane3.setViewportView(NOTA);
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel18.setText("COMENTARIO(Opcional)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -2815,48 +2963,33 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel63, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jSeparator4)
-                            .addComponent(jSeparator3)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jPanel53, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator5)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel18)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)
-                                .addGap(15, 15, 15))))
+                                .addComponent(jPanel48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(238, 238, 238)
                         .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2865,149 +2998,82 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(l3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(l4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(l4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(l2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(l4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(l3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel53, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel63, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(l2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(l4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(l3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel53, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel63, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void unoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unoActionPerformed
-       uno.setText("X");uno.setBackground(Color.red);
-       dos.setText("");dos.setBackground(new Color(240, 240, 240));
-       tres.setText("");tres.setBackground(new Color(240, 240, 240));
-       
-       uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
-       dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
-       tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
-       uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
-       dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
-       tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
-       uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
-       dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
-       tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
-      
-       UNO.setText("17");UNO.setBackground(Color.RED);
-       DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
-       TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
-       CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
-       
-        suma();
-               
-    }//GEN-LAST:event_unoActionPerformed
-
-    private void dosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dosActionPerformed
-       dos.setText("X");dos.setBackground(Color.red);
-       uno.setText("");uno.setBackground(new Color(240, 240, 240));
-       tres.setText("");tres.setBackground(new Color(240, 240, 240));
-       
-       uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
-       dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
-       tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
-       uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
-       dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
-       tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
-       uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
-       dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
-       tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
-       UNO.setText("33");UNO.setBackground(Color.RED);
-       DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
-       TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
-       CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dosActionPerformed
-
-    private void tresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tresActionPerformed
-       tres.setText("X");tres.setBackground(Color.red);
-       uno.setText("");uno.setBackground(new Color(240, 240, 240));
-       dos.setText("");dos.setBackground(new Color(240, 240, 240));
-       uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
-       dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
-       tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
-       uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
-       dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
-       tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
-       uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
-       dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
-       tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
-       UNO.setText("50");UNO.setBackground(Color.RED);
-       DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
-       TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
-       CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tresActionPerformed
 
     private void uno19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno19ActionPerformed
         // TODO add your handling code here:
@@ -3057,197 +3123,6 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tres22ActionPerformed
 
-    private void dos27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos27ActionPerformed
-       dos27.setText("X");dos27.setBackground(Color.red);
-       uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
-       tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
-       
-       uno.setText("");uno.setBackground(new Color(240, 240, 240));
-       dos.setText("");dos.setBackground(new Color(240, 240, 240));
-       tres.setText("");tres.setBackground(new Color(240, 240, 240));
-       uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
-       dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
-       tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
-       uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
-       dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
-       tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
-       UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
-       DOS.setText("60");DOS.setBackground(Color.RED);
-       TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
-       CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos27ActionPerformed
-
-    private void tres27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres27ActionPerformed
-       tres27.setText("X");tres27.setBackground(Color.red);
-       dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
-       uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
-       
-       uno.setText("");uno.setBackground(new Color(240, 240, 240));
-       dos.setText("");dos.setBackground(new Color(240, 240, 240));
-       tres.setText("");tres.setBackground(new Color(240, 240, 240));
-       uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
-       dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
-       tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
-       uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
-       dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
-       tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
-       UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
-       DOS.setText("65");DOS.setBackground(Color.RED);
-       TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
-       CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres27ActionPerformed
-
-    private void uno27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno27ActionPerformed
-       uno27.setText("X");uno27.setBackground(Color.red);
-       dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
-       tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
-       
-       uno.setText("");uno.setBackground(new Color(240, 240, 240));
-       dos.setText("");dos.setBackground(new Color(240, 240, 240));
-       tres.setText("");tres.setBackground(new Color(240, 240, 240));
-       uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
-       dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
-       tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
-       uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
-       dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
-       tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
-       
-       UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
-       DOS.setText("56");DOS.setBackground(Color.RED);
-       TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
-       CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno27ActionPerformed
-
-    private void dos28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos28ActionPerformed
-        dos28.setText("X");dos28.setBackground(Color.red);
-       uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
-       tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
-       
-       uno.setText("");uno.setBackground(new Color(240, 240, 240));
-       dos.setText("");dos.setBackground(new Color(240, 240, 240));
-       tres.setText("");tres.setBackground(new Color(240, 240, 240));
-       uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
-       dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
-       tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
-       uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
-       dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
-       tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
-       UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
-       DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
-       TRES.setText("78");TRES.setBackground(Color.RED);
-       CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos28ActionPerformed
-
-    private void tres28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres28ActionPerformed
-       tres28.setText("X");tres28.setBackground(Color.red);
-       dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
-       uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
-       
-       uno.setText("");uno.setBackground(new Color(240, 240, 240));
-       dos.setText("");dos.setBackground(new Color(240, 240, 240));
-       tres.setText("");tres.setBackground(new Color(240, 240, 240));
-       uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
-       dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
-       tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
-       uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
-       dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
-       tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
-       UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
-       DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
-       TRES.setText("84");TRES.setBackground(Color.RED);
-       CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres28ActionPerformed
-
-    private void uno28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno28ActionPerformed
-       uno28.setText("X");uno28.setBackground(Color.red);
-       dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
-       tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
-       
-       uno.setText("");uno.setBackground(new Color(240, 240, 240));
-       dos.setText("");dos.setBackground(new Color(240, 240, 240));
-       tres.setText("");tres.setBackground(new Color(240, 240, 240));
-       uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
-       dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
-       tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
-       uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
-       dos29.setText(""); dos29.setBackground(new Color(240, 240, 240));
-       tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
-       UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
-       DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
-       TRES.setText("72");TRES.setBackground(Color.RED);
-       CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno28ActionPerformed
-
-    private void dos29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos29ActionPerformed
-       dos29.setText("X");dos29.setBackground(Color.red);
-       uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
-       tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
-       
-       uno.setText("");uno.setBackground(new Color(240, 240, 240));
-       dos.setText("");dos.setBackground(new Color(240, 240, 240));
-       tres.setText("");tres.setBackground(new Color(240, 240, 240));
-       uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
-       dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
-       tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
-       uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
-       dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
-       tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
-      UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
-       DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
-       TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
-       CUATRO.setText("95");CUATRO.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_dos29ActionPerformed
-
-    private void tres29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres29ActionPerformed
-       tres29.setText("X");tres29.setBackground(Color.red);
-       dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
-       uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
-       
-       uno.setText("");uno.setBackground(new Color(240, 240, 240));
-       dos.setText("");dos.setBackground(new Color(240, 240, 240));
-       tres.setText("");tres.setBackground(new Color(240, 240, 240));
-       uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
-       dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
-       tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
-       uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
-       dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
-       tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
-       UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
-       DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
-       TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
-       CUATRO.setText("100");CUATRO.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_tres29ActionPerformed
-
-    private void uno29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno29ActionPerformed
-       uno29.setText("X");uno29.setBackground(Color.red);
-       dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
-       tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
-       
-       uno.setText("");uno.setBackground(new Color(240, 240, 240));
-       dos.setText("");dos.setBackground(new Color(240, 240, 240));
-       tres.setText("");tres.setBackground(new Color(240, 240, 240));
-       uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
-       dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
-       tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
-       uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
-       dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
-       tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
-       UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
-       DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
-       TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
-       CUATRO.setText("90");CUATRO.setBackground(Color.RED);
-       suma();
-       
-    }//GEN-LAST:event_uno29ActionPerformed
-
     private void dos30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos30ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dos30ActionPerformed
@@ -3295,260 +3170,6 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
     private void uno33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno33ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_uno33ActionPerformed
-
-    private void dos34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos34ActionPerformed
-       dos34.setText("X");dos34.setBackground(Color.red);
-       uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
-       tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
-       
-       uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
-       dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
-       tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
-       uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
-       dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
-       tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
-       uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
-       dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
-       tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
-       UNO1.setText("33");UNO1.setBackground(Color.RED);
-       DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
-       TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
-       CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos34ActionPerformed
-
-    private void tres34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres34ActionPerformed
-       tres34.setText("X");tres34.setBackground(Color.red);
-       uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
-       dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
-       
-       uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
-       dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
-       tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
-       uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
-       dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
-       tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
-       uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
-       dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
-       tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
-       UNO1.setText("50");UNO1.setBackground(Color.RED);
-       DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
-       TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
-       CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres34ActionPerformed
-
-    private void uno34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno34ActionPerformed
-       uno34.setText("X");uno34.setBackground(Color.red);
-       dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
-       tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
-       
-       uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
-       dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
-       tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
-       uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
-       dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
-       tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
-       uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
-       dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
-       tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
-      
-       UNO1.setText("17");UNO1.setBackground(Color.RED);
-       DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
-       TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
-       CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno34ActionPerformed
-
-    private void dos35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos35ActionPerformed
-       dos35.setText("X");dos35.setBackground(Color.red);
-       uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
-       tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
-       
-       uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
-       dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
-       tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
-       uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
-       dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
-       tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
-       uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
-       dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
-       tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
-       UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
-       DOS1.setText("60");DOS1.setBackground(Color.RED);
-       TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
-       CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos35ActionPerformed
-
-    private void tres35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres35ActionPerformed
-       tres35.setText("X");tres35.setBackground(Color.red);
-       dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
-       uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
-       
-       uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
-       dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
-       tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
-       uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
-       dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
-       tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
-       uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
-       dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
-       tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
-       UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
-       DOS1.setText("65");DOS1.setBackground(Color.RED);
-       TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
-       CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres35ActionPerformed
-
-    private void uno35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno35ActionPerformed
-       uno35.setText("X");uno35.setBackground(Color.red);
-       dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
-       tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
-       
-       uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
-       dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
-       tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
-       uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
-       dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
-       tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
-       uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
-       dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
-       tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
-       
-       UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
-       DOS1.setText("56");DOS1.setBackground(Color.RED);
-       TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
-       CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno35ActionPerformed
-
-    private void dos36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos36ActionPerformed
-       dos36.setText("X");dos36.setBackground(Color.red);
-       uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
-       tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
-       
-       uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
-       dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
-       tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
-       uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
-       dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
-       tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
-       uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
-       dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
-       tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
-       UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
-       DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
-       TRES1.setText("78");TRES1.setBackground(Color.RED);
-       CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos36ActionPerformed
-
-    private void tres36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres36ActionPerformed
-       tres36.setText("X");tres36.setBackground(Color.red);
-       dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
-       uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
-       
-       uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
-       dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
-       tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
-       uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
-       dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
-       tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
-       uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
-       dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
-       tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
-       UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
-       DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
-       TRES1.setText("84");TRES1.setBackground(Color.RED);
-       CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres36ActionPerformed
-
-    private void uno36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno36ActionPerformed
-       uno36.setText("X");uno36.setBackground(Color.red);
-       dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
-       tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
-       
-       uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
-       dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
-       tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
-       uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
-       dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
-       tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
-       uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
-       dos37.setText(""); dos37.setBackground(new Color(240, 240, 240));
-       tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
-      UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
-       DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
-       TRES1.setText("72");TRES1.setBackground(Color.RED);
-       CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno36ActionPerformed
-
-    private void dos37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos37ActionPerformed
-       dos37.setText("X");dos37.setBackground(Color.red);
-       uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
-       tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
-       
-       uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
-       dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
-       tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
-       uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
-       dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
-       tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
-       uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
-       dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
-       tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
-       UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
-       DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
-       TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
-       CUATRO1.setText("95");CUATRO1.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_dos37ActionPerformed
-
-    private void tres37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres37ActionPerformed
-       tres37.setText("X");tres37.setBackground(Color.red);
-       dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
-       uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
-       
-       uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
-       dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
-       tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
-       uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
-       dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
-       tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
-       uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
-       dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
-       tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
-       UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
-       DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
-       TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
-       CUATRO1.setText("100");CUATRO1.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_tres37ActionPerformed
-
-    private void uno37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno37ActionPerformed
-       uno37.setText("X");uno37.setBackground(Color.red);
-       dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
-       tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
-       
-       uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
-       dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
-       tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
-       uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
-       dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
-       tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
-       uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
-       dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
-       tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
-       UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
-       DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
-       TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
-       CUATRO1.setText("90");CUATRO1.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_uno37ActionPerformed
 
     private void dos38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos38ActionPerformed
         // TODO add your handling code here:
@@ -3598,515 +3219,6 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_uno41ActionPerformed
 
-    private void dos42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos42ActionPerformed
-       dos42.setText("X");dos42.setBackground(Color.red);
-       uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
-       tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
-       
-       uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
-       dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
-       tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
-       uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
-       dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
-       tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
-       uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
-       dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
-       tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
-      UNO2.setText("33");UNO2.setBackground(Color.RED);
-       DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
-       TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
-       CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos42ActionPerformed
-
-    private void tres42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres42ActionPerformed
-       tres42.setText("X");tres42.setBackground(Color.red);
-       uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
-       dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
-       
-       uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
-       dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
-       tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
-       uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
-       dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
-       tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
-       uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
-       dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
-       tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
-       UNO2.setText("50");UNO2.setBackground(Color.RED);
-       DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
-       TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
-       CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres42ActionPerformed
-
-    private void uno42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno42ActionPerformed
-      
-       uno42.setText("X");uno42.setBackground(Color.red);
-       dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
-       tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
-       
-       uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
-       dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
-       tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
-       uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
-       dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
-       tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
-       uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
-       dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
-       tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
-      
-       UNO2.setText("17");UNO2.setBackground(Color.RED);
-       DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
-       TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
-       CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno42ActionPerformed
-
-    private void dos43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos43ActionPerformed
-       dos43.setText("X");dos43.setBackground(Color.red);
-       uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
-       tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
-       
-       uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
-       dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
-       tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
-       uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
-       dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
-       tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
-       uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
-       dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
-       tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
-      UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
-       DOS2.setText("60");DOS2.setBackground(Color.RED);
-       TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
-       CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos43ActionPerformed
-
-    private void tres43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres43ActionPerformed
-       tres43.setText("X");tres43.setBackground(Color.red);
-       dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
-       uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
-       
-       uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
-       dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
-       tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
-       uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
-       dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
-       tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
-       uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
-       dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
-       tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
-       UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
-       DOS2.setText("65");DOS2.setBackground(Color.RED);
-       TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
-       CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres43ActionPerformed
-
-    private void uno43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno43ActionPerformed
-       uno43.setText("X");uno43.setBackground(Color.red);
-       dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
-       tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
-       
-       uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
-       dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
-       tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
-       uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
-       dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
-       tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
-       uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
-       dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
-       tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
-       
-      UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
-       DOS2.setText("56");DOS2.setBackground(Color.RED);
-       TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
-       CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno43ActionPerformed
-
-    private void dos44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos44ActionPerformed
-       dos44.setText("X");dos44.setBackground(Color.red);
-       uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
-       tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
-       
-       uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
-       dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
-       tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
-       uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
-       dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
-       tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
-       uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
-       dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
-       tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
-      UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
-       DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
-       TRES2.setText("78");TRES2.setBackground(Color.RED);
-       CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos44ActionPerformed
-
-    private void tres44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres44ActionPerformed
-       tres44.setText("X");tres44.setBackground(Color.red);
-       dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
-       uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
-       
-       uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
-       dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
-       tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
-       uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
-       dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
-       tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
-       uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
-       dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
-       tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
-       UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
-       DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
-       TRES2.setText("84");TRES2.setBackground(Color.RED);
-       CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres44ActionPerformed
-
-    private void uno44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno44ActionPerformed
-       uno44.setText("X");uno44.setBackground(Color.red);
-       dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
-       tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
-       
-       uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
-       dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
-       tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
-       uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
-       dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
-       tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
-       uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
-       dos45.setText(""); dos45.setBackground(new Color(240, 240, 240));
-       tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
-       UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
-       DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
-       TRES2.setText("72");TRES2.setBackground(Color.RED);
-       CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno44ActionPerformed
-
-    private void dos45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos45ActionPerformed
-       dos45.setText("X");dos45.setBackground(Color.red);
-       uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
-       tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
-       
-       uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
-       dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
-       tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
-       uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
-       dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
-       tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
-       uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
-       dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
-       tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
-       UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
-       DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
-       TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
-       CUATRO2.setText("95");CUATRO2.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_dos45ActionPerformed
-
-    private void tres45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres45ActionPerformed
-       tres45.setText("X");tres45.setBackground(Color.red);
-       dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
-       uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
-       
-       uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
-       dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
-       tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
-       uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
-       dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
-       tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
-       uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
-       dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
-       tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
-       UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
-       DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
-       TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
-       CUATRO2.setText("100");CUATRO2.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_tres45ActionPerformed
-
-    private void uno45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno45ActionPerformed
-       uno45.setText("X");uno45.setBackground(Color.red);
-       dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
-       tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
-       
-       uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
-       dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
-       tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
-       uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
-       dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
-       tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
-       uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
-       dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
-       tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
-       UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
-       DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
-       TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
-       CUATRO2.setText("90");CUATRO2.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_uno45ActionPerformed
-
-    private void dos46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos46ActionPerformed
-       dos46.setText("X");dos46.setBackground(Color.red);
-       uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
-       tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
-       
-       uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
-       dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
-       tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
-       uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
-       dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
-       tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
-       uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
-       dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
-       tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
-       UNO3.setText("33");UNO3.setBackground(Color.RED);
-       DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
-       TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
-       CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos46ActionPerformed
-
-    private void tres46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres46ActionPerformed
-       tres46.setText("X");tres46.setBackground(Color.red);
-       uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
-       dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
-       
-       uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
-       dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
-       tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
-       uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
-       dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
-       tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
-       uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
-       dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
-       tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
-       UNO3.setText("50");UNO3.setBackground(Color.RED);
-       DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
-       TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
-       CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres46ActionPerformed
-
-    private void uno46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno46ActionPerformed
-       uno46.setText("X");uno46.setBackground(Color.red);
-       dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
-       tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
-       
-       uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
-       dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
-       tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
-       uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
-       dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
-       tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
-       uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
-       dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
-       tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
-      
-       UNO3.setText("17");UNO3.setBackground(Color.RED);
-       DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
-       TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
-       CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno46ActionPerformed
-
-    private void dos47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos47ActionPerformed
-       dos47.setText("X");dos47.setBackground(Color.red);
-       uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
-       tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
-       
-       uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
-       dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
-       tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
-       uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
-       dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
-       tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
-       uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
-       dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
-       tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
-       UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
-       DOS3.setText("60");DOS3.setBackground(Color.RED);
-       TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
-       CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos47ActionPerformed
-
-    private void tres47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres47ActionPerformed
-       tres47.setText("X");tres47.setBackground(Color.red);
-       dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
-       uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
-       
-       uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
-       dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
-       tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
-       uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
-       dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
-       tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
-       uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
-       dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
-       tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
-       UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
-       DOS3.setText("65");DOS3.setBackground(Color.RED);
-       TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
-       CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres47ActionPerformed
-
-    private void uno47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno47ActionPerformed
-       uno47.setText("X");uno47.setBackground(Color.red);
-       dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
-       tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
-       
-       uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
-       dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
-       tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
-       uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
-       dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
-       tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
-       uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
-       dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
-       tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
-       
-       UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
-       DOS3.setText("56");DOS3.setBackground(Color.RED);
-       TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
-       CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno47ActionPerformed
-
-    private void dos48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos48ActionPerformed
-       dos48.setText("X");dos48.setBackground(Color.red);
-       uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
-       tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
-       
-       uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
-       dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
-       tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
-       uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
-       dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
-       tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
-       uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
-       dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
-       tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
-       UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
-       DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
-       TRES3.setText("78");TRES3.setBackground(Color.RED);
-       CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos48ActionPerformed
-
-    private void tres48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres48ActionPerformed
-       tres48.setText("X");tres48.setBackground(Color.red);
-       dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
-       uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
-       
-       uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
-       dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
-       tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
-       uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
-       dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
-       tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
-       uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
-       dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
-       tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
-       UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
-       DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
-       TRES3.setText("84");TRES3.setBackground(Color.RED);
-       CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres48ActionPerformed
-
-    private void uno48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno48ActionPerformed
-       uno48.setText("X");uno48.setBackground(Color.red);
-       dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
-       tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
-       
-       uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
-       dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
-       tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
-       uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
-       dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
-       tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
-       uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
-       dos49.setText(""); dos49.setBackground(new Color(240, 240, 240));
-       tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
-       UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
-       DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
-       TRES3.setText("72");TRES3.setBackground(Color.RED);
-       CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno48ActionPerformed
-
-    private void dos49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos49ActionPerformed
-       dos49.setText("X");dos49.setBackground(Color.red);
-       uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
-       tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
-       
-       uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
-       dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
-       tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
-       uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
-       dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
-       tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
-       uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
-       dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
-       tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
-       UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
-       DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
-       TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
-       CUATRO3.setText("95");CUATRO3.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_dos49ActionPerformed
-
-    private void tres49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres49ActionPerformed
-       tres49.setText("X");tres49.setBackground(Color.red);
-       dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
-       uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
-       
-       uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
-       dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
-       tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
-       uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
-       dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
-       tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
-       uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
-       dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
-       tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
-       UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
-       DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
-       TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
-       CUATRO3.setText("100");CUATRO3.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_tres49ActionPerformed
-
-    private void uno49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno49ActionPerformed
-       uno49.setText("X");uno49.setBackground(Color.red);
-       dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
-       tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
-       
-       uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
-       dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
-       tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
-       uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
-       dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
-       tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
-       uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
-       dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
-       tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
-       UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
-       DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
-       TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
-       CUATRO3.setText("90");CUATRO3.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_uno49ActionPerformed
-
     private void dos50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos50ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dos50ActionPerformed
@@ -4155,306 +3267,6 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_uno53ActionPerformed
 
-    private void dos54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos54ActionPerformed
-       dos54.setText("X");dos54.setBackground(Color.red);
-       uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
-       tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
-       
-       uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
-       dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
-       tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
-       uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
-       dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
-       tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
-       uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
-       dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
-       tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
-       UNO4.setText("33");UNO4.setBackground(Color.RED);
-       DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
-       TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
-       CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos54ActionPerformed
-
-    private void tres54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres54ActionPerformed
-       tres54.setText("X");tres54.setBackground(Color.red);
-       uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
-       dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
-       
-       uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
-       dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
-       tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
-       uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
-       dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
-       tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
-       uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
-       dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
-       tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
-       UNO4.setText("50");UNO4.setBackground(Color.RED);
-       DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
-       TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
-       CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres54ActionPerformed
-
-    private void uno54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno54ActionPerformed
-       uno54.setText("X");uno54.setBackground(Color.red);
-       dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
-       tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
-       
-       uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
-       dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
-       tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
-       uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
-       dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
-       tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
-       uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
-       dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
-       tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
-      
-       UNO4.setText("17");UNO4.setBackground(Color.RED);
-       DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
-       TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
-       CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno54ActionPerformed
-
-    private void dos55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos55ActionPerformed
-       dos55.setText("X");dos55.setBackground(Color.red);
-       uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
-       tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
-       
-       uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
-       dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
-       tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
-       uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
-       dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
-       tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
-       uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
-       dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
-       tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
-       UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
-       DOS4.setText("60");DOS4.setBackground(Color.RED);
-       TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
-       CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos55ActionPerformed
-
-    private void tres55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres55ActionPerformed
-       tres55.setText("X");tres55.setBackground(Color.red);
-       dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
-       uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
-       
-       uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
-       dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
-       tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
-       uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
-       dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
-       tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
-       uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
-       dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
-       tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
-        UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
-       DOS4.setText("65");DOS4.setBackground(Color.RED);
-       TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
-       CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres55ActionPerformed
-
-    private void uno55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno55ActionPerformed
-       uno55.setText("X");uno55.setBackground(Color.red);
-       dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
-       tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
-       
-       uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
-       dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
-       tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
-       uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
-       dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
-       tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
-       uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
-       dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
-       tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
-       UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
-       DOS4.setText("56");DOS4.setBackground(Color.RED);
-       TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
-       CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno55ActionPerformed
-
-    private void dos56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos56ActionPerformed
-       dos56.setText("X");dos56.setBackground(Color.red);
-       uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
-       tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
-       
-       uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
-       dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
-       tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
-       uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
-       dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
-       tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
-       uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
-       dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
-       tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
-       UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
-       DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
-       TRES4.setText("78");TRES4.setBackground(Color.RED);
-       CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_dos56ActionPerformed
-
-    private void tres56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres56ActionPerformed
-       tres56.setText("X");tres56.setBackground(Color.red);
-       dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
-       uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
-       
-       uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
-       dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
-       tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
-       uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
-       dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
-       tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
-       uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
-       dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
-       tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
-        UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
-       DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
-       TRES4.setText("84");TRES4.setBackground(Color.RED);
-       CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_tres56ActionPerformed
-
-    private void uno56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno56ActionPerformed
-       uno56.setText("X");uno56.setBackground(Color.red);
-       dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
-       tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
-       
-       uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
-       dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
-       tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
-       uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
-       dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
-       tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
-       uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
-       dos57.setText(""); dos57.setBackground(new Color(240, 240, 240));
-       tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
-       UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
-       DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
-       TRES4.setText("72");TRES4.setBackground(Color.RED);
-       CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
-       suma();
-    }//GEN-LAST:event_uno56ActionPerformed
-
-    private void dos57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos57ActionPerformed
-       dos57.setText("X");dos57.setBackground(Color.red);
-       uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
-       tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
-       
-       uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
-       dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
-       tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
-       uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
-       dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
-       tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
-       uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
-       dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
-       tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
-       UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
-       DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
-       TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
-       CUATRO4.setText("95");CUATRO4.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_dos57ActionPerformed
-
-    private void tres57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres57ActionPerformed
-       tres57.setText("X");tres57.setBackground(Color.red);
-       dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
-       uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
-       uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
-       dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
-       tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
-       uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
-       dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
-       tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
-       uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
-       dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
-       tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
-       UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
-       DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
-       TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
-       CUATRO4.setText("100");CUATRO4.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_tres57ActionPerformed
-
-    private void uno57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno57ActionPerformed
-       uno57.setText("X");uno57.setBackground(Color.red);
-       dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
-       tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
-       
-       uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
-       dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
-       tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
-       uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
-       dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
-       tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
-       uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
-       dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
-       tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
-       UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
-       DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
-       TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
-       CUATRO4.setText("90");CUATRO4.setBackground(Color.RED);
-       suma();
-    }//GEN-LAST:event_uno57ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-         if((UNO.getText().compareTo("0") != 0 || DOS.getText().compareTo("0")!= 0 || TRES.getText().compareTo("0")!= 0 || CUATRO.getText().compareTo("0")!= 0) &&
-                 (UNO1.getText().compareTo("0") != 0 || DOS1.getText().compareTo("0")!= 0 || TRES1.getText().compareTo("0")!= 0 || CUATRO1.getText().compareTo("0")!= 0) &&
-                 (UNO2.getText().compareTo("0") != 0 || DOS2.getText().compareTo("0")!= 0 || TRES2.getText().compareTo("0")!= 0 || CUATRO2.getText().compareTo("0")!= 0) &&
-                 (UNO3.getText().compareTo("0") != 0 || DOS3.getText().compareTo("0")!= 0 || TRES3.getText().compareTo("0")!= 0 || CUATRO3.getText().compareTo("0")!= 0) &&
-                 (UNO4.getText().compareTo("0") != 0 || DOS4.getText().compareTo("0")!= 0 || TRES4.getText().compareTo("0")!= 0 || CUATRO4.getText().compareTo("0")!= 0) )
-         {
-        
-        try {
-            ClassEvaluacion l = new ClassEvaluacion();
-            l.setId_evaluacion(id_evaluacion);
-            l.setUNO(Integer.parseInt(UNO.getText()));
-            l.setDOS(Integer.parseInt(DOS.getText()));
-            l.setTRES(Integer.parseInt(TRES.getText()));
-            l.setCUATRO(Integer.parseInt(CUATRO.getText()));
-            
-            l.setUNO1(Integer.parseInt(UNO1.getText()));
-            l.setDOS1(Integer.parseInt(DOS1.getText()));
-            l.setTRES1(Integer.parseInt(TRES1.getText()));
-            l.setCUATRO1(Integer.parseInt(CUATRO1.getText()));
-            
-            l.setUNO2(Integer.parseInt(UNO2.getText()));
-            l.setDOS2(Integer.parseInt(DOS2.getText()));
-            l.setTRES2(Integer.parseInt(TRES2.getText()));
-            l.setCUATRO2(Integer.parseInt(CUATRO2.getText()));
-            
-            l.setUNO3(Integer.parseInt(UNO3.getText()));
-            l.setDOS3(Integer.parseInt(DOS3.getText()));
-            l.setTRES3(Integer.parseInt(TRES3.getText()));
-            l.setCUATRO3(Integer.parseInt(CUATRO3.getText()));
-            
-            l.setUNO4(Integer.parseInt(UNO4.getText()));
-            l.setDOS4(Integer.parseInt(DOS4.getText()));
-            l.setTRES4(Integer.parseInt(TRES4.getText()));
-            l.setCUATRO4(Integer.parseInt(CUATRO4.getText()));
-            l.setNOTA(NOTA.getText());
-            Clases.Evaluacion.BDEvaluacion.insertarResponsabilidad(l);
-            JOptionPane.showMessageDialog(null, "EVALUACION TERMINADA CORRECTAMENTE");
-            this.dispose();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR INGRESO EMPLEADOS" + e);
-        }
-         }else{JOptionPane.showMessageDialog(null, "FALTA PARA TERMINAR LA EVALUACION");}
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
        /* TiposEvaluacion tra = new TiposEvaluacion(id_evaluacion);
         Pane1.add(tra);
@@ -4476,6 +3288,1369 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        if((UNO.getText().compareTo("0") != 0 || DOS.getText().compareTo("0")!= 0 || TRES.getText().compareTo("0")!= 0 || CUATRO.getText().compareTo("0")!= 0) &&
+            (UNO1.getText().compareTo("0") != 0 || DOS1.getText().compareTo("0")!= 0 || TRES1.getText().compareTo("0")!= 0 || CUATRO1.getText().compareTo("0")!= 0) &&
+            (UNO2.getText().compareTo("0") != 0 || DOS2.getText().compareTo("0")!= 0 || TRES2.getText().compareTo("0")!= 0 || CUATRO2.getText().compareTo("0")!= 0) &&
+            (UNO3.getText().compareTo("0") != 0 || DOS3.getText().compareTo("0")!= 0 || TRES3.getText().compareTo("0")!= 0 || CUATRO3.getText().compareTo("0")!= 0) &&
+            (UNO4.getText().compareTo("0") != 0 || DOS4.getText().compareTo("0")!= 0 || TRES4.getText().compareTo("0")!= 0 || CUATRO4.getText().compareTo("0")!= 0) )
+        {
+            try {
+                ClassEvaluacionOperativo l = new ClassEvaluacionOperativo();
+                l.setId_evaluacion(id_evaluacion);
+                l.setUNO(Integer.parseInt(UNO.getText()));
+                l.setDOS(Integer.parseInt(DOS.getText()));
+                l.setTRES(Integer.parseInt(TRES.getText()));
+                l.setCUATRO(Integer.parseInt(CUATRO.getText()));
+
+                l.setUNO1(Integer.parseInt(UNO1.getText()));
+                l.setDOS1(Integer.parseInt(DOS1.getText()));
+                l.setTRES1(Integer.parseInt(TRES1.getText()));
+                l.setCUATRO1(Integer.parseInt(CUATRO1.getText()));
+
+                l.setUNO2(Integer.parseInt(UNO2.getText()));
+                l.setDOS2(Integer.parseInt(DOS2.getText()));
+                l.setTRES2(Integer.parseInt(TRES2.getText()));
+                l.setCUATRO2(Integer.parseInt(CUATRO2.getText()));
+
+                l.setUNO3(Integer.parseInt(UNO3.getText()));
+                l.setDOS3(Integer.parseInt(DOS3.getText()));
+                l.setTRES3(Integer.parseInt(TRES3.getText()));
+                l.setCUATRO3(Integer.parseInt(CUATRO3.getText()));
+
+                l.setUNO4(Integer.parseInt(UNO4.getText()));
+                l.setDOS4(Integer.parseInt(DOS4.getText()));
+                l.setTRES4(Integer.parseInt(TRES4.getText()));
+                l.setCUATRO4(Integer.parseInt(CUATRO4.getText()));
+                l.setNOTA(NOTA1.getText());
+                Clases.EvaluacionOperativo.BDEvaluacion.insertarOrganizacion(l);
+                JOptionPane.showMessageDialog(null, "EVALUACION TERMINADA CORRECTAMENTE");
+                this.dispose();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "ERROR INGRESO EMPLEADOS" + e);
+            }
+        }else{JOptionPane.showMessageDialog(null, "FALTA PARA TERMINAR LA EVALUACION");}
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        if((UNO.getText().compareTo("0") != 0 || DOS.getText().compareTo("0")!= 0 || TRES.getText().compareTo("0")!= 0 || CUATRO.getText().compareTo("0")!= 0) &&
+            (UNO1.getText().compareTo("0") != 0 || DOS1.getText().compareTo("0")!= 0 || TRES1.getText().compareTo("0")!= 0 || CUATRO1.getText().compareTo("0")!= 0) &&
+            (UNO2.getText().compareTo("0") != 0 || DOS2.getText().compareTo("0")!= 0 || TRES2.getText().compareTo("0")!= 0 || CUATRO2.getText().compareTo("0")!= 0) &&
+            (UNO3.getText().compareTo("0") != 0 || DOS3.getText().compareTo("0")!= 0 || TRES3.getText().compareTo("0")!= 0 || CUATRO3.getText().compareTo("0")!= 0) &&
+            (UNO4.getText().compareTo("0") != 0 || DOS4.getText().compareTo("0")!= 0 || TRES4.getText().compareTo("0")!= 0 || CUATRO4.getText().compareTo("0")!= 0) )
+        {
+
+            try {
+                ClassEvaluacionOperativo l = new ClassEvaluacionOperativo();
+                l.setId_evaluacion(id_evaluacion);
+                l.setUNO(Integer.parseInt(UNO.getText()));
+                l.setDOS(Integer.parseInt(DOS.getText()));
+                l.setTRES(Integer.parseInt(TRES.getText()));
+                l.setCUATRO(Integer.parseInt(CUATRO.getText()));
+
+                l.setUNO1(Integer.parseInt(UNO1.getText()));
+                l.setDOS1(Integer.parseInt(DOS1.getText()));
+                l.setTRES1(Integer.parseInt(TRES1.getText()));
+                l.setCUATRO1(Integer.parseInt(CUATRO1.getText()));
+
+                l.setUNO2(Integer.parseInt(UNO2.getText()));
+                l.setDOS2(Integer.parseInt(DOS2.getText()));
+                l.setTRES2(Integer.parseInt(TRES2.getText()));
+                l.setCUATRO2(Integer.parseInt(CUATRO2.getText()));
+
+                l.setUNO3(Integer.parseInt(UNO3.getText()));
+                l.setDOS3(Integer.parseInt(DOS3.getText()));
+                l.setTRES3(Integer.parseInt(TRES3.getText()));
+                l.setCUATRO3(Integer.parseInt(CUATRO3.getText()));
+
+                l.setUNO4(Integer.parseInt(UNO4.getText()));
+                l.setDOS4(Integer.parseInt(DOS4.getText()));
+                l.setTRES4(Integer.parseInt(TRES4.getText()));
+                l.setCUATRO4(Integer.parseInt(CUATRO4.getText()));
+                l.setNOTA(NOTA.getText());
+                Clases.EvaluacionOperativo.BDEvaluacion.insertarResponsabilidad(l);
+                JOptionPane.showMessageDialog(null, "EVALUACION TERMINADA CORRECTAMENTE");
+                this.dispose();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "ERROR INGRESO EMPLEADOS" + e);
+            }
+        }else{JOptionPane.showMessageDialog(null, "FALTA PARA TERMINAR LA EVALUACION");}
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void uno57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno57ActionPerformed
+        uno57.setText("X");uno57.setBackground(Color.red);
+        dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
+        tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
+
+        uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
+        dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
+        tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
+        uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
+        dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
+        tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
+        uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
+        dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
+        tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
+        UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
+        DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
+        TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
+        CUATRO4.setText("90");CUATRO4.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_uno57ActionPerformed
+
+    private void tres57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres57ActionPerformed
+        tres57.setText("X");tres57.setBackground(Color.red);
+        dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
+        uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
+        uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
+        dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
+        tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
+        uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
+        dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
+        tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
+        uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
+        dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
+        tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
+        UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
+        DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
+        TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
+        CUATRO4.setText("100");CUATRO4.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_tres57ActionPerformed
+
+    private void dos57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos57ActionPerformed
+        dos57.setText("X");dos57.setBackground(Color.red);
+        uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
+        tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
+
+        uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
+        dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
+        tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
+        uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
+        dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
+        tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
+        uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
+        dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
+        tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
+        UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
+        DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
+        TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
+        CUATRO4.setText("95");CUATRO4.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_dos57ActionPerformed
+
+    private void uno56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno56ActionPerformed
+        uno56.setText("X");uno56.setBackground(Color.red);
+        dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
+        tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
+
+        uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
+        dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
+        tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
+        uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
+        dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
+        tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
+        uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
+        dos57.setText(""); dos57.setBackground(new Color(240, 240, 240));
+        tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
+        UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
+        DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
+        TRES4.setText("72");TRES4.setBackground(Color.RED);
+        CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno56ActionPerformed
+
+    private void tres56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres56ActionPerformed
+        tres56.setText("X");tres56.setBackground(Color.red);
+        dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
+        uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
+
+        uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
+        dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
+        tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
+        uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
+        dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
+        tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
+        uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
+        dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
+        tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
+        UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
+        DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
+        TRES4.setText("84");TRES4.setBackground(Color.RED);
+        CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres56ActionPerformed
+
+    private void dos56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos56ActionPerformed
+        dos56.setText("X");dos56.setBackground(Color.red);
+        uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
+        tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
+
+        uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
+        dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
+        tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
+        uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
+        dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
+        tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
+        uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
+        dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
+        tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
+        UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
+        DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
+        TRES4.setText("78");TRES4.setBackground(Color.RED);
+        CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos56ActionPerformed
+
+    private void uno55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno55ActionPerformed
+        uno55.setText("X");uno55.setBackground(Color.red);
+        dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
+        tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
+
+        uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
+        dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
+        tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
+        uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
+        dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
+        tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
+        uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
+        dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
+        tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
+        UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
+        DOS4.setText("56");DOS4.setBackground(Color.RED);
+        TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
+        CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno55ActionPerformed
+
+    private void tres55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres55ActionPerformed
+        tres55.setText("X");tres55.setBackground(Color.red);
+        dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
+        uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
+
+        uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
+        dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
+        tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
+        uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
+        dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
+        tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
+        uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
+        dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
+        tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
+        UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
+        DOS4.setText("65");DOS4.setBackground(Color.RED);
+        TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
+        CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres55ActionPerformed
+
+    private void dos55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos55ActionPerformed
+        dos55.setText("X");dos55.setBackground(Color.red);
+        uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
+        tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
+
+        uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
+        dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
+        tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
+        uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
+        dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
+        tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
+        uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
+        dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
+        tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
+        UNO4.setText("0");UNO4.setBackground(new Color(240, 240, 240));
+        DOS4.setText("60");DOS4.setBackground(Color.RED);
+        TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
+        CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos55ActionPerformed
+
+    private void uno54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno54ActionPerformed
+        uno54.setText("X");uno54.setBackground(Color.red);
+        dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
+        tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
+
+        uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
+        dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
+        tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
+        uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
+        dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
+        tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
+        uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
+        dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
+        tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
+
+        UNO4.setText("17");UNO4.setBackground(Color.RED);
+        DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
+        TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
+        CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno54ActionPerformed
+
+    private void tres54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres54ActionPerformed
+        tres54.setText("X");tres54.setBackground(Color.red);
+        uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
+        dos54.setText("");dos54.setBackground(new Color(240, 240, 240));
+
+        uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
+        dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
+        tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
+        uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
+        dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
+        tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
+        uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
+        dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
+        tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
+        UNO4.setText("50");UNO4.setBackground(Color.RED);
+        DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
+        TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
+        CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres54ActionPerformed
+
+    private void dos54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos54ActionPerformed
+        dos54.setText("X");dos54.setBackground(Color.red);
+        uno54.setText("");uno54.setBackground(new Color(240, 240, 240));
+        tres54.setText("");tres54.setBackground(new Color(240, 240, 240));
+
+        uno55.setText("");uno55.setBackground(new Color(240, 240, 240));
+        dos55.setText("");dos55.setBackground(new Color(240, 240, 240));
+        tres55.setText("");tres55.setBackground(new Color(240, 240, 240));
+        uno56.setText("");uno56.setBackground(new Color(240, 240, 240));
+        dos56.setText("");dos56.setBackground(new Color(240, 240, 240));
+        tres56.setText("");tres56.setBackground(new Color(240, 240, 240));
+        uno57.setText("");uno57.setBackground(new Color(240, 240, 240));
+        dos57.setText("");dos57.setBackground(new Color(240, 240, 240));
+        tres57.setText("");tres57.setBackground(new Color(240, 240, 240));
+        UNO4.setText("33");UNO4.setBackground(Color.RED);
+        DOS4.setText("0");DOS4.setBackground(new Color(240, 240, 240));
+        TRES4.setText("0");TRES4.setBackground(new Color(240, 240, 240));
+        CUATRO4.setText("0");CUATRO4.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos54ActionPerformed
+
+    private void uno49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno49ActionPerformed
+        uno49.setText("X");uno49.setBackground(Color.red);
+        dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
+        tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
+
+        uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
+        dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
+        tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
+        uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
+        dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
+        tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
+        uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
+        dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
+        tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
+        UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
+        DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
+        TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
+        CUATRO3.setText("90");CUATRO3.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_uno49ActionPerformed
+
+    private void tres49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres49ActionPerformed
+        tres49.setText("X");tres49.setBackground(Color.red);
+        dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
+        uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
+
+        uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
+        dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
+        tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
+        uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
+        dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
+        tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
+        uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
+        dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
+        tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
+        UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
+        DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
+        TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
+        CUATRO3.setText("100");CUATRO3.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_tres49ActionPerformed
+
+    private void dos49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos49ActionPerformed
+        dos49.setText("X");dos49.setBackground(Color.red);
+        uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
+        tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
+
+        uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
+        dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
+        tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
+        uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
+        dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
+        tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
+        uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
+        dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
+        tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
+        UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
+        DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
+        TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
+        CUATRO3.setText("95");CUATRO3.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_dos49ActionPerformed
+
+    private void uno48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno48ActionPerformed
+        uno48.setText("X");uno48.setBackground(Color.red);
+        dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
+        tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
+
+        uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
+        dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
+        tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
+        uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
+        dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
+        tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
+        uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
+        dos49.setText(""); dos49.setBackground(new Color(240, 240, 240));
+        tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
+        UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
+        DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
+        TRES3.setText("72");TRES3.setBackground(Color.RED);
+        CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno48ActionPerformed
+
+    private void tres48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres48ActionPerformed
+        tres48.setText("X");tres48.setBackground(Color.red);
+        dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
+        uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
+
+        uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
+        dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
+        tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
+        uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
+        dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
+        tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
+        uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
+        dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
+        tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
+        UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
+        DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
+        TRES3.setText("84");TRES3.setBackground(Color.RED);
+        CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres48ActionPerformed
+
+    private void dos48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos48ActionPerformed
+        dos48.setText("X");dos48.setBackground(Color.red);
+        uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
+        tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
+
+        uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
+        dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
+        tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
+        uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
+        dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
+        tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
+        uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
+        dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
+        tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
+        UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
+        DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
+        TRES3.setText("78");TRES3.setBackground(Color.RED);
+        CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos48ActionPerformed
+
+    private void uno47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno47ActionPerformed
+        uno47.setText("X");uno47.setBackground(Color.red);
+        dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
+        tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
+
+        uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
+        dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
+        tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
+        uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
+        dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
+        tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
+        uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
+        dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
+        tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
+
+        UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
+        DOS3.setText("56");DOS3.setBackground(Color.RED);
+        TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
+        CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno47ActionPerformed
+
+    private void tres47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres47ActionPerformed
+        tres47.setText("X");tres47.setBackground(Color.red);
+        dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
+        uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
+
+        uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
+        dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
+        tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
+        uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
+        dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
+        tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
+        uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
+        dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
+        tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
+        UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
+        DOS3.setText("65");DOS3.setBackground(Color.RED);
+        TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
+        CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres47ActionPerformed
+
+    private void dos47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos47ActionPerformed
+        dos47.setText("X");dos47.setBackground(Color.red);
+        uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
+        tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
+
+        uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
+        dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
+        tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
+        uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
+        dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
+        tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
+        uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
+        dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
+        tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
+        UNO3.setText("0");UNO3.setBackground(new Color(240, 240, 240));
+        DOS3.setText("60");DOS3.setBackground(Color.RED);
+        TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
+        CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos47ActionPerformed
+
+    private void uno46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno46ActionPerformed
+        uno46.setText("X");uno46.setBackground(Color.red);
+        dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
+        tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
+
+        uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
+        dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
+        tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
+        uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
+        dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
+        tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
+        uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
+        dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
+        tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
+
+        UNO3.setText("17");UNO3.setBackground(Color.RED);
+        DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
+        TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
+        CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno46ActionPerformed
+
+    private void tres46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres46ActionPerformed
+        tres46.setText("X");tres46.setBackground(Color.red);
+        uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
+        dos46.setText("");dos46.setBackground(new Color(240, 240, 240));
+
+        uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
+        dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
+        tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
+        uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
+        dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
+        tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
+        uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
+        dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
+        tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
+        UNO3.setText("50");UNO3.setBackground(Color.RED);
+        DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
+        TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
+        CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres46ActionPerformed
+
+    private void dos46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos46ActionPerformed
+        dos46.setText("X");dos46.setBackground(Color.red);
+        uno46.setText("");uno46.setBackground(new Color(240, 240, 240));
+        tres46.setText("");tres46.setBackground(new Color(240, 240, 240));
+
+        uno47.setText("");uno47.setBackground(new Color(240, 240, 240));
+        dos47.setText("");dos47.setBackground(new Color(240, 240, 240));
+        tres47.setText("");tres47.setBackground(new Color(240, 240, 240));
+        uno48.setText("");uno48.setBackground(new Color(240, 240, 240));
+        dos48.setText("");dos48.setBackground(new Color(240, 240, 240));
+        tres48.setText("");tres48.setBackground(new Color(240, 240, 240));
+        uno49.setText("");uno49.setBackground(new Color(240, 240, 240));
+        dos49.setText("");dos49.setBackground(new Color(240, 240, 240));
+        tres49.setText("");tres49.setBackground(new Color(240, 240, 240));
+        UNO3.setText("33");UNO3.setBackground(Color.RED);
+        DOS3.setText("0");DOS3.setBackground(new Color(240, 240, 240));
+        TRES3.setText("0");TRES3.setBackground(new Color(240, 240, 240));
+        CUATRO3.setText("0");CUATRO3.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos46ActionPerformed
+
+    private void uno45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno45ActionPerformed
+        uno45.setText("X");uno45.setBackground(Color.red);
+        dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
+        tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
+
+        uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
+        dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
+        tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
+        uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
+        dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
+        tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
+        uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
+        dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
+        tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
+        UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
+        DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
+        TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
+        CUATRO2.setText("90");CUATRO2.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_uno45ActionPerformed
+
+    private void tres45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres45ActionPerformed
+        tres45.setText("X");tres45.setBackground(Color.red);
+        dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
+        uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
+
+        uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
+        dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
+        tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
+        uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
+        dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
+        tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
+        uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
+        dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
+        tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
+        UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
+        DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
+        TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
+        CUATRO2.setText("100");CUATRO2.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_tres45ActionPerformed
+
+    private void dos45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos45ActionPerformed
+        dos45.setText("X");dos45.setBackground(Color.red);
+        uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
+        tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
+
+        uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
+        dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
+        tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
+        uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
+        dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
+        tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
+        uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
+        dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
+        tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
+        UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
+        DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
+        TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
+        CUATRO2.setText("95");CUATRO2.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_dos45ActionPerformed
+
+    private void uno44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno44ActionPerformed
+        uno44.setText("X");uno44.setBackground(Color.red);
+        dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
+        tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
+
+        uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
+        dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
+        tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
+        uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
+        dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
+        tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
+        uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
+        dos45.setText(""); dos45.setBackground(new Color(240, 240, 240));
+        tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
+        UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
+        DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
+        TRES2.setText("72");TRES2.setBackground(Color.RED);
+        CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno44ActionPerformed
+
+    private void tres44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres44ActionPerformed
+        tres44.setText("X");tres44.setBackground(Color.red);
+        dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
+        uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
+
+        uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
+        dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
+        tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
+        uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
+        dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
+        tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
+        uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
+        dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
+        tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
+        UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
+        DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
+        TRES2.setText("84");TRES2.setBackground(Color.RED);
+        CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres44ActionPerformed
+
+    private void dos44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos44ActionPerformed
+        dos44.setText("X");dos44.setBackground(Color.red);
+        uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
+        tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
+
+        uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
+        dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
+        tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
+        uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
+        dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
+        tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
+        uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
+        dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
+        tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
+        UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
+        DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
+        TRES2.setText("78");TRES2.setBackground(Color.RED);
+        CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos44ActionPerformed
+
+    private void uno43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno43ActionPerformed
+        uno43.setText("X");uno43.setBackground(Color.red);
+        dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
+        tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
+
+        uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
+        dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
+        tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
+        uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
+        dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
+        tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
+        uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
+        dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
+        tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
+
+        UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
+        DOS2.setText("56");DOS2.setBackground(Color.RED);
+        TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
+        CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno43ActionPerformed
+
+    private void tres43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres43ActionPerformed
+        tres43.setText("X");tres43.setBackground(Color.red);
+        dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
+        uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
+
+        uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
+        dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
+        tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
+        uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
+        dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
+        tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
+        uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
+        dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
+        tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
+        UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
+        DOS2.setText("65");DOS2.setBackground(Color.RED);
+        TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
+        CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres43ActionPerformed
+
+    private void dos43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos43ActionPerformed
+        dos43.setText("X");dos43.setBackground(Color.red);
+        uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
+        tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
+
+        uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
+        dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
+        tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
+        uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
+        dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
+        tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
+        uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
+        dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
+        tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
+        UNO2.setText("0");UNO2.setBackground(new Color(240, 240, 240));
+        DOS2.setText("60");DOS2.setBackground(Color.RED);
+        TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
+        CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos43ActionPerformed
+
+    private void uno42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno42ActionPerformed
+
+        uno42.setText("X");uno42.setBackground(Color.red);
+        dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
+        tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
+
+        uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
+        dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
+        tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
+        uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
+        dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
+        tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
+        uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
+        dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
+        tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
+
+        UNO2.setText("17");UNO2.setBackground(Color.RED);
+        DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
+        TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
+        CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno42ActionPerformed
+
+    private void tres42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres42ActionPerformed
+        tres42.setText("X");tres42.setBackground(Color.red);
+        uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
+        dos42.setText("");dos42.setBackground(new Color(240, 240, 240));
+
+        uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
+        dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
+        tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
+        uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
+        dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
+        tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
+        uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
+        dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
+        tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
+        UNO2.setText("50");UNO2.setBackground(Color.RED);
+        DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
+        TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
+        CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres42ActionPerformed
+
+    private void dos42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos42ActionPerformed
+        dos42.setText("X");dos42.setBackground(Color.red);
+        uno42.setText("");uno42.setBackground(new Color(240, 240, 240));
+        tres42.setText("");tres42.setBackground(new Color(240, 240, 240));
+
+        uno43.setText("");uno43.setBackground(new Color(240, 240, 240));
+        dos43.setText("");dos43.setBackground(new Color(240, 240, 240));
+        tres43.setText("");tres43.setBackground(new Color(240, 240, 240));
+        uno44.setText("");uno44.setBackground(new Color(240, 240, 240));
+        dos44.setText("");dos44.setBackground(new Color(240, 240, 240));
+        tres44.setText("");tres44.setBackground(new Color(240, 240, 240));
+        uno45.setText("");uno45.setBackground(new Color(240, 240, 240));
+        dos45.setText("");dos45.setBackground(new Color(240, 240, 240));
+        tres45.setText("");tres45.setBackground(new Color(240, 240, 240));
+        UNO2.setText("33");UNO2.setBackground(Color.RED);
+        DOS2.setText("0");DOS2.setBackground(new Color(240, 240, 240));
+        TRES2.setText("0");TRES2.setBackground(new Color(240, 240, 240));
+        CUATRO2.setText("0");CUATRO2.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos42ActionPerformed
+
+    private void uno37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno37ActionPerformed
+        uno37.setText("X");uno37.setBackground(Color.red);
+        dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
+        tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
+
+        uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
+        dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
+        tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
+        uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
+        dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
+        tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
+        uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
+        dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
+        tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
+        UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
+        DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
+        TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
+        CUATRO1.setText("90");CUATRO1.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_uno37ActionPerformed
+
+    private void tres37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres37ActionPerformed
+        tres37.setText("X");tres37.setBackground(Color.red);
+        dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
+        uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
+
+        uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
+        dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
+        tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
+        uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
+        dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
+        tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
+        uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
+        dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
+        tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
+        UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
+        DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
+        TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
+        CUATRO1.setText("100");CUATRO1.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_tres37ActionPerformed
+
+    private void dos37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos37ActionPerformed
+        dos37.setText("X");dos37.setBackground(Color.red);
+        uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
+        tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
+
+        uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
+        dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
+        tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
+        uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
+        dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
+        tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
+        uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
+        dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
+        tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
+        UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
+        DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
+        TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
+        CUATRO1.setText("95");CUATRO1.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_dos37ActionPerformed
+
+    private void uno36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno36ActionPerformed
+        uno36.setText("X");uno36.setBackground(Color.red);
+        dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
+        tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
+
+        uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
+        dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
+        tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
+        uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
+        dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
+        tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
+        uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
+        dos37.setText(""); dos37.setBackground(new Color(240, 240, 240));
+        tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
+        UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
+        DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
+        TRES1.setText("72");TRES1.setBackground(Color.RED);
+        CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno36ActionPerformed
+
+    private void tres36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres36ActionPerformed
+        tres36.setText("X");tres36.setBackground(Color.red);
+        dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
+        uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
+
+        uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
+        dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
+        tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
+        uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
+        dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
+        tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
+        uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
+        dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
+        tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
+        UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
+        DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
+        TRES1.setText("84");TRES1.setBackground(Color.RED);
+        CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres36ActionPerformed
+
+    private void dos36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos36ActionPerformed
+        dos36.setText("X");dos36.setBackground(Color.red);
+        uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
+        tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
+
+        uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
+        dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
+        tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
+        uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
+        dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
+        tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
+        uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
+        dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
+        tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
+        UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
+        DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
+        TRES1.setText("78");TRES1.setBackground(Color.RED);
+        CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos36ActionPerformed
+
+    private void uno35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno35ActionPerformed
+        uno35.setText("X");uno35.setBackground(Color.red);
+        dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
+        tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
+
+        uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
+        dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
+        tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
+        uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
+        dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
+        tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
+        uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
+        dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
+        tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
+
+        UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
+        DOS1.setText("56");DOS1.setBackground(Color.RED);
+        TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
+        CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno35ActionPerformed
+
+    private void tres35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres35ActionPerformed
+        tres35.setText("X");tres35.setBackground(Color.red);
+        dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
+        uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
+
+        uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
+        dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
+        tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
+        uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
+        dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
+        tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
+        uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
+        dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
+        tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
+        UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
+        DOS1.setText("65");DOS1.setBackground(Color.RED);
+        TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
+        CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres35ActionPerformed
+
+    private void dos35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos35ActionPerformed
+        dos35.setText("X");dos35.setBackground(Color.red);
+        uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
+        tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
+
+        uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
+        dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
+        tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
+        uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
+        dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
+        tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
+        uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
+        dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
+        tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
+        UNO1.setText("0");UNO1.setBackground(new Color(240, 240, 240));
+        DOS1.setText("60");DOS1.setBackground(Color.RED);
+        TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
+        CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos35ActionPerformed
+
+    private void uno34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno34ActionPerformed
+        uno34.setText("X");uno34.setBackground(Color.red);
+        dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
+        tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
+
+        uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
+        dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
+        tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
+        uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
+        dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
+        tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
+        uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
+        dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
+        tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
+
+        UNO1.setText("17");UNO1.setBackground(Color.RED);
+        DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
+        TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
+        CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno34ActionPerformed
+
+    private void tres34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres34ActionPerformed
+        tres34.setText("X");tres34.setBackground(Color.red);
+        uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
+        dos34.setText("");dos34.setBackground(new Color(240, 240, 240));
+
+        uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
+        dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
+        tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
+        uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
+        dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
+        tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
+        uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
+        dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
+        tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
+        UNO1.setText("50");UNO1.setBackground(Color.RED);
+        DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
+        TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
+        CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres34ActionPerformed
+
+    private void dos34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos34ActionPerformed
+        dos34.setText("X");dos34.setBackground(Color.red);
+        uno34.setText("");uno34.setBackground(new Color(240, 240, 240));
+        tres34.setText("");tres34.setBackground(new Color(240, 240, 240));
+
+        uno35.setText("");uno35.setBackground(new Color(240, 240, 240));
+        dos35.setText("");dos35.setBackground(new Color(240, 240, 240));
+        tres35.setText("");tres35.setBackground(new Color(240, 240, 240));
+        uno36.setText("");uno36.setBackground(new Color(240, 240, 240));
+        dos36.setText("");dos36.setBackground(new Color(240, 240, 240));
+        tres36.setText("");tres36.setBackground(new Color(240, 240, 240));
+        uno37.setText("");uno37.setBackground(new Color(240, 240, 240));
+        dos37.setText("");dos37.setBackground(new Color(240, 240, 240));
+        tres37.setText("");tres37.setBackground(new Color(240, 240, 240));
+        UNO1.setText("33");UNO1.setBackground(Color.RED);
+        DOS1.setText("0");DOS1.setBackground(new Color(240, 240, 240));
+        TRES1.setText("0");TRES1.setBackground(new Color(240, 240, 240));
+        CUATRO1.setText("0");CUATRO1.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos34ActionPerformed
+
+    private void uno29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno29ActionPerformed
+        uno29.setText("X");uno29.setBackground(Color.red);
+        dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
+        tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
+
+        uno.setText("");uno.setBackground(new Color(240, 240, 240));
+        dos.setText("");dos.setBackground(new Color(240, 240, 240));
+        tres.setText("");tres.setBackground(new Color(240, 240, 240));
+        uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
+        dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
+        tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
+        uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
+        dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
+        tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
+        UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
+        DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
+        TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
+        CUATRO.setText("90");CUATRO.setBackground(Color.RED);
+        suma();
+
+    }//GEN-LAST:event_uno29ActionPerformed
+
+    private void tres29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres29ActionPerformed
+        tres29.setText("X");tres29.setBackground(Color.red);
+        dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
+        uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
+
+        uno.setText("");uno.setBackground(new Color(240, 240, 240));
+        dos.setText("");dos.setBackground(new Color(240, 240, 240));
+        tres.setText("");tres.setBackground(new Color(240, 240, 240));
+        uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
+        dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
+        tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
+        uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
+        dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
+        tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
+        UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
+        DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
+        TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
+        CUATRO.setText("100");CUATRO.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_tres29ActionPerformed
+
+    private void dos29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos29ActionPerformed
+        dos29.setText("X");dos29.setBackground(Color.red);
+        uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
+        tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
+
+        uno.setText("");uno.setBackground(new Color(240, 240, 240));
+        dos.setText("");dos.setBackground(new Color(240, 240, 240));
+        tres.setText("");tres.setBackground(new Color(240, 240, 240));
+        uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
+        dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
+        tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
+        uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
+        dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
+        tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
+        UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
+        DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
+        TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
+        CUATRO.setText("95");CUATRO.setBackground(Color.RED);
+        suma();
+    }//GEN-LAST:event_dos29ActionPerformed
+
+    private void uno28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno28ActionPerformed
+        uno28.setText("X");uno28.setBackground(Color.red);
+        dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
+        tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
+
+        uno.setText("");uno.setBackground(new Color(240, 240, 240));
+        dos.setText("");dos.setBackground(new Color(240, 240, 240));
+        tres.setText("");tres.setBackground(new Color(240, 240, 240));
+        uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
+        dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
+        tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
+        uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
+        dos29.setText(""); dos29.setBackground(new Color(240, 240, 240));
+        tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
+        UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
+        DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
+        TRES.setText("72");TRES.setBackground(Color.RED);
+        CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno28ActionPerformed
+
+    private void tres28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres28ActionPerformed
+        tres28.setText("X");tres28.setBackground(Color.red);
+        dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
+        uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
+
+        uno.setText("");uno.setBackground(new Color(240, 240, 240));
+        dos.setText("");dos.setBackground(new Color(240, 240, 240));
+        tres.setText("");tres.setBackground(new Color(240, 240, 240));
+        uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
+        dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
+        tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
+        uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
+        dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
+        tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
+        UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
+        DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
+        TRES.setText("84");TRES.setBackground(Color.RED);
+        CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres28ActionPerformed
+
+    private void dos28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos28ActionPerformed
+        dos28.setText("X");dos28.setBackground(Color.red);
+        uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
+        tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
+
+        uno.setText("");uno.setBackground(new Color(240, 240, 240));
+        dos.setText("");dos.setBackground(new Color(240, 240, 240));
+        tres.setText("");tres.setBackground(new Color(240, 240, 240));
+        uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
+        dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
+        tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
+        uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
+        dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
+        tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
+        UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
+        DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
+        TRES.setText("78");TRES.setBackground(Color.RED);
+        CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos28ActionPerformed
+
+    private void uno27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uno27ActionPerformed
+        uno27.setText("X");uno27.setBackground(Color.red);
+        dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
+        tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
+
+        uno.setText("");uno.setBackground(new Color(240, 240, 240));
+        dos.setText("");dos.setBackground(new Color(240, 240, 240));
+        tres.setText("");tres.setBackground(new Color(240, 240, 240));
+        uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
+        dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
+        tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
+        uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
+        dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
+        tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
+
+        UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
+        DOS.setText("56");DOS.setBackground(Color.RED);
+        TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
+        CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_uno27ActionPerformed
+
+    private void tres27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres27ActionPerformed
+        tres27.setText("X");tres27.setBackground(Color.red);
+        dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
+        uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
+
+        uno.setText("");uno.setBackground(new Color(240, 240, 240));
+        dos.setText("");dos.setBackground(new Color(240, 240, 240));
+        tres.setText("");tres.setBackground(new Color(240, 240, 240));
+        uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
+        dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
+        tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
+        uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
+        dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
+        tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
+        UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
+        DOS.setText("65");DOS.setBackground(Color.RED);
+        TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
+        CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tres27ActionPerformed
+
+    private void dos27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos27ActionPerformed
+        dos27.setText("X");dos27.setBackground(Color.red);
+        uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
+        tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
+
+        uno.setText("");uno.setBackground(new Color(240, 240, 240));
+        dos.setText("");dos.setBackground(new Color(240, 240, 240));
+        tres.setText("");tres.setBackground(new Color(240, 240, 240));
+        uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
+        dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
+        tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
+        uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
+        dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
+        tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
+        UNO.setText("0");UNO.setBackground(new Color(240, 240, 240));
+        DOS.setText("60");DOS.setBackground(Color.RED);
+        TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
+        CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dos27ActionPerformed
+
+    private void unoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unoActionPerformed
+        uno.setText("X");uno.setBackground(Color.red);
+        dos.setText("");dos.setBackground(new Color(240, 240, 240));
+        tres.setText("");tres.setBackground(new Color(240, 240, 240));
+
+        uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
+        dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
+        tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
+        uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
+        dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
+        tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
+        uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
+        dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
+        tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
+
+        UNO.setText("17");UNO.setBackground(Color.RED);
+        DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
+        TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
+        CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
+
+        suma();
+
+    }//GEN-LAST:event_unoActionPerformed
+
+    private void tresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tresActionPerformed
+        tres.setText("X");tres.setBackground(Color.red);
+        uno.setText("");uno.setBackground(new Color(240, 240, 240));
+        dos.setText("");dos.setBackground(new Color(240, 240, 240));
+        uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
+        dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
+        tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
+        uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
+        dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
+        tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
+        uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
+        dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
+        tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
+        UNO.setText("50");UNO.setBackground(Color.RED);
+        DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
+        TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
+        CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_tresActionPerformed
+
+    private void dosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dosActionPerformed
+        dos.setText("X");dos.setBackground(Color.red);
+        uno.setText("");uno.setBackground(new Color(240, 240, 240));
+        tres.setText("");tres.setBackground(new Color(240, 240, 240));
+
+        uno27.setText("");uno27.setBackground(new Color(240, 240, 240));
+        dos27.setText("");dos27.setBackground(new Color(240, 240, 240));
+        tres27.setText("");tres27.setBackground(new Color(240, 240, 240));
+        uno28.setText("");uno28.setBackground(new Color(240, 240, 240));
+        dos28.setText("");dos28.setBackground(new Color(240, 240, 240));
+        tres28.setText("");tres28.setBackground(new Color(240, 240, 240));
+        uno29.setText("");uno29.setBackground(new Color(240, 240, 240));
+        dos29.setText("");dos29.setBackground(new Color(240, 240, 240));
+        tres29.setText("");tres29.setBackground(new Color(240, 240, 240));
+        UNO.setText("33");UNO.setBackground(Color.RED);
+        DOS.setText("0");DOS.setBackground(new Color(240, 240, 240));
+        TRES.setText("0");TRES.setBackground(new Color(240, 240, 240));
+        CUATRO.setText("0");CUATRO.setBackground(new Color(240, 240, 240));
+        suma();
+    }//GEN-LAST:event_dosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4634,7 +4809,7 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dEvaluacionResponsabilidad(1).setVisible(true);
+                new dEvaluacionResponsabilidad(1,2).setVisible(true);
             }
         });
     }
@@ -4650,14 +4825,18 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JTextField DOS2;
     private javax.swing.JTextField DOS3;
     private javax.swing.JTextField DOS4;
+    private javax.swing.JLabel LabelFoto;
+    private javax.swing.JLabel LabelFoto1;
     private javax.swing.JTextArea NOTA;
     private javax.swing.JTextArea NOTA1;
+    private javax.swing.JTextArea NOTA2;
     private javax.swing.JTextField TRES;
     private javax.swing.JTextField TRES1;
     private javax.swing.JTextField TRES2;
     private javax.swing.JTextField TRES3;
     private javax.swing.JTextField TRES4;
     private javax.swing.JTextField TxtTotal;
+    private javax.swing.JTextField TxtTotal1;
     private javax.swing.JTextField UNO;
     private javax.swing.JTextField UNO1;
     private javax.swing.JTextField UNO2;
@@ -4700,20 +4879,25 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JButton dos56;
     private javax.swing.JButton dos57;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
@@ -4730,7 +4914,6 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel38;
     private javax.swing.JPanel jPanel39;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel40;
     private javax.swing.JPanel jPanel41;
     private javax.swing.JPanel jPanel42;
@@ -4759,8 +4942,10 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel65;
     private javax.swing.JPanel jPanel66;
     private javax.swing.JPanel jPanel67;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -4788,6 +4973,7 @@ public class dEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JLabel l3;
     private javax.swing.JLabel l4;
     private javax.swing.JLabel punteo;
+    private javax.swing.JLabel punteo1;
     private javax.swing.JButton tres;
     private javax.swing.JButton tres19;
     private javax.swing.JButton tres20;

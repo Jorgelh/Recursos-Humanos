@@ -5,8 +5,8 @@
  */
 package EvaluacionDesempeñoOperativo;
 
-import Clases.Evaluacion.BDEvaluacion;
-import Clases.Evaluacion.ClassEvaluacion;
+import Clases.EvaluacionOperativo.BDEvaluacion;
+import Clases.EvaluacionOperativo.ClassEvaluacionOperativo;
 import static Formuarios.Inicio.Pane1;
 import java.awt.Dimension;
 import java.sql.Connection;
@@ -218,14 +218,14 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
     
     
     private void ListarCodigosPendientes(){
-        ArrayList<ClassEvaluacion> result1 = BDEvaluacion.ListarEvaluacionesPendientes(Codigotxt.getText(),depto);
+        ArrayList<ClassEvaluacionOperativo> result1 = BDEvaluacion.ListarEvaluacionesPendientes(Codigotxt.getText(),depto);
         Listar(result1);  
     }
-     private void Listar(ArrayList<ClassEvaluacion> list1) {
+     private void Listar(ArrayList<ClassEvaluacionOperativo> list1) {
          
               Object[][] datos = new Object[list1.size()][8];
               int i = 0;
-              for(ClassEvaluacion t : list1)
+              for(ClassEvaluacionOperativo t : list1)
               {
                   datos[i][0] = t.getId_evaluacion();
                   datos[i][1] = t.getCodigo();

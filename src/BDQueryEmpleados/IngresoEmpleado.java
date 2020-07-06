@@ -56,6 +56,82 @@ public class IngresoEmpleado {
         p.close();
     }
     
+    
+    
+    public static void ActualizarEmpleado(ListaMaestro c) throws SQLException {
+        
+        Connection cnn = BD.getConnection();
+        PreparedStatement p = null;
+        p = cnn.prepareStatement("update ALISTAEMPLEADOS set CODIGO =?, NOMBRES = ?,APELLIDOS = ?,F_NACIMIENTO = ?,DPI = ?,DPIEXTENDIDO = ?,DIRECCION = ?,NIT = ?,TELEFONO = ?,T_SANGRE = ?,"
+                + " CORREO_ELECTRO = ?,ESTUDIOS_ULTIMOS = ?,IGSS = ?,IRTRA = ?,ESTADO_CIVIL = ?,SEXO = ?,CUENTA_BANCO = ?,DEPARTAMENTO = ?,PUESTO = ?,"
+                + " FECHA_INGRESO = ?,ORDINARIO = ?,BONIFICACION = ?,FOTOGRAFIA = ? where id_listaempleados="+c.getID_LISTAEMPLEADOS());
+        p.setInt(1, c.getCODIGO());
+        p.setString(2, c.getNOMBRES());
+        p.setString(3, c.getAPELLIDOS());
+        p.setDate(4, new java.sql.Date(c.getF_NACIMIENTO().getTime()));
+        p.setString(5, c.getDPI());
+        p.setString(6, c.getDPIEXTENDIDO());
+        p.setString(7, c.getDIRECCION());
+        p.setString(8, c.getNIT());
+        p.setString(9, c.getTELEFONO());
+        p.setString(10, c.getT_SANGRE());
+        p.setString(11, c.getCORREO_ELECTRO());
+        p.setString(12, c.getESTUDIOS_ULTIMOS());
+        p.setString(13, c.getIGSS());
+        p.setString(14, c.getIRTRA());
+        p.setString(15, c.getESTADO_CIVIL());
+        p.setString(16, c.getSEXO());
+        p.setString(17, c.getCUENTA_BANCO());
+        p.setInt(18, c.getDEPARTAMENTO());
+        p.setString(19, c.getPUESTO());
+        p.setDate(20, new java.sql.Date(c.getFECHA_INGRESO().getTime()));
+        p.setDouble(21, c.getORDINARIO());
+        p.setDouble(22, c.getBONIFICACION());
+        p.setBinaryStream(23, c.getFOTOGRAFIA(),c.getLongitudBytes());
+        p.executeUpdate();
+        cnn.close();
+        p.close();
+    }
+    
+    
+     public static void ActualizarEmpleadoSinfoto(ListaMaestro c) throws SQLException {
+        
+        Connection cnn = BD.getConnection();
+        PreparedStatement p = null;
+        p = cnn.prepareStatement("update ALISTAEMPLEADOS set CODIGO =?, NOMBRES = ?,APELLIDOS = ?,F_NACIMIENTO = ?,DPI = ?,DPIEXTENDIDO = ?,DIRECCION = ?,NIT = ?,TELEFONO = ?,T_SANGRE = ?,"
+                + " CORREO_ELECTRO = ?,ESTUDIOS_ULTIMOS = ?,IGSS = ?,IRTRA = ?,ESTADO_CIVIL = ?,SEXO = ?,CUENTA_BANCO = ?,DEPARTAMENTO = ?,PUESTO = ?,"
+                + " FECHA_INGRESO = ?,ORDINARIO = ?,BONIFICACION = ? where id_listaempleados="+c.getID_LISTAEMPLEADOS());
+        p.setInt(1, c.getCODIGO());
+        p.setString(2, c.getNOMBRES());
+        p.setString(3, c.getAPELLIDOS());
+        p.setDate(4, new java.sql.Date(c.getF_NACIMIENTO().getTime()));
+        p.setString(5, c.getDPI());
+        p.setString(6, c.getDPIEXTENDIDO());
+        p.setString(7, c.getDIRECCION());
+        p.setString(8, c.getNIT());
+        p.setString(9, c.getTELEFONO());
+        p.setString(10, c.getT_SANGRE());
+        p.setString(11, c.getCORREO_ELECTRO());
+        p.setString(12, c.getESTUDIOS_ULTIMOS());
+        p.setString(13, c.getIGSS());
+        p.setString(14, c.getIRTRA());
+        p.setString(15, c.getESTADO_CIVIL());
+        p.setString(16, c.getSEXO());
+        p.setString(17, c.getCUENTA_BANCO());
+        p.setInt(18, c.getDEPARTAMENTO());
+        p.setString(19, c.getPUESTO());
+        p.setDate(20, new java.sql.Date(c.getFECHA_INGRESO().getTime()));
+        p.setDouble(21, c.getORDINARIO());
+        p.setDouble(22, c.getBONIFICACION());
+        p.executeUpdate();
+        cnn.close();
+        p.close();
+    }
+    
+    
+    
+    
+    
     public static ListaMaestro buscarEmpleado(int id) throws SQLException {
         return buscarEmple(id, null);
     }
@@ -66,7 +142,7 @@ public class IngresoEmpleado {
         try {
             PreparedStatement ps = null;
 
-            ps = cnn.prepareStatement("select CODIGO,NOMBRES,APELLIDOS,to_char(F_NACIMIENTO,'dd/mm/yy') as F_NACIMIENTO,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,CORREO_ELECTRO,ESTUDIOS_ULTIMOS,IGSS,IRTRA,ESTADO_CIVIL,SEXO,CUENTA_BANCO,DECODE(DEPARTAMENTO,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA') AS DEPTO,PUESTO,to_char(FECHA_INGRESO,'dd/mm/yy') as FECHA_INGRESO,ORDINARIO,BONIFICACION FROM alistaempleados  where codigo = ?");
+            ps = cnn.prepareStatement("select id_listaempleados,CODIGO,NOMBRES,APELLIDOS,to_char(F_NACIMIENTO,'dd/mm/yy') as F_NACIMIENTO,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,CORREO_ELECTRO,ESTUDIOS_ULTIMOS,IGSS,IRTRA,ESTADO_CIVIL,SEXO,CUENTA_BANCO,DECODE(DEPARTAMENTO,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA') AS DEPTO,PUESTO,to_char(FECHA_INGRESO,'dd/mm/yy') as FECHA_INGRESO,ORDINARIO,BONIFICACION FROM alistaempleados  where codigo = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -74,6 +150,7 @@ public class IngresoEmpleado {
                     p = new ListaMaestro() {
                     };
                 }
+                p.setID_LISTAEMPLEADOS(rs.getInt("id_listaempleados"));
                 p.setCODIGO(rs.getInt("CODIGO"));
                 p.setNOMBRES(rs.getString("NOMBRES"));
                 p.setAPELLIDOS(rs.getString("APELLIDOS"));

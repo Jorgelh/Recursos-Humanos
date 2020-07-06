@@ -6,8 +6,8 @@
 package EvaluacionDesempeñoOperativo;
 
 import BD.BD;
-import Clases.Evaluacion.BDEvaluacion;
-import Clases.Evaluacion.ClassEvaluacion;
+import Clases.EvaluacionOperativo.BDEvaluacion;
+import Clases.EvaluacionOperativo.ClassEvaluacionOperativo;
 import static Formuarios.Inicio.Pane1;
 import java.awt.Dimension;
 import java.sql.Connection;
@@ -40,7 +40,7 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
     private void buscar() {
 
         try {
-            ClassEvaluacion p = BDEvaluacion.buscarEmpleado(Integer.parseInt(CODIGO.getText()));
+            ClassEvaluacionOperativo p = BDEvaluacion.buscarEmpleado(Integer.parseInt(CODIGO.getText()));
             nombre.setText(p.getNombres() + ' ' + p.getApellidos());
             PUESTO.setText(p.getPuesto());
             DEPTO.setText(p.getDepto());
@@ -159,12 +159,12 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
     private void guardarEvaluacion() {
         try {
             ValidarNodeEvaluacion();
-            ClassEvaluacion l = new ClassEvaluacion();
+            ClassEvaluacionOperativo l = new ClassEvaluacionOperativo();
             l.setId_listaempleados(idlistaempleado);
             l.setFace(face);
             l.setFecha(fechaEvaluacion.getDate());
             l.setNoEvaluacion(evaluacion);
-            Clases.Evaluacion.BDEvaluacion.insertarEvaluacion(l);
+            Clases.EvaluacionOperativo.BDEvaluacion.insertarEvaluacion(l);
             JOptionPane.showMessageDialog(null, "EVALUACION ASIGNADA");
             crearEvaluaciones();
             this.dispose();
