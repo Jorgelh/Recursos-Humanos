@@ -39,12 +39,13 @@ public class eEvaluacionOrganizacion extends javax.swing.JInternalFrame {
         this.id_evaluacion = i;
         this.codigo = c;
         initComponents();
-        jLabel1.setText("<html><b>Trabaja ordenadamente cuando esta en su puesto de trabajo</b></html>");
-        jLabel2.setText("<html><b>No genera desorden invadiendo el espacio de otros compañeros</b></html>");
-        jLabel3.setText("<html><b>Sabe priorizar sus actividades</b></html>");
-        jLabel4.setText("<html><b>Cuandorealiza otras actividades urgentes, saber retomarlas actividades propuestas</b></html>");
-        jLabel5.setText("<html><b>Planifica en tiempo posibles atrasos para cumplir con su trabajo cuando es solicitado/b></html>");
-        jLabel6.setText("<html><b>3.Organización: Mantener el orden de las actividades mediante una correcta toma de decisiones</b></html>");
+        jLabel1.setText("<html><b>Define roles y responsabilidades entre los miembros del\n" +
+                        "departamento</b></html>");
+        jLabel2.setText("<html><b>Resdristribuye equitativamente las responsabilidades</b></html>");
+        jLabel3.setText("<html><b>Coordina adecuadamente</b></html>");
+        jLabel4.setText("<html><b>Prioriza las actividades</b></html>");
+        jLabel5.setText("<html><b>Puede llevar registros sin mucha demora para entrega de los mismos</b></html>");
+        jLabel6.setText("<html><b>Organización: Mantener el orden de las actividades mediante una correcta toma de decisiones.</b></html>");
         l1.setText("<html><b><center> por debajo de lo esperado <br> 0 - 50 </center></b></html>");
         l2.setText("<html><b><center> A mejorar <br> 51 - 65 </center></b></html>");
         l3.setText("<html><b><center> Aceptable <br> 66 - 84 </center></b></html>");
@@ -4509,7 +4510,7 @@ public class eEvaluacionOrganizacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        TiposEvaluacion tra = new TiposEvaluacion(id_evaluacion);
+        TiposEvaluacionSupervisores tra = new TiposEvaluacionSupervisores(id_evaluacion);
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();

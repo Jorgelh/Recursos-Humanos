@@ -37,12 +37,16 @@ public class aEvaluacionPlanificacion extends javax.swing.JInternalFrame {
         this.codigo = c;
         this.id_evaluacion = i;
         initComponents();
-        jLabel1.setText("<html><b>Cumple con el horario establecido.</b></html>");
-        jLabel2.setText("<html><b>Maneja adecuadamente los insumos y materia prima que se otorga</b></html>");
-        jLabel3.setText("<html><b>Compromiso a adquirir conocimientos que ayudan a la mejora de un SGC (política, riesgo, entre otros)</b></html>");
-        jLabel4.setText("<html><b>Cumple con las medidas de seguridad y utiliza adecuadamente el equipo de protección personal</b></html>");
-        jLabel5.setText("<html><b>Termina en el tiempo establecido las tareas asignada scumpliendo con los estándares establecidos</b></html>");
-        jLabel6.setText("<html><b>4.Responsabilidad: es el cumplimiento de las obligaciones, y el cuidado al tomar decisiones o realizar algo.</b></html>");
+        jLabel1.setText("<html><b>Define metas y objetivos claros con los miembros de su equipo</b></html>");
+        jLabel2.setText("<html><b>Brinda seguimiento y verifica el cumplimiento de los objetivos\n" +
+                        "periódicamente</b></html>");
+        jLabel3.setText("<html><b>Brinda el apoyo y los recursos necesarios para el logro de los\n" +
+                        "objetivos del equipo</b></html>");
+        jLabel4.setText("<html><b>Se preocupa en incorporar mejores prácticas para una adecuada\n" +
+                        "planificación</b></html>");
+        jLabel5.setText("<html><b>Identifica y soluciona problemas</b></html>");
+        jLabel6.setText("<html><b>1. Planificación: capacidad de determinar eficazmente las metas y prioridades de su tarea estipulando la acción, los plazos y los\n" +
+"recursos requeridos.</b></html>");
         l1.setText("<html><b><center> por debajo de lo esperado <br> 0 - 50 </center></b></html>");
         l2.setText("<html><b><center> A mejorar <br> 51 - 65 </center></b></html>");
         l3.setText("<html><b><center> Aceptable <br> 66 - 84 </center></b></html>");
@@ -1387,7 +1391,7 @@ public class aEvaluacionPlanificacion extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("EVALUACION DESEMPEÑO -RESPONSABILIDAD-");
+        setTitle("EVALUACION DESEMPEÑO -PLANIFICACION-");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -3278,7 +3282,7 @@ public class aEvaluacionPlanificacion extends javax.swing.JInternalFrame {
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
        
-        TiposEvaluacion tra = new TiposEvaluacion(id_evaluacion);
+        TiposEvaluacionSupervisores tra = new TiposEvaluacionSupervisores(id_evaluacion);
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();

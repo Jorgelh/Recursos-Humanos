@@ -8,9 +8,9 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select l.nombres||' '||l.apellidos as nombre,l.codigo,l.puesto,
-DECODE(l.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA') AS DEPTO,
-to_char(e.fecha,'dd/mm/yy')as FECHA, e.face,o.p1,o.p2,o.p3,o.p4,o.p5,o.p6,o.p7,o.p8,o.p9,o.p10,o.p11,o.p12,o.p13,o.p14,o.p15,o.p16,o.p17,o.p18,o.p19,o.p20,
+		<![CDATA[select l.nombres||' '||l.apellidos as nombre,l.codigo,(select nombres from alistaempleados where codigo = e.evaluadopor) as Evaluado ,(select puesto from alistaempleados where codigo = e.evaluadopor) as cargo  ,l.puesto,
+DECODE(l.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION / MANTENIMIENTO') AS DEPTO,
+to_char(e.fecha,'MON-DD-YYYY')as FECHA, e.face,o.p1,o.p2,o.p3,o.p4,o.p5,o.p6,o.p7,o.p8,o.p9,o.p10,o.p11,o.p12,o.p13,o.p14,o.p15,o.p16,o.p17,o.p18,o.p19,o.p20,
 ROUND((o.p1+o.p2+o.p3+o.p4+o.p5+o.p6+o.p7+o.p8+o.p9+o.p10+o.p11+o.p12+o.p13+o.p14+o.p15+o.p16+o.p17+o.p18+o.p19+o.p20)/5,0) as PROMEDIO,
 t.p1 as t1,t.p2 as t2,t.p3 as t3,t.p4 as t4,t.p5 as t5,t.p6 as t6,t.p7 as t7,t.p8 as t8,t.p9 as t9,t.p10 as t10,t.p11 as t11,t.p12 as t12,t.p13 as t13,t.p14 as t14,t.p15 as t15,t.p16 as t16,t.p17 as t17,t.p18 as t18,t.p19 as t19,t.p20 as t20,
 ROUND((t.p1+t.p2+t.p3+t.p4+t.p5+t.p6+t.p7+t.p8+t.p9+t.p10+t.p11+t.p12+t.p13+t.p14+t.p15+t.p16+t.p17+t.p18+t.p19+t.p20)/5,0) as PROMEDIO2,
@@ -31,6 +31,8 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 	</queryString>
 	<field name="NOMBRE" class="java.lang.String"/>
 	<field name="CODIGO" class="java.math.BigDecimal"/>
+	<field name="EVALUADO" class="java.lang.String"/>
+	<field name="CARGO" class="java.lang.String"/>
 	<field name="PUESTO" class="java.lang.String"/>
 	<field name="DEPTO" class="java.lang.String"/>
 	<field name="FECHA" class="java.lang.String"/>
@@ -331,7 +333,7 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMBRE}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="96" y="26" width="239" height="20"/>
+				<reportElement x="95" y="26" width="259" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEPTO}.toString()]]></textFieldExpression>
 			</textField>
@@ -349,6 +351,16 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 				<reportElement x="511" y="27" width="61" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODIGO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="54" width="142" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{EVALUADO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="76" width="141" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CARGO}.toString()]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>

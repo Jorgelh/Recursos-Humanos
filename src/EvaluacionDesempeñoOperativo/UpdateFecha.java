@@ -44,10 +44,7 @@ public class UpdateFecha extends javax.swing.JInternalFrame {
         } catch (Exception e) {System.out.println("F"+e);
         }
     }
-    
-    
-    
-    
+
     private void ActualizarFecha() {
             
             try {
@@ -62,7 +59,7 @@ public class UpdateFecha extends javax.swing.JInternalFrame {
                 con.close();
                 next();
             } catch (SQLException error) {
-               System.out.print(" ERROR QUE OBTIENE EL ULTIMO ID DE INGRESO  " + error );
+               JOptionPane.showMessageDialog(null," ERROR QUE OBTIENE EL ULTIMO ID DE INGRESO  " + error );
             }
             
          //System.out.println("1 = "+FechaProxima+ "2 = "+id_listaempleados+" 3 = "+no_evaluacion+" FACE ="+(face+1));
@@ -112,6 +109,7 @@ public class UpdateFecha extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("INGRESAR FECHA DE REALIZACION DE EVALUACION");
 
+        FECHA.setDateFormatString("MMMMM-dd-yyyy");
         FECHA.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jButton1.setText("ACEPTAR");

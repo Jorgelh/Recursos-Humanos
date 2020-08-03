@@ -47,7 +47,45 @@ private int longitudBytes;
 private String depto;
 private String f_nacimiento;
 private String f_ingreso;
+private int discapacidad;
+private String TipoDiscapa;
+private String NivelAcademico;
+private int evaluadopor;
 
+    public int getEvaluadopor() {
+        return evaluadopor;
+    }
+
+    public void setEvaluadopor(int evaluadopor) {
+        this.evaluadopor = evaluadopor;
+    }
+
+    public int getDiscapacidad() {
+        return discapacidad;
+    }
+
+    public void setDiscapacidad(int discapacidad) {
+        this.discapacidad = discapacidad;
+    }
+
+    public String getTipoDiscapa() {
+        return TipoDiscapa;
+    }
+
+    public void setTipoDiscapa(String TipoDiscapa) {
+        this.TipoDiscapa = TipoDiscapa;
+    }
+
+    public String getNivelAcademico() {
+        return NivelAcademico;
+    }
+
+    public void setNivelAcademico(String NivelAcademico) {
+        this.NivelAcademico = NivelAcademico;
+    }
+    
+     
+ 
     public String getF_nacimiento() {
         return f_nacimiento;
     }

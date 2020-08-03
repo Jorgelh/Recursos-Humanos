@@ -29,7 +29,8 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
     int codigo;
     int año;
     int evaluacion;
-
+    int dept;
+    int evalua;
     /**
      * Creates new form NuevaEvaluacion
      */
@@ -41,10 +42,12 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
 
         try {
             ClassEvaluacionOperativo p = BDEvaluacion.buscarEmpleado(Integer.parseInt(CODIGO.getText()));
-            nombre.setText(p.getNombres() + ' ' + p.getApellidos());
+            nombre.setText(p.getNombres());// + ' ' + p.getApellidos());
             PUESTO.setText(p.getPuesto());
             DEPTO.setText(p.getDepto());
+            evalua = p.getEvalua();
             idlistaempleado = p.getId_listaempleados();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRORRRR" + e);
         }
@@ -65,6 +68,32 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
         }
 
     }
+    
+    
+    private void departamento(){
+    
+     if (DEPTO.getText().equalsIgnoreCase("INSPECCION")) {
+            dept = 1;
+        } else if (DEPTO.getText().equalsIgnoreCase("TESTING")) {
+            dept = 2;
+        } else if (DEPTO.getText().equalsIgnoreCase("CHIPS")) {
+            dept = 3;
+        } else if (DEPTO.getText().equalsIgnoreCase("SOLDER DIP, STRIP & POTTING")) {
+            dept = 4;
+        } else if (DEPTO.getText().equalsIgnoreCase("TRANSFORMADORES")) {
+            dept = 5;
+        } else if (DEPTO.getText().equalsIgnoreCase("TALLER")) {
+            dept = 6;
+        } else if (DEPTO.getText().equalsIgnoreCase("BODEGA")) {
+            dept = 7;
+        } else if (DEPTO.getText().equalsIgnoreCase("ADMINISTRACION")) {
+            dept = 8;
+        } else if (DEPTO.getText().equalsIgnoreCase("GERENCIA")) {
+            dept = 9;
+        } else if (DEPTO.getText().equalsIgnoreCase("TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO")){
+           dept = 10;
+        } 
+    }
 
     private void ValidarExistencia() {
 
@@ -78,13 +107,36 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
             if (CODIGO.getText() == "") {
                 JOptionPane.showMessageDialog(null, "INGRESE EL CODIGO");
             } else if (c == 1) {
+                 ValidarFaceEnProceso();
+            } else {
+                JOptionPane.showMessageDialog(null, "EL CODIGO EMPLEADO NO EXITE INTENTE DE NUEVO...");
+                CODIGO.setText("");
+            }
+
+        } catch (Exception e) {
+            System.out.println("ERROR " + e);
+        }
+
+    }
+    
+    private void ValidarFaceEnProceso() {
+
+        try {
+
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select nvl(MIN(b.estado),'2') as ESTADO from bevaluacion_desempeno b inner join alistaempleados a on b.id_listaempleados = a.id_listaempleados where a.codigo=" + CODIGO.getText());
+            rs.next();
+            int c = rs.getInt("ESTADO");
+            if (c >= 2 ) {
                 buscar();
                 fechaEvaluacion.setEnabled(true);
                 nuevo.setEnabled(true);
                 guardar.setEnabled(true);
                 fechaEvaluacion.requestFocus();
-            } else {
-                JOptionPane.showMessageDialog(null, "EL CODIGO EMPLEADO NO EXITE INTENTE DE NUEVO...");
+            }  else {
+                JOptionPane.showMessageDialog(null, "EL EMPLEADO AUN TIENE FACES ANTERIORES PENDIENTES DE COMPLETAR, COMPLETE O ELIMINE LA EVALUACION ");
+                CODIGO.setText("");
             }
 
         } catch (Exception e) {
@@ -153,17 +205,18 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
         CODIGO.requestFocus();
 
     }
-    
-   
 
     private void guardarEvaluacion() {
         try {
+            departamento();
             ValidarNodeEvaluacion();
             ClassEvaluacionOperativo l = new ClassEvaluacionOperativo();
             l.setId_listaempleados(idlistaempleado);
             l.setFace(face);
             l.setFecha(fechaEvaluacion.getDate());
             l.setNoEvaluacion(evaluacion);
+            l.setDept(dept);
+            l.setEvalua(evalua);
             Clases.EvaluacionOperativo.BDEvaluacion.insertarEvaluacion(l);
             JOptionPane.showMessageDialog(null, "EVALUACION ASIGNADA");
             crearEvaluaciones();
@@ -182,7 +235,7 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
         try {
             Connection c = BD.getConnection();
             Statement ps = c.createStatement();
-            ps.executeUpdate("BEGIN CREAREVALUACIONES(NID_EMPLEADO=>"+idlistaempleado+",NFECHA=>'"+fecha+"',NEVALUACION=>"+evaluacion+"); COMMIT; END;");
+            ps.executeUpdate("BEGIN CREAREVALUACIONES(NID_EMPLEADO=>"+idlistaempleado+",NFECHA=>'"+fecha+"',NEVALUACION=>"+evaluacion+",NDEPTO=>"+dept+",NEVALUA=>"+evalua+"); COMMIT; END;");
             c.close();
             ps.close();
         } catch (Exception e) {
@@ -307,6 +360,7 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("FECHA ");
 
+        fechaEvaluacion.setDateFormatString("MMMMM-dd-yyyy");
         fechaEvaluacion.setEnabled(false);
         fechaEvaluacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -392,11 +446,11 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         //ValidarExistenciaFaceporAño();
-        guardarEvaluacion();
+       guardarEvaluacion();
     }//GEN-LAST:event_guardarActionPerformed
 
     private void CODIGOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CODIGOActionPerformed
-        ValidarExistencia();
+       ValidarExistencia();
     }//GEN-LAST:event_CODIGOActionPerformed
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
@@ -404,12 +458,12 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        InicioEvaluacioOperativos tra = new InicioEvaluacioOperativos();
+        /*InicioEvaluacioOperativos tra = new InicioEvaluacioOperativos();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();
         tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-        tra.show();
+        tra.show();*/
 
     }//GEN-LAST:event_formInternalFrameClosing
 

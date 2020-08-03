@@ -26,8 +26,8 @@ public class IngresoEmpleado {
         p = cnn.prepareStatement("insert into ALISTAEMPLEADOS" 
                 + "(ID_LISTAEMPLEADOS,CODIGO,NOMBRES,APELLIDOS,F_NACIMIENTO,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,"
                 + " CORREO_ELECTRO,ESTUDIOS_ULTIMOS,IGSS,IRTRA,ESTADO_CIVIL,SEXO,CUENTA_BANCO,DEPARTAMENTO,PUESTO,"
-                + " FECHA_INGRESO,ORDINARIO,BONIFICACION,FOTOGRAFIA) "
-                + "values (IDEMPLEADO.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                + " FECHA_INGRESO,ORDINARIO,BONIFICACION,FOTOGRAFIA,DISCAPACIDAD,TIPODISCA,NIVELACADEMICO,EVALUADOPOR) "
+                + "values (IDEMPLEADO.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         p.setInt(1, c.getCODIGO());
         p.setString(2, c.getNOMBRES());
         p.setString(3, c.getAPELLIDOS());
@@ -51,6 +51,10 @@ public class IngresoEmpleado {
         p.setDouble(21, c.getORDINARIO());
         p.setDouble(22, c.getBONIFICACION());
         p.setBinaryStream(23, c.getFOTOGRAFIA(),c.getLongitudBytes());
+        p.setInt(24, c.getDiscapacidad());
+        p.setString(25, c.getTipoDiscapa());
+        p.setString(26, c.getNivelAcademico());
+        p.setInt(27, c.getEvaluadopor());
         p.executeUpdate();
         cnn.close();
         p.close();
@@ -64,7 +68,7 @@ public class IngresoEmpleado {
         PreparedStatement p = null;
         p = cnn.prepareStatement("update ALISTAEMPLEADOS set CODIGO =?, NOMBRES = ?,APELLIDOS = ?,F_NACIMIENTO = ?,DPI = ?,DPIEXTENDIDO = ?,DIRECCION = ?,NIT = ?,TELEFONO = ?,T_SANGRE = ?,"
                 + " CORREO_ELECTRO = ?,ESTUDIOS_ULTIMOS = ?,IGSS = ?,IRTRA = ?,ESTADO_CIVIL = ?,SEXO = ?,CUENTA_BANCO = ?,DEPARTAMENTO = ?,PUESTO = ?,"
-                + " FECHA_INGRESO = ?,ORDINARIO = ?,BONIFICACION = ?,FOTOGRAFIA = ? where id_listaempleados="+c.getID_LISTAEMPLEADOS());
+                + " FECHA_INGRESO = ?,ORDINARIO = ?,BONIFICACION = ?,FOTOGRAFIA = ?,DISCAPACIDAD = ?, TIPODISCA = ?, NIVELACADEMICO = ?,EVALUADOPOR = ? where id_listaempleados="+c.getID_LISTAEMPLEADOS());
         p.setInt(1, c.getCODIGO());
         p.setString(2, c.getNOMBRES());
         p.setString(3, c.getAPELLIDOS());
@@ -88,6 +92,10 @@ public class IngresoEmpleado {
         p.setDouble(21, c.getORDINARIO());
         p.setDouble(22, c.getBONIFICACION());
         p.setBinaryStream(23, c.getFOTOGRAFIA(),c.getLongitudBytes());
+        p.setInt(24, c.getDiscapacidad());
+        p.setString(25, c.getTipoDiscapa());
+        p.setString(26, c.getNivelAcademico());
+        p.setInt(27, c.getEvaluadopor());
         p.executeUpdate();
         cnn.close();
         p.close();
@@ -100,7 +108,7 @@ public class IngresoEmpleado {
         PreparedStatement p = null;
         p = cnn.prepareStatement("update ALISTAEMPLEADOS set CODIGO =?, NOMBRES = ?,APELLIDOS = ?,F_NACIMIENTO = ?,DPI = ?,DPIEXTENDIDO = ?,DIRECCION = ?,NIT = ?,TELEFONO = ?,T_SANGRE = ?,"
                 + " CORREO_ELECTRO = ?,ESTUDIOS_ULTIMOS = ?,IGSS = ?,IRTRA = ?,ESTADO_CIVIL = ?,SEXO = ?,CUENTA_BANCO = ?,DEPARTAMENTO = ?,PUESTO = ?,"
-                + " FECHA_INGRESO = ?,ORDINARIO = ?,BONIFICACION = ? where id_listaempleados="+c.getID_LISTAEMPLEADOS());
+                + " FECHA_INGRESO = ?,ORDINARIO = ?,BONIFICACION = ? ,DISCAPACIDAD = ?,TIPODISCA = ?, NIVELACADEMICO = ?, EVALUADOPOR = ? where id_listaempleados="+c.getID_LISTAEMPLEADOS());
         p.setInt(1, c.getCODIGO());
         p.setString(2, c.getNOMBRES());
         p.setString(3, c.getAPELLIDOS());
@@ -123,6 +131,10 @@ public class IngresoEmpleado {
         p.setDate(20, new java.sql.Date(c.getFECHA_INGRESO().getTime()));
         p.setDouble(21, c.getORDINARIO());
         p.setDouble(22, c.getBONIFICACION());
+        p.setInt(23, c.getDiscapacidad());
+        p.setString(24, c.getTipoDiscapa());
+        p.setString(25, c.getNivelAcademico());
+        p.setInt(26, c.getEvaluadopor());
         p.executeUpdate();
         cnn.close();
         p.close();
@@ -142,7 +154,7 @@ public class IngresoEmpleado {
         try {
             PreparedStatement ps = null;
 
-            ps = cnn.prepareStatement("select id_listaempleados,CODIGO,NOMBRES,APELLIDOS,to_char(F_NACIMIENTO,'dd/mm/yy') as F_NACIMIENTO,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,CORREO_ELECTRO,ESTUDIOS_ULTIMOS,IGSS,IRTRA,ESTADO_CIVIL,SEXO,CUENTA_BANCO,DECODE(DEPARTAMENTO,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA') AS DEPTO,PUESTO,to_char(FECHA_INGRESO,'dd/mm/yy') as FECHA_INGRESO,ORDINARIO,BONIFICACION FROM alistaempleados  where codigo = ?");
+            ps = cnn.prepareStatement("select id_listaempleados,CODIGO,NOMBRES,APELLIDOS,to_char(F_NACIMIENTO,'dd/mm/yy') as F_NACIMIENTO,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,CORREO_ELECTRO,ESTUDIOS_ULTIMOS,IGSS,IRTRA,ESTADO_CIVIL,SEXO,CUENTA_BANCO,DECODE(DEPARTAMENTO,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MATENIMIENTO') AS DEPTO,PUESTO,to_char(FECHA_INGRESO,'dd/mm/yy') as FECHA_INGRESO,ORDINARIO,BONIFICACION,DISCAPACIDAD,TIPODISCA,NIVELACADEMICO,EVALUADOPOR FROM alistaempleados  where codigo = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -173,6 +185,10 @@ public class IngresoEmpleado {
                 p.setF_ingreso(rs.getString("FECHA_INGRESO"));
                 p.setORDINARIO(rs.getDouble("ORDINARIO"));
                 p.setBONIFICACION(rs.getDouble("BONIFICACION"));
+                p.setDiscapacidad(rs.getInt("DISCAPACIDAD"));
+                p.setTipoDiscapa(rs.getString("TIPODISCA"));
+                p.setNivelAcademico(rs.getString("NIVELACADEMICO"));
+                p.setEvaluadopor(rs.getInt("EVALUADOPOR"));
                 cnn.close();
                 ps.close();
                 return p;

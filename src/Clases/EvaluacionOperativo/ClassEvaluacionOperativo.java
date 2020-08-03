@@ -47,6 +47,26 @@ public class ClassEvaluacionOperativo {
     private int TRES4;
     private int CUATRO4;
     private String NOTA;
+    private int dept;
+    private int evalua;
+
+    public int getEvalua() {
+        return evalua;
+    }
+
+    public void setEvalua(int evalua) {
+        this.evalua = evalua;
+    }
+    
+    public int getDept() {
+        return dept;
+    }
+
+    public void setDept(int dept) {
+        this.dept = dept;
+    }
+    
+    
 
     public String getNOTA() {
         return NOTA;

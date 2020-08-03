@@ -39,12 +39,15 @@ public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
         this.id_evaluacion = i;
         this.codigo = c;
         initComponents();
-        jLabel1.setText("<html><b>Trabaja ordenadamente cuando esta en su puesto de trabajo</b></html>");
-        jLabel2.setText("<html><b>No genera desorden invadiendo el espacio de otros compañeros</b></html>");
-        jLabel3.setText("<html><b>Sabe priorizar sus actividades</b></html>");
-        jLabel4.setText("<html><b>Cuandorealiza otras actividades urgentes, saber retomarlas actividades propuestas</b></html>");
-        jLabel5.setText("<html><b>Planifica en tiempo posibles atrasos para cumplir con su trabajo cuando es solicitado/b></html>");
-        jLabel6.setText("<html><b>3.Organización: Mantener el orden de las actividades mediante una correcta toma de decisiones</b></html>");
+        jLabel1.setText("<html><b>Fomenta la integración de los miembros de su equipo</b></html>");
+        jLabel2.setText("<html><b>Guía y dirige a sus subordinados cuando estos necesitan de ayuda</b></html>");
+        jLabel3.setText("<html><b>Permite la libertad de autonomía de sus subordinados</b></html>");
+        jLabel4.setText("<html><b>Permite retroalimentación para realizar las tareas cuando surgen\n" +
+                        "nuevas ideas por parte de sus colaboradores</b></html>");
+        jLabel5.setText("<html><b>Actúa rápida y eficazmente pero sin llegar a ser de una manera\n" +
+                        "reactiva</b></html>");
+        jLabel6.setText("<html><b>6. Liderazgo: Sabe influir positivamente en sus colaboradores, permitiendo que estos desarrollen sus competencias mediante una guía\n" +
+                        "e influencia en los mismos.</b></html>");
         l1.setText("<html><b><center> por debajo de lo esperado <br> 0 - 50 </center></b></html>");
         l2.setText("<html><b><center> A mejorar <br> 51 - 65 </center></b></html>");
         l3.setText("<html><b><center> Aceptable <br> 66 - 84 </center></b></html>");
@@ -1305,7 +1308,7 @@ public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("EVALUACION DESEMPEÑO -ORGANIZACION-");
+        setTitle("EVALUACION DESEMPEÑO -LIDERAZGO-");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -2957,10 +2960,10 @@ public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel53, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel53, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -4509,7 +4512,7 @@ public class fEvaluacionLiderazgo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        TiposEvaluacion tra = new TiposEvaluacion(id_evaluacion);
+        TiposEvaluacionSupervisores tra = new TiposEvaluacionSupervisores(id_evaluacion);
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();

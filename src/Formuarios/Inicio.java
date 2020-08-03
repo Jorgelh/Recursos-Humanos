@@ -8,6 +8,7 @@ package Formuarios;
 import Aspirantes.SolicitudEmpleo;
 import BD.BD;
 import EvaluacionDesempeñoOperativo.InicioEvaluacioOperativos;
+import EvaluacionDesempeñoSupervisores.InicioEvaluacioSupervisores;
 import java.awt.Dimension;
 import java.sql.Connection;
 import java.util.HashMap;
@@ -28,11 +29,13 @@ import ImpresionDocumentos.ImpresionDoc;
  */
 public class Inicio extends javax.swing.JFrame {
 
+    int depto;
+
     /**
      * Creates new form Inicio
      */
     public Inicio() {
-         try {
+        try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -41,7 +44,23 @@ public class Inicio extends javax.swing.JFrame {
         }
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+        selectusuario();
+        bloqueonopermitido();
+        }
+
+    public void selectusuario() {
+        String a = System.getProperty("user.name");//usar usuario de windows
+        if (a.equals("jluis") || a.equals("amonroy") || a.equals("glemus")||a.equals("emely")/* || a.equals("conta")||a.equals("oecheverria")||a.equals("apacheco")||a.equals("Emely")*/) {
+            depto = 1;
+        } else {
+            depto = 2;
+        }
     }
+    
+    public void bloqueonopermitido(){
+       if(depto == 2){gestiones.setEnabled(false);empleados.setEnabled(false);supervisores.setEnabled(false);registros.setEnabled(false);rdigitales.setEnabled(false);}
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,7 +75,7 @@ public class Inicio extends javax.swing.JFrame {
         Pane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu6 = new javax.swing.JMenu();
+        gestiones = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -66,26 +85,25 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenu10 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        empleados = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
-        jMenu11 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        evaluaciones = new javax.swing.JMenu();
+        operativos = new javax.swing.JMenuItem();
+        supervisores = new javax.swing.JMenuItem();
+        registros = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        rdigitales = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
 
         jToolBar1.setRollover(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Historial de Produccion");
+        setTitle("Sistema de Recursos Humanos Elettronici, S.A");
 
         Pane1.setBackground(new java.awt.Color(255, 255, 255));
         Pane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -117,9 +135,9 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 35));
 
-        jMenu6.setText("GESTIONES");
-        jMenu6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenu6.setMargin(new java.awt.Insets(5, 25, 5, 25));
+        gestiones.setText("GESTIONES");
+        gestiones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        gestiones.setMargin(new java.awt.Insets(5, 25, 5, 25));
 
         jMenu7.setText("GESTION DE ASPIRANTES");
         jMenu7.setMargin(new java.awt.Insets(5, 5, 5, 5));
@@ -137,7 +155,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem7.setMargin(new java.awt.Insets(5, 5, 5, 5));
         jMenu7.add(jMenuItem7);
 
-        jMenu6.add(jMenu7);
+        gestiones.add(jMenu7);
 
         jMenu8.setText("PROCESO DE CONTRATACION");
         jMenu8.setMargin(new java.awt.Insets(5, 5, 5, 5));
@@ -164,21 +182,21 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem13.setMargin(new java.awt.Insets(5, 5, 5, 5));
         jMenu8.add(jMenuItem13);
 
-        jMenu6.add(jMenu8);
+        gestiones.add(jMenu8);
 
         jMenu9.setText("GESTION CODIGO EMPLEADO");
         jMenu9.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jMenu6.add(jMenu9);
+        gestiones.add(jMenu9);
 
         jMenu10.setText("GESTION GENERAL");
         jMenu10.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jMenu6.add(jMenu10);
+        gestiones.add(jMenu10);
 
-        jMenuBar1.add(jMenu6);
+        jMenuBar1.add(gestiones);
 
-        jMenu2.setText("EMPLEADOS");
-        jMenu2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenu2.setMargin(new java.awt.Insets(5, 25, 5, 25));
+        empleados.setText("EMPLEADOS");
+        empleados.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        empleados.setMargin(new java.awt.Insets(5, 25, 5, 25));
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1481834876_tick_16.png"))); // NOI18N
         jMenuItem6.setText("AGREGAR A LISTA");
@@ -188,40 +206,44 @@ public class Inicio extends javax.swing.JFrame {
                 jMenuItem6ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem6);
+        empleados.add(jMenuItem6);
 
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit2.png"))); // NOI18N
         jMenuItem12.setText("GESTIONAR LISTADO DE EMPLEADOS");
         jMenuItem12.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jMenu2.add(jMenuItem12);
+        empleados.add(jMenuItem12);
 
-        jMenu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ComponenteImagenes/Clipboard.png"))); // NOI18N
-        jMenu11.setText("EVALUACION DE DESEMPEÑO");
-        jMenu11.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenuBar1.add(empleados);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
-        jMenuItem3.setText("OPERATIVOS");
-        jMenuItem3.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        evaluaciones.setText("EVALUACIONES");
+        evaluaciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        evaluaciones.setMargin(new java.awt.Insets(5, 25, 5, 25));
+
+        operativos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
+        operativos.setText("OPERATIVOS");
+        operativos.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        operativos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                operativosActionPerformed(evt);
             }
         });
-        jMenu11.add(jMenuItem3);
+        evaluaciones.add(operativos);
 
-        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
-        jMenuItem14.setText("SUPERVISORES");
-        jMenuItem14.setEnabled(false);
-        jMenuItem14.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jMenu11.add(jMenuItem14);
+        supervisores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
+        supervisores.setText("SUPERVISORES");
+        supervisores.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        supervisores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supervisoresActionPerformed(evt);
+            }
+        });
+        evaluaciones.add(supervisores);
 
-        jMenu2.add(jMenu11);
+        jMenuBar1.add(evaluaciones);
 
-        jMenuBar1.add(jMenu2);
-
-        jMenu1.setText("REGISTROS");
-        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenu1.setMargin(new java.awt.Insets(5, 25, 5, 25));
+        registros.setText("REGISTROS");
+        registros.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        registros.setMargin(new java.awt.Insets(5, 25, 5, 25));
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
         jMenuItem1.setText("LISTA DE VERIFICACION EXPEDIENTE LABORAL");
@@ -231,7 +253,7 @@ public class Inicio extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        registros.add(jMenuItem1);
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
         jMenuItem2.setText("PROGRAMA DE INDUCCION");
@@ -241,7 +263,7 @@ public class Inicio extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        registros.add(jMenuItem2);
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
         jMenuItem10.setText("LISTADO DE ASISTENCIA DE CAPACITACION");
@@ -251,7 +273,7 @@ public class Inicio extends javax.swing.JFrame {
                 jMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem10);
+        registros.add(jMenuItem10);
 
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
         jMenuItem11.setText("NULL");
@@ -262,19 +284,14 @@ public class Inicio extends javax.swing.JFrame {
                 jMenuItem11ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem11);
+        registros.add(jMenuItem11);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(registros);
 
-        jMenu3.setText("REGISTROS DIGITALES ");
-        jMenu3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenu3.setMargin(new java.awt.Insets(5, 25, 5, 25));
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("OTROS");
-        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenu4.setMargin(new java.awt.Insets(5, 25, 5, 25));
-        jMenuBar1.add(jMenu4);
+        rdigitales.setText("REGISTROS DIGITALES ");
+        rdigitales.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        rdigitales.setMargin(new java.awt.Insets(5, 25, 5, 25));
+        jMenuBar1.add(rdigitales);
 
         jMenu5.setForeground(new java.awt.Color(255, 0, 0));
         jMenu5.setText("SALIR");
@@ -324,8 +341,6 @@ public class Inicio extends javax.swing.JFrame {
         Dimension FrameSize = tra.getSize();
         tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         tra.show();
-
-
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -346,12 +361,10 @@ public class Inicio extends javax.swing.JFrame {
         } catch (Exception e) {
             System.err.println("Error al generar el reporte -> " + e.getMessage());
         }
-
-
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-            
+    private void operativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operativosActionPerformed
+
         InicioEvaluacioOperativos tra = new InicioEvaluacioOperativos();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
@@ -359,7 +372,7 @@ public class Inicio extends javax.swing.JFrame {
         tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         tra.show();
 
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_operativosActionPerformed
 
     private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
 
@@ -378,7 +391,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-       
+
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -391,19 +404,16 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        
         SolicitudEmpleo tra = new SolicitudEmpleo();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();
         tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         tra.show();
-        
-        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        
+
         IncioMaestro tra = new IncioMaestro();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
@@ -420,6 +430,18 @@ public class Inicio extends javax.swing.JFrame {
         tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         tra.show();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void supervisoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supervisoresActionPerformed
+
+        InicioEvaluacioSupervisores tra = new InicioEvaluacioSupervisores();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+
+
+    }//GEN-LAST:event_supervisoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -465,15 +487,12 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane Pane1;
+    private javax.swing.JMenu empleados;
+    private javax.swing.JMenu evaluaciones;
+    private javax.swing.JMenu gestiones;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
-    private javax.swing.JMenu jMenu11;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
@@ -483,9 +502,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
@@ -493,5 +510,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JMenuItem operativos;
+    private javax.swing.JMenu rdigitales;
+    private javax.swing.JMenu registros;
+    private javax.swing.JMenuItem supervisores;
     // End of variables declaration//GEN-END:variables
 }

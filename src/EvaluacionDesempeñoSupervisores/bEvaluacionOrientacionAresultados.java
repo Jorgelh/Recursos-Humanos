@@ -39,15 +39,15 @@ public class bEvaluacionOrientacionAresultados extends javax.swing.JInternalFram
         this.codigo = c;
         initComponents();
         jLabel1.setText("<html><b>Define prioridades y orienta a su equipo a lograr los objetivos</b></html>");
-        jLabel2.setText("<html><b>Acuerda con sus compañeros la entrega de los resultados en el tiempo\n" +
-"establecido</b></html>");
-        jLabel3.setText("<html><b>Promueve con sus compañeros la utilización adecuada de los recursos para,\n" +
-"realizar su trabajo</b></html>");
+        jLabel2.setText("<html><b>Acuerda con su equipo la entrega de los resultados en el tiempo\n" +
+                        "establecido</b></html>");
+        jLabel3.setText("<html><b>Promueve con su equipo la utilización adecuada de los recursos para\n" +
+        "realizar su trabajo</b></html>");
         jLabel4.setText("<html><b>Investiga y busca conocimiento sobre temas relacionados con su\n" +
-"trabajo</b></html>");
+        "trabajo</b></html>");
         jLabel5.setText("<html><b>Incorpora mejoras en los procesos bajo su responsabilidad</b></html>");
         
-        jLabel6.setText("<html><b>2.Orientación a resultados: realizar las funciones y cumplir los compromisos organizacionales con eficacia y calidad.</b></html>");
+        jLabel6.setText("<html><b>2. Orientación a resultados: realizar las funciones y cumplir los compromisos organizacionales con eficacia y calidad.</b></html>");
         l1.setText("<html><b><center> por debajo de lo esperado <br> 0 - 50 </center></b></html>");
         l2.setText("<html><b><center> A mejorar <br> 51 - 65 </center></b></html>");
         l3.setText("<html><b><center> Aceptable <br> 66 - 84 </center></b></html>");
@@ -4499,7 +4499,7 @@ public class bEvaluacionOrientacionAresultados extends javax.swing.JInternalFram
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-       TiposEvaluacion tra = new TiposEvaluacion(id_evaluacion);
+       TiposEvaluacionSupervisores tra = new TiposEvaluacionSupervisores(id_evaluacion);
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();

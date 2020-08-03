@@ -10,7 +10,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="EVALUACION DE DESEMPE&#xd1;O"/>
+    <Property name="title" type="java.lang.String" value="EVALUACION DE DESEMPE&#xd1;O SUPERVISORES"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -53,17 +53,20 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jPanel4" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                          <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -75,9 +78,9 @@
                       <Component id="jPanel2" max="32767" attributes="0"/>
                       <Component id="jPanel4" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -94,61 +97,63 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="trabajoEquipo" max="32767" attributes="0"/>
-                          <Component id="responsabilidad" pref="174" max="32767" attributes="0"/>
-                          <Component id="trabajoEquipo1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="responsabilidad1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="planificacion" max="32767" attributes="0"/>
+                          <Component id="OrientaResultados" pref="0" max="32767" attributes="0"/>
+                          <Component id="ResolucionConflictos" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TrabajoEquipo" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="Organizacion1" max="32767" attributes="0"/>
-                              <Component id="orientacionResultados" alignment="0" max="32767" attributes="0"/>
-                              <Component id="orientacionResultados1" alignment="0" pref="163" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="Iniciativa" max="32767" attributes="0"/>
+                                  <Component id="Responsabilidad" alignment="0" pref="163" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="Organizacion" alignment="1" min="-2" pref="163" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="Organizacion" alignment="1" min="-2" pref="163" max="-2" attributes="0"/>
+                          <Component id="Liderazgo" min="-2" pref="163" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="trabajoEquipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="planificacion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Organizacion" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="responsabilidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="orientacionResultados" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="OrientaResultados" max="32767" attributes="0"/>
+                          <Component id="Liderazgo" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="trabajoEquipo1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="orientacionResultados1" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="ResolucionConflictos" max="32767" attributes="0"/>
+                          <Component id="Responsabilidad" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="responsabilidad1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Organizacion1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TrabajoEquipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Iniciativa" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="trabajoEquipo">
+            <Component class="javax.swing.JButton" name="planificacion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="1. Planificacion"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trabajoEquipoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="planificacionActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="Organizacion">
@@ -159,52 +164,52 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OrganizacionActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="orientacionResultados">
+            <Component class="javax.swing.JButton" name="Liderazgo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="6. Liderazgo"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orientacionResultadosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LiderazgoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="responsabilidad">
+            <Component class="javax.swing.JButton" name="OrientaResultados">
               <Properties>
                 <Property name="text" type="java.lang.String" value="2. Orientacion a Resultados"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="responsabilidadActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OrientaResultadosActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="trabajoEquipo1">
+            <Component class="javax.swing.JButton" name="ResolucionConflictos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="3. Resolucion de Conflictos"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trabajoEquipo1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ResolucionConflictosActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="responsabilidad1">
+            <Component class="javax.swing.JButton" name="TrabajoEquipo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="4. Trabajo en Equipo"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="responsabilidad1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TrabajoEquipoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="Organizacion1">
+            <Component class="javax.swing.JButton" name="Iniciativa">
               <Properties>
                 <Property name="text" type="java.lang.String" value="8. Iniciativa"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Organizacion1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IniciativaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="orientacionResultados1">
+            <Component class="javax.swing.JButton" name="Responsabilidad">
               <Properties>
                 <Property name="text" type="java.lang.String" value="7. Responsabilidad"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orientacionResultados1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ResponsabilidadActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -226,7 +231,7 @@
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="197" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="240" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -240,9 +245,9 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="CODIGO" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="NOMBRE" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -256,6 +261,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="CODIGO:"/>
               </Properties>
             </Component>
@@ -266,6 +274,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="NOMBRE:"/>
               </Properties>
             </Component>
@@ -276,6 +287,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="PUESTO:"/>
               </Properties>
             </Component>
@@ -297,17 +311,17 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="FECHA" max="32767" attributes="0"/>
                           <Component id="FACE" alignment="0" max="32767" attributes="0"/>
+                          <Component id="DEPTO" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="162" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="DEPTO" alignment="0" max="32767" attributes="0"/>
+                          <Component id="fechaF" alignment="0" pref="293" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -320,10 +334,10 @@
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="DEPTO" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="FECHA" min="-2" max="-2" attributes="0"/>
+                      <Component id="fechaF" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -336,16 +350,17 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="FECHA:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="FECHA">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="FASE:"/>
               </Properties>
             </Component>
@@ -356,6 +371,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="DEPARTAMENTO:"/>
               </Properties>
             </Component>
@@ -366,6 +384,12 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DEPTOActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="fechaF">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="MMMMM-dd-yyyy"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

@@ -24,11 +24,13 @@ public class BDEvaluacion {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
-        p = cnn.prepareStatement("insert into BEVALUACION_DESEMPENO values(id_evaluacion.nextval,?,?,1,?,?)");
+        p = cnn.prepareStatement("insert into BEVALUACION_DESEMPENO(ID_EVALUACION,ID_LISTAEMPLEADOS,FECHA,ESTADO,FACE,EVALUACION,TIPO,IMPRIME,DEPTO,EVALUADOPOR) values(id_evaluacion.nextval,?,?,1,?,?,1,1,?,?)");
         p.setInt(1, c.getId_listaempleados());
         p.setDate(2, new java.sql.Date(c.getFecha().getTime()));
         p.setInt(3, c.getFace());
         p.setInt(4, c.getNoEvaluacion());
+        p.setInt(5, c.getDept());
+        p.setInt(6, c.getEvalua());
         p.executeUpdate();
         cnn.close();
         p.close();
@@ -44,7 +46,7 @@ public static ClassEvaluacionOperativo buscarEmpleado(int id) throws SQLExceptio
         
         try {
             PreparedStatement ps = null;
-            ps = cnn.prepareStatement("select ID_LISTAEMPLEADOS,nombres,apellidos,puesto,decode(departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION','GERENCIA',9) as DEPTO from alistaempleados where codigo = ?");
+            ps = cnn.prepareStatement("select ID_LISTAEMPLEADOS,nombres,apellidos,puesto,decode(departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,EVALUADOPOR from alistaempleados where codigo = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -57,6 +59,7 @@ public static ClassEvaluacionOperativo buscarEmpleado(int id) throws SQLExceptio
                 p.setApellidos(rs.getString("APELLIDOS"));
                 p.setDepto(rs.getString("DEPTO"));
                 p.setPuesto(rs.getString("PUESTO"));
+                p.setEvalua(rs.getInt("EVALUADOPOR"));
                 cnn.close();
                 ps.close();
                 return p;
@@ -77,7 +80,7 @@ public static ClassEvaluacionOperativo buscarEmpleado(int id) throws SQLExceptio
         Connection cnn = BD.getConnection();
         try {
             PreparedStatement ps = null;
-            ps = cnn.prepareStatement("select ID_LISTAEMPLEADOS,codigo,nombres,apellidos,puesto,decode(departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION','GERENCIA',9) as DEPTO from alistaempleados where id_listaempleados = ?");
+            ps = cnn.prepareStatement("select ID_LISTAEMPLEADOS,codigo,nombres,apellidos,puesto,decode(departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO from alistaempleados where id_listaempleados = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -103,17 +106,34 @@ public static ClassEvaluacionOperativo buscarEmpleado(int id) throws SQLExceptio
  
  public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesPendientes(String a ,int depto) {
                    
-        return SQL1("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA') as DEPTO,\n" +
-"E.PUESTO,TO_CHAR(V.FECHA,'dd/mm/yy') as FECHA,v.evaluacion,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE \n" +
-"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 1 and e.departamento = "+depto+" and upper(e.codigo) like upper('"+a+"%')");
+        return SQL1("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,\n" +
+"E.PUESTO,TO_CHAR(V.FECHA,'MON-DD-YYYY') as FECHA,v.evaluacion,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE \n" +
+"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 1 and v.tipo = 1 and v.depto = "+depto+" and upper(e.codigo) like upper('"+a+"%') order by e.codigo");
     }
  
- public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesTerminadas(String B,int depto) {
+ public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesPendientesEvalua(String a ,int evalua) {
                    
-        return SQL1("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION','GERENCIA',9) as DEPTO,\n" +
-"E.PUESTO,TO_CHAR(V.FECHA,'dd/mm/yy') as FECHA,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE,v.evaluacion \n" +
-"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2 and e.departamento = "+depto+" and upper(e.codigo) like upper('"+B+"%') order by v.id_evaluacion");
+        return SQL1("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,\n" +
+"E.PUESTO,TO_CHAR(V.FECHA,'MON-DD-YYYY') as FECHA,v.evaluacion,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE \n" +
+"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 1 and v.tipo = 1 and v.evaluadopor = "+evalua+" and upper(e.codigo) like upper('"+a+"%') order by e.codigo");
     }
+ 
+ public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesTerminadas(String B,int evalua) {
+                   
+        return SQL1("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,\n" +
+"E.PUESTO,TO_CHAR(V.FECHA,'MON-DD-YYYY') as FECHA,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE,v.evaluacion \n" +
+"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2 and v.tipo = 1 and v.evaluadopor = "+evalua+" and upper(e.codigo) like upper('"+B+"%') order by v.id_evaluacion");
+    }
+ 
+ public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesTerminadasEvalua(String B,int depto) {
+                   
+        return SQL1("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,\n" +
+"E.PUESTO,TO_CHAR(V.FECHA,'MON-DD-YYYY') as FECHA,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE,v.evaluacion \n" +
+"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2 and v.tipo = 1  and v.depto ="+depto+" and upper(e.codigo) like upper('"+B+"%') order by v.id_evaluacion");
+    }
+ 
+ 
+ 
     private static ArrayList<ClassEvaluacionOperativo> SQL1(String sql){
     ArrayList<ClassEvaluacionOperativo> list = new ArrayList<ClassEvaluacionOperativo>();
     Connection cn = BD.getConnection();
@@ -149,7 +169,7 @@ public static ClassEvaluacionOperativo buscarEmpleadoIDEvaluacion(int id) throws
         Connection cnn = BD.getConnection();
         try {
             PreparedStatement ps = null;
-            ps = cnn.prepareStatement("SELECT v.id_listaempleados,v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION','GERENCIA',9) as DEPTO,E.PUESTO,to_char(V.FECHA,'dd/mm/yy') as fecha,v.face,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE, v.evaluacion FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados\n" +
+            ps = cnn.prepareStatement("SELECT v.id_listaempleados,v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,E.PUESTO,TO_CHAR(V.FECHA,'MON-DD-YYYY') as fecha,v.face,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE, v.evaluacion FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados\n" +
             "where v.id_evaluacion = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -307,6 +327,43 @@ public static ClassEvaluacionOperativo buscarEmpleadoIDEvaluacion(int id) throws
         p.executeUpdate();
         cnn.close();
         p.close();
+    }
+
+
+
+
+public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesImprimir(String B,int depto) {
+                   
+        return IMPRE("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,\n" +
+"E.PUESTO,TO_CHAR(V.FECHA,'dd/mm/yy') as FECHA,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE,v.evaluacion \n" +
+"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2 and e.departamento = "+depto+" and upper(e.codigo) like upper('"+B+"%') order by v.id_evaluacion");
+    }
+    private static ArrayList<ClassEvaluacionOperativo> IMPRE(String sql){
+    ArrayList<ClassEvaluacionOperativo> list = new ArrayList<ClassEvaluacionOperativo>();
+    Connection cn = BD.getConnection();
+        try {
+            ClassEvaluacionOperativo b;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()){
+                 b = new ClassEvaluacionOperativo();
+                 b.setId_evaluacion(rs.getInt("id_evaluacion"));
+                 b.setCodigo(rs.getInt("codigo"));
+                 b.setNombres(rs.getString("nombres"));
+                 b.setApellidos(rs.getString("apellidos"));
+                 b.setDepto(rs.getString("depto"));
+                 b.setPuesto(rs.getString("puesto"));
+                 b.setFechaS(rs.getString("FECHA"));
+                 b.setFaceS(rs.getString("FASE"));
+                 b.setNoEvaluacion(rs.getInt("evaluacion"));
+                 list.add(b);
+            }
+            cn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        } 
+        return list;
     }
 
 }

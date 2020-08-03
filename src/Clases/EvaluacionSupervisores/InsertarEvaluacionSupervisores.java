@@ -21,7 +21,7 @@ public class InsertarEvaluacionSupervisores {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
-        p = cnn.prepareStatement("insert into aplanificacion values(IDTRABAJO_EQUIPO.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
+        p = cnn.prepareStatement("insert into aplanificacion values(IDPLANIFICACION.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
         p.setInt(1, c.getId_evaluacion());
         p.setInt(2, c.getUNO());
         p.setInt(3, c.getDOS());
@@ -86,7 +86,7 @@ public class InsertarEvaluacionSupervisores {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
-        p = cnn.prepareStatement("insert into cresolucion_conflictos values(IDORGANIZACION.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
+        p = cnn.prepareStatement("insert into cresolucion_conflictos values(IDCONFLICTOS.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
         p.setInt(1, c.getId_evaluacion());
         p.setInt(2, c.getUNO());
         p.setInt(3, c.getDOS());
@@ -118,7 +118,7 @@ public class InsertarEvaluacionSupervisores {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
-        p = cnn.prepareStatement("insert into dtrabajo_equipo values(IDRESPONSABILIDAD.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
+        p = cnn.prepareStatement("insert into GRESPONSABILIDAD values(IDRESPONSABILIDAD.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
         p.setInt(1, c.getId_evaluacion());
         p.setInt(2, c.getUNO());
         p.setInt(3, c.getDOS());
@@ -151,7 +151,7 @@ public class InsertarEvaluacionSupervisores {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
-        p = cnn.prepareStatement("insert into eorganizacion values(IDTRABAJO_EQUIPO.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
+        p = cnn.prepareStatement("insert into eorganizacion values(IDORGANIZACION.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
         p.setInt(1, c.getId_evaluacion());
         p.setInt(2, c.getUNO());
         p.setInt(3, c.getDOS());
@@ -183,7 +183,7 @@ public class InsertarEvaluacionSupervisores {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
-        p = cnn.prepareStatement("insert into fliderazgo values(IDORIENTACION.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
+        p = cnn.prepareStatement("insert into fliderazgo values(IDLIDERAZGO.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
         p.setInt(1, c.getId_evaluacion());
         p.setInt(2, c.getUNO());
         p.setInt(3, c.getDOS());
@@ -216,7 +216,7 @@ public class InsertarEvaluacionSupervisores {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
-        p = cnn.prepareStatement("insert into gresponsabilidad values(IDORGANIZACION.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
+        p = cnn.prepareStatement("insert into gresponsabilidad values(IDRESPONSABILIDAD.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
         p.setInt(1, c.getId_evaluacion());
         p.setInt(2, c.getUNO());
         p.setInt(3, c.getDOS());
@@ -248,7 +248,7 @@ public class InsertarEvaluacionSupervisores {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
-        p = cnn.prepareStatement("insert into hiniciativa values(IDRESPONSABILIDAD.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
+        p = cnn.prepareStatement("insert into hiniciativa values(IDINICIATIVA.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
         p.setInt(1, c.getId_evaluacion());
         p.setInt(2, c.getUNO());
         p.setInt(3, c.getDOS());

@@ -52,35 +52,51 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     }
 
     private void actualizarEstado() {
-        
-            if (estado1 == 1 && estado2 == 1 && estado3 == 1 && estado4 == 1) {
-            
+
+        System.out.println("FE " + FechaProxima);
+
+        if (estado1 == 1 && estado2 == 1 && estado3 == 1 && estado4 == 1) {
+
             try {
-            int meses = 4; 
+
+                /*Date date = fechaEvaluacion.getDate();
+         SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yyyy");
+         String fecha = sdf.format(date);*/
+ /*   int meses = 4; 
             String FechaS = FECHA.getText();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+            SimpleDateFormat sdf = new SimpleDateFormat("Month-dd-yyyy");
             Date fecha = sdf.parse(FechaS);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(fecha); 
             calendar.add(Calendar.MONTH, meses);  
             FechaProxima = (sdf.format(calendar.getTime()));
+            SimpleDateFormat sdf1 = new SimpleDateFormat("d/MM/yyyy");
+            String fechanew = sdf1.format(FechaProxima);*/
+                int meses = 4;
+                Date date = fechaF.getDate();
+                SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yyyy");
+                String fecha = sdf.format(date);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+                calendar.add(Calendar.MONTH, meses);
+                FechaProxima = (sdf.format(calendar.getTime()));
                 Connection con = BD.getConnection();
                 Statement stmt = con.createStatement();
                 Statement st = con.createStatement();
-                ResultSet rs = stmt.executeQuery("update BEVALUACION_DESEMPENO set estado = 2 where id_evaluacion ="+id_evaluacion);
-                ResultSet r = st.executeQuery("update BEVALUACION_DESEMPENO set estado = 1,fecha = '"+FechaProxima+"' where estado = 0 and id_listaempleados ="+id_listaempleados+"  and face = "+(face+1)+" and evaluacion =" + no_evaluacion);
+                ResultSet rs = stmt.executeQuery("update BEVALUACION_DESEMPENO set estado = 2 where tipo = 1 and id_evaluacion =" + id_evaluacion);
+                ResultSet r = st.executeQuery("update BEVALUACION_DESEMPENO set estado = 1,fecha = '" + FechaProxima + "' where tipo = 1 and estado = 0 and id_listaempleados =" + id_listaempleados + "  and face = " + (face + 1) + " and evaluacion =" + no_evaluacion);
                 rs.close();
                 r.close();
                 stmt.close();
                 st.close();
                 con.close();
             } catch (SQLException error) {
-               System.out.print(" ERROR QUE OBTIENE EL ULTIMO ID DE INGRESO  " + error );
-            } catch (ParseException ex) {
-                Logger.getLogger(TiposEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(" ERROR QUE OBTIENE EL ULTIMO ID DE INGRESO  " + error);
             }
-            } 
+        }
+        /*
          //System.out.println("1 = "+FechaProxima+ "2 = "+id_listaempleados+" 3 = "+no_evaluacion+" FACE ="+(face+1));
+         */
     }
 
     private void buscar() {
@@ -88,10 +104,15 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
         try {
             ClassEvaluacionOperativo p = BDEvaluacion.buscarEmpleadoIDEvaluacion(id_evaluacion);
             CODIGO.setText(String.valueOf(p.getCodigo()));
-            NOMBRE.setText(p.getNombres() + ' ' + p.getApellidos());
+            NOMBRE.setText(p.getNombres());// + ' ' + p.getApellidos());
             PUESTO.setText(p.getPuesto());
             DEPTO.setText(p.getDepto());
-            FECHA.setText(p.getFechaS());
+
+            SimpleDateFormat sdf = new SimpleDateFormat("MMMMM-dd-yyyy");
+            Date datenaci = sdf.parse(p.getFechaS());
+            fechaF.setDate(datenaci);
+
+            //FECHA.setText(p.getFechaS());
             FACE.setText(p.getFaceS());
             face = p.getFace();
             no_evaluacion = p.getNoEvaluacion();
@@ -141,7 +162,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
                 responsabilidad.setIcon(iconobtn);
                 estado4 = 1;
             }
-          actualizarEstado();
+            actualizarEstado();
         } catch (Exception e) {
             System.out.println("ERROR " + e);
         }
@@ -172,11 +193,11 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
         PUESTO = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        FECHA = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         FACE = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         DEPTO = new javax.swing.JTextField();
+        fechaF = new com.toedter.calendar.JDateChooser();
 
         jLabel3.setText("jLabel3");
 
@@ -242,18 +263,18 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
                     .addComponent(trabajoEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Organizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(orientacionResultados)
-                    .addComponent(responsabilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(responsabilidad, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                    .addComponent(orientacionResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(trabajoEquipo)
-                    .addComponent(orientacionResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(trabajoEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(orientacionResultados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Organizacion)
@@ -261,14 +282,17 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("CODIGO:");
 
         CODIGO.setEditable(false);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("NOMBRE:");
 
         NOMBRE.setEditable(false);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("PUESTO:");
 
         PUESTO.setEditable(false);
@@ -302,26 +326,27 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CODIGO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CODIGO, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(4, 4, 4)
                 .addComponent(NOMBRE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PUESTO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("FECHA:");
 
-        FECHA.setEditable(false);
-
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("FASE:");
 
         FACE.setEditable(false);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("DEPARTAMENTO:");
 
         DEPTO.setEditable(false);
@@ -331,6 +356,9 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
             }
         });
 
+        fechaF.setDateFormatString("MMMMM-dd-yyyy");
+        fechaF.setEnabled(false);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -338,15 +366,15 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FECHA)
                     .addComponent(FACE)
+                    .addComponent(DEPTO)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
                             .addComponent(jLabel5))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(DEPTO))
+                    .addComponent(fechaF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -356,11 +384,11 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DEPTO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(FECHA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fechaF, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(FACE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -391,7 +419,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -410,7 +438,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
 
     private void trabajoEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trabajoEquipoActionPerformed
 
-        if (estado1 == 0){
+        if (estado1 == 0) {
             aEvaluacionTrabajoEnEquipo ma = new aEvaluacionTrabajoEnEquipo(id_evaluacion, Integer.parseInt(CODIGO.getText()));
             Pane1.add(ma);
             Dimension desktopSize = Pane1.getSize();
@@ -422,8 +450,8 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_trabajoEquipoActionPerformed
 
     private void OrganizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrganizacionActionPerformed
-        if (estado3 == 0){
-            cEvaluacionOrganizacion ma = new cEvaluacionOrganizacion(id_evaluacion,Integer.parseInt(CODIGO.getText()));
+        if (estado3 == 0) {
+            cEvaluacionOrganizacion ma = new cEvaluacionOrganizacion(id_evaluacion, Integer.parseInt(CODIGO.getText()));
             Pane1.add(ma);
             Dimension desktopSize = Pane1.getSize();
             Dimension FrameSize = ma.getSize();
@@ -434,8 +462,8 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_OrganizacionActionPerformed
 
     private void orientacionResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orientacionResultadosActionPerformed
-        if (estado2 == 0){
-            bEvaluacionOrientacionAresultados ma = new bEvaluacionOrientacionAresultados(id_evaluacion,Integer.parseInt(CODIGO.getText()));
+        if (estado2 == 0) {
+            bEvaluacionOrientacionAresultados ma = new bEvaluacionOrientacionAresultados(id_evaluacion, Integer.parseInt(CODIGO.getText()));
             Pane1.add(ma);
             Dimension desktopSize = Pane1.getSize();
             Dimension FrameSize = ma.getSize();
@@ -443,12 +471,12 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
             ma.show();
             this.dispose();
         }
-       
+
     }//GEN-LAST:event_orientacionResultadosActionPerformed
 
     private void responsabilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responsabilidadActionPerformed
-        if (estado4 == 0){
-            dEvaluacionResponsabilidad ma = new dEvaluacionResponsabilidad(id_evaluacion,Integer.parseInt(CODIGO.getText()));
+        if (estado4 == 0) {
+            dEvaluacionResponsabilidad ma = new dEvaluacionResponsabilidad(id_evaluacion, Integer.parseInt(CODIGO.getText()));
             Pane1.add(ma);
             Dimension desktopSize = Pane1.getSize();
             Dimension FrameSize = ma.getSize();
@@ -472,7 +500,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();
         tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-        tra.show();       
+        tra.show();
     }//GEN-LAST:event_formInternalFrameClosing
 
 
@@ -480,10 +508,10 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField CODIGO;
     private javax.swing.JTextField DEPTO;
     private javax.swing.JTextField FACE;
-    private javax.swing.JTextField FECHA;
     private javax.swing.JTextField NOMBRE;
     private javax.swing.JButton Organizacion;
     private javax.swing.JTextField PUESTO;
+    private com.toedter.calendar.JDateChooser fechaF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

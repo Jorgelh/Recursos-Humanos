@@ -5,14 +5,21 @@
  */
 package EvaluacionDesempeñoOperativo;
 
+import BD.BD;
 import Clases.EvaluacionOperativo.BDEvaluacion;
 import Clases.EvaluacionOperativo.ClassEvaluacionOperativo;
 import static Formuarios.Inicio.Pane1;
 import java.awt.Dimension;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 
@@ -21,26 +28,30 @@ import javax.swing.table.TableColumn;
  * @author jluis
  */
 public class BuscarCodigo extends javax.swing.JInternalFrame {
-     int id_evaluacion;
-     int codigo;
-     int id;
-     int idevaluacion;
-     int depto = 10;
+
+    int id_evaluacion;
+    int codigo;
+    int id;
+    int idevaluacion;
+    int depto = 10;
+    int deptousuario = 0;
+    int evalua=1;
+
     /**
      * Creates new form BuscarCodigo
      */
     public BuscarCodigo() {
         initComponents();
         selectusuario();
-        if (depto == 8) {DEPAR.setEnabled(true);
-            
+        if (depto == 8) {
+            DEPAR.setEnabled(true);
+            deptousuario = 8;
         }
     }
-      
-    
-     public void selectusuario(){
-         
-             /* 1,'INSPECCION',
+
+    public void selectusuario() {
+
+        /* 1,'INSPECCION',
                 2,'TESTING',
                 3,'CHIPS',
                 4,'STRIP Y POTTING',
@@ -49,24 +60,72 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
                 7,'BODEGA',
                 8,'ADMINISTRACION'
                 9,'GERENCIA'*/
-         
-             String a = System.getProperty("user.name");//usar usuario de windows
-             if (a.equals("jluis")){depto=8;} //INFORMATICA
-             else if (a.equals("Inspeccion")){depto=1;}// INSPECCION
-             else if (a.equals("testing")){depto=2;} // TESTING
-             else if (a.equals("deptochips")){depto=3;}//CHIPS
-             else if (a.equals("potting")){depto=4;}  //STRIP & POTTING
-             else if (a.equals("ehernandez")){depto=5;} //TRANSFORMADORES
-             else if (a.equals("taller")){depto=6;}//TALLE
-             else if (a.equals("bodega")){depto=7;}//BODEGA 
-             else if (a.equals("amonroy")){depto=8;} //INFORMATICA
-             else if (a.equals("calidad")){depto=8;} // CALIDAD 
-             else if (a.equals("Sotano")){depto=6;}//SOTANO
-             ListarCodigosPendientes();
-   }
-    
-    
-     private void next(){
+        String a = System.getProperty("user.name");//usar usuario de windows
+        if (a.equals("jluis")) {
+            evalua = 367;
+            depto = 8;
+            deptousuario = 8;
+        } //INFORMATICA
+        else if (a.equals("Inspeccion")) {
+            evalua = 302;
+        }// INSPECCION
+        else if (a.equals("testing")) {
+            evalua = 822;
+        } // TESTING
+        else if (a.equals("deptochips")) {
+            evalua = 748;
+        }//CHIPS
+        else if (a.equals("potting")) {
+            evalua = 781;
+        } //STRIP & POTTING
+        else if (a.equals("ehernandez")) {
+            evalua = 533;
+        } //TRANSFORMADORES
+        else if (a.equals("taller")) {
+            evalua = 348;
+        }//TALLE
+        else if (a.equals("bodega")) {
+            evalua = 465;
+        }//BODEGA 
+        else if (a.equals("amonroy")) {
+            evalua = 920;
+            depto = 8;
+            deptousuario = 8;
+        } //INFORMATICA
+        else if (a.equals("ingenieria2")) {
+            evalua = 876;
+        } // CALIDAD 
+        else if (a.equals("glemus")) {
+            evalua = 755;
+        }//SOTANO
+        else if (a.equals("oecheverria")) {
+            evalua = 847;
+        }//SOTANO
+        else if (a.equals("apacheco")) {
+            evalua = 833;
+        }//SOTANO
+        else if (a.equals("emely")) {
+            evalua = 833;
+        }//SOTANO
+        ListarCodigosPendientesEvalua();
+    }
+
+    public boolean EliminarFace(int a, int b) {
+
+        try {
+            //int id = (Integer.parseInt(String.valueOf(Imprime.getModel().getValueAt(Imprime.getSelectedRow(), 0))));
+            Connection cnn = BD.getConnection();
+            PreparedStatement ps = null;
+            ps = cnn.prepareStatement("update bevaluacion_desempeno set estado = 5 where id_listaempleados = (select id_listaempleados from alistaempleados where codigo = " + a + ") and evaluacion =" + b);
+            System.out.println("Evaluacion = " + id);
+            int rowsUpdated = ps.executeUpdate();
+            cnn.close();
+            ps.close();
+        }catch (SQLException ex){Logger.getLogger(ImpresionEvaluaciones.class.getName()).log(Level.SEVERE, null, ex);}
+        return false;
+    }
+
+    private void next() {
         id_evaluacion = (Integer.parseInt(String.valueOf(Evaluaciones.getModel().getValueAt(Evaluaciones.getSelectedRow(), 0))));
         UpdateFecha tra = new UpdateFecha(id_evaluacion);
         Pane1.add(tra);
@@ -76,10 +135,11 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
         tra.show();
         try {
             this.dispose();
-        } catch (Exception e) {System.out.println("F"+e);
+        } catch (Exception e) {
+            System.out.println("F" + e);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,6 +157,7 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
         Codigotxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         DEPAR = new javax.swing.JComboBox<>();
+        Eliminar = new javax.swing.JButton();
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -124,7 +185,7 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "No.", "CODIGO", "NOMBRE", "PUESTO", "DEPARTAMENTO", "FECHA EVALUACION", "FASE"
+                "No.", "CODIGO", "NOMBRE", "PUESTO", "DEPARTAMENTO", "FECHA EVALUACION", "#EVALUACION", "FASE"
             }
         ));
         Evaluaciones.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,9 +211,8 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("DEPARTAMENTO");
 
-        DEPAR.setEditable(true);
         DEPAR.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "STRIP Y POTTING", "TRANSFORMADORES", "TALLER", "BODEGA" }));
+        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "ADMINISTRACION", "GERENCIA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO" }));
         DEPAR.setEnabled(false);
         DEPAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,10 +220,23 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
             }
         });
 
+        Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
+        Eliminar.setText("Eliminar Face");
+        Eliminar.setEnabled(false);
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(320, 320, 320)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -178,12 +251,11 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(DEPAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Eliminar)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(320, 320, 320)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,8 +269,10 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(DEPAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Eliminar)
+                .addGap(7, 7, 7))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,77 +289,82 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    private void ListarCodigosPendientes(){
-        ArrayList<ClassEvaluacionOperativo> result1 = BDEvaluacion.ListarEvaluacionesPendientes(Codigotxt.getText(),depto);
-        Listar(result1);  
+    private void ListarCodigosPendientes() {
+        ArrayList<ClassEvaluacionOperativo> result1 = BDEvaluacion.ListarEvaluacionesPendientes(Codigotxt.getText(), depto);
+        Listar(result1);
     }
-     private void Listar(ArrayList<ClassEvaluacionOperativo> list1) {
-         
-              Object[][] datos = new Object[list1.size()][8];
-              int i = 0;
-              for(ClassEvaluacionOperativo t : list1)
-              {
-                  datos[i][0] = t.getId_evaluacion();
-                  datos[i][1] = t.getCodigo();
-                  datos[i][2] = t.getNombres()+' '+t.getApellidos();
-                  datos[i][3] = t.getPuesto();
-                  datos[i][4] = t.getDepto();
-                  datos[i][5] = t.getFechaS();
-                  datos[i][6] = t.getNoEvaluacion();
-                  datos[i][7] = t.getFaceS();
-                  i++;
-              }    
-             Evaluaciones.setModel(new javax.swing.table.DefaultTableModel(
+    
+    private void ListarCodigosPendientesEvalua() {
+        ArrayList<ClassEvaluacionOperativo> result2 = BDEvaluacion.ListarEvaluacionesPendientesEvalua(Codigotxt.getText(), evalua);
+        Listar(result2);
+    }
+
+    private void Listar(ArrayList<ClassEvaluacionOperativo> list1) {
+
+        Object[][] datos = new Object[list1.size()][8];
+        int i = 0;
+        for (ClassEvaluacionOperativo t : list1) {
+            datos[i][0] = t.getId_evaluacion();
+            datos[i][1] = t.getCodigo();
+            datos[i][2] = t.getNombres();//+' '+t.getApellidos();
+            datos[i][3] = t.getPuesto();
+            datos[i][4] = t.getDepto();
+            datos[i][5] = t.getFechaS();
+            datos[i][6] = t.getNoEvaluacion();
+            datos[i][7] = t.getFaceS();
+            i++;
+        }
+        Evaluaciones.setModel(new javax.swing.table.DefaultTableModel(
                 datos,
                 new String[]{
-                "No.","CODIGO","NOMBRE","PUESTO","DEPARTAMENTO","FECHA EVALUACION","#EVALUACION","FASE"
-             })
-             {  
-                 @Override
-             public boolean isCellEditable(int row, int column){
-             return false;
-             }
-             });
-             TableColumn columna1 = Evaluaciones.getColumn("No.");
-             columna1.setPreferredWidth(0);
-             TableColumn columna2 = Evaluaciones.getColumn("CODIGO");
-             columna2.setPreferredWidth(0);
-             TableColumn columna3 = Evaluaciones.getColumn("NOMBRE");
-             columna3.setPreferredWidth(150);
-             TableColumn columna4 = Evaluaciones.getColumn("PUESTO");
-             columna4.setPreferredWidth(150);
-             TableColumn columna5 = Evaluaciones.getColumn("DEPARTAMENTO");
-             columna5.setPreferredWidth(100);
-             TableColumn columna6 = Evaluaciones.getColumn("FECHA EVALUACION");
-             columna6.setPreferredWidth(75);
-             TableColumn columna7 = Evaluaciones.getColumn("#EVALUACION");
-             columna7.setPreferredWidth(35);
-             TableColumn columna8 = Evaluaciones.getColumn("FASE");
-             columna8.setPreferredWidth(35);
-     }
+                    "No.", "CODIGO", "NOMBRE", "PUESTO", "DEPARTAMENTO", "FECHA EVALUACION", "#EVALUACION", "FASE"
+                }) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        TableColumn columna1 = Evaluaciones.getColumn("No.");
+        columna1.setPreferredWidth(0);
+        TableColumn columna2 = Evaluaciones.getColumn("CODIGO");
+        columna2.setPreferredWidth(0);
+        TableColumn columna3 = Evaluaciones.getColumn("NOMBRE");
+        columna3.setPreferredWidth(150);
+        TableColumn columna4 = Evaluaciones.getColumn("PUESTO");
+        columna4.setPreferredWidth(150);
+        TableColumn columna5 = Evaluaciones.getColumn("DEPARTAMENTO");
+        columna5.setPreferredWidth(100);
+        TableColumn columna6 = Evaluaciones.getColumn("FECHA EVALUACION");
+        columna6.setPreferredWidth(75);
+        TableColumn columna7 = Evaluaciones.getColumn("#EVALUACION");
+        columna7.setPreferredWidth(35);
+        TableColumn columna8 = Evaluaciones.getColumn("FASE");
+        columna8.setPreferredWidth(35);
+    }
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-       
+
         InicioEvaluacioOperativos tra = new InicioEvaluacioOperativos();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();
         tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         tra.show();
-        
+
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void EvaluacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EvaluacionesMouseClicked
-        
+       
+        if (deptousuario == 8) {
+            Eliminar.setEnabled(true);
+        }
         if (evt.getClickCount() > 1) {
-           next();
+            next();
         }
     }//GEN-LAST:event_EvaluacionesMouseClicked
 
     private void CodigotxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CodigotxtKeyReleased
-         ListarCodigosPendientes();
+        ListarCodigosPendientes();
     }//GEN-LAST:event_CodigotxtKeyReleased
 
     private void DEPARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DEPARActionPerformed
@@ -295,7 +374,7 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
             depto = 2;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("CHIPS")) {
             depto = 3;
-        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("STRIP Y POTTING")) {
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SOLDER DIP, STRIP & POTTING")) {
             depto = 4;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("TRANSFORMADORES")) {
             depto = 5;
@@ -303,15 +382,42 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
             depto = 6;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("BODEGA")) {
             depto = 7;
-        }else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){depto = 0;}
-        System.out.println(depto);
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("ADMINISTRACION")) {
+            depto = 8;
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("GERENCIA")) {
+            depto = 9;
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO")) {
+            depto = 10;
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")) {
+            depto = 0;
+        }
         ListarCodigosPendientes();
-        
     }//GEN-LAST:event_DEPARActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+
+        String Nom;
+        Nom = (String) (Evaluaciones.getModel().getValueAt(Evaluaciones.getSelectedRow(), 2));
+        int resp = JOptionPane.showConfirmDialog(null, "Desea Eliminar Evaluacion de " + Nom);
+        if (JOptionPane.OK_OPTION == resp) {
+            int cod = 0;
+            int eva = 0;
+            cod = (Integer.parseInt(String.valueOf(Evaluaciones.getModel().getValueAt(Evaluaciones.getSelectedRow(), 1))));
+            eva = (Integer.parseInt(String.valueOf(Evaluaciones.getModel().getValueAt(Evaluaciones.getSelectedRow(), 6))));
+            if (cod > 0 && eva > 0) {
+                EliminarFace(cod, eva);
+                JOptionPane.showMessageDialog(null, "EL EVALUACION ELIMINADA...");
+                ListarCodigosPendientes();
+            }
+    }
+
+
+    }//GEN-LAST:event_EliminarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Codigotxt;
     private javax.swing.JComboBox<String> DEPAR;
+    private javax.swing.JButton Eliminar;
     private javax.swing.JTable Evaluaciones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -34,6 +34,8 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
      int id;
      int idevaluacion;
      int depto = 10;
+     int evalua;
+     
     /**
      * Creates new form BuscarCodigo
      */
@@ -41,12 +43,11 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
         initComponents();
         selectusuario();
         if (depto == 8) {DEPAR.setEnabled(true); }
-        
     }
      
-    public void selectusuario(){
-         
-             /* 1,'INSPECCION',
+    public void selectusuario() {
+
+        /* 1,'INSPECCION',
                 2,'TESTING',
                 3,'CHIPS',
                 4,'STRIP Y POTTING',
@@ -55,22 +56,53 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
                 7,'BODEGA',
                 8,'ADMINISTRACION'
                 9,'GERENCIA'*/
-         
-             String a = System.getProperty("user.name");//usar usuario de windows
-             if (a.equals("jluis")){depto=8;} //INFORMATICA
-             else if (a.equals("Inspeccion")){depto=1;}// INSPECCION
-             else if (a.equals("testing")){depto=2;} // TESTING
-             else if (a.equals("deptochips")){depto=3;}//CHIPS
-             else if (a.equals("potting")){depto=4;}  //STRIP & POTTING
-             else if (a.equals("ehernandez")){depto=5;} //TRANSFORMADORES
-             else if (a.equals("taller")){depto=6;}//TALLE
-             else if (a.equals("bodega")){depto=7;}//BODEGA 
-             else if (a.equals("amonroy")){depto=8;} //INFORMATICA
-             else if (a.equals("calidad")){depto=8;} // CALIDAD
-             
-             ListarCodigosTerminados();
-             jLabel4.setText(a+" "+depto);
-   }
+        String a = System.getProperty("user.name");//usar usuario de windows
+        if (a.equals("jluis")) {
+            evalua = 367;
+            depto = 8;
+        } //INFORMATICA
+        else if (a.equals("Inspeccion")) {
+            evalua = 302;
+        }// INSPECCION
+        else if (a.equals("testing")) {
+            evalua = 822;
+        } // TESTING
+        else if (a.equals("deptochips")) {
+            evalua = 748;
+        }//CHIPS
+        else if (a.equals("potting")) {
+            evalua = 781;
+        } //STRIP & POTTING
+        else if (a.equals("ehernandez")) {
+            evalua = 533;
+        } //TRANSFORMADORES
+        else if (a.equals("taller")) {
+            evalua = 348;
+        }//TALLE
+        else if (a.equals("bodega")) {
+            evalua = 465;
+        }//BODEGA 
+        else if (a.equals("amonroy")) {
+            evalua = 920;
+            depto = 8;
+        } //INFORMATICA
+        else if (a.equals("ingenieria2")) {
+            evalua = 876;
+        } // CALIDAD 
+        else if (a.equals("glemus")) {
+            evalua = 755;
+        }//SOTANO
+        else if (a.equals("oecheverria")) {
+            evalua = 847;
+        }//SOTANO
+        else if (a.equals("apacheco")) {
+            evalua = 833;
+        }//SOTANO
+        else if (a.equals("emely")) {
+            evalua = 833;
+        }//SOTANO
+        ListarCodigosTerminados();
+    }
     
     private void ImprimeEva(){
         id_evaluacion = (Integer.parseInt(String.valueOf(Evaluaciones.getModel().getValueAt(Evaluaciones.getSelectedRow(),0))));
@@ -160,9 +192,8 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
             }
         });
 
-        DEPAR.setEditable(true);
         DEPAR.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "STRIP Y POTTING", "TRANSFORMADORES", "TALLER", "BODEGA" }));
+        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO" }));
         DEPAR.setEnabled(false);
         DEPAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,7 +238,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(18, 51, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Codigotxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -215,7 +246,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
                     .addComponent(DEPAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,7 +257,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -235,7 +266,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
     
     
     private void ListarCodigosTerminados(){
-        ArrayList<ClassEvaluacionOperativo> result1 = BDEvaluacion.ListarEvaluacionesTerminadas(Codigotxt.getText(),depto);
+        ArrayList<ClassEvaluacionOperativo> result1 = BDEvaluacion.ListarEvaluacionesTerminadas(Codigotxt.getText(),evalua);
         Listar(result1);  
     }
      private void Listar(ArrayList<ClassEvaluacionOperativo> list1) {
@@ -246,7 +277,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
               {
                   datos[i][0] = t.getId_evaluacion();
                   datos[i][1] = t.getCodigo();
-                  datos[i][2] = t.getNombres()+' '+t.getApellidos();
+                  datos[i][2] = t.getNombres();//+' '+t.getApellidos();
                   datos[i][3] = t.getPuesto();
                   datos[i][4] = t.getDepto();
                   datos[i][5] = t.getFechaS();
@@ -282,6 +313,56 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
              TableColumn columna8 = Evaluaciones.getColumn("FASE");
              columna8.setPreferredWidth(35);
      }
+     
+      private void ListarCodigosTerminadosEvalua(){
+        ArrayList<ClassEvaluacionOperativo> result1 = BDEvaluacion.ListarEvaluacionesTerminadasEvalua(Codigotxt.getText(),depto);
+        Listar1(result1);  
+    }
+     private void Listar1(ArrayList<ClassEvaluacionOperativo> list1) {
+         
+              Object[][] datos = new Object[list1.size()][8];
+              int i = 0;
+              for(ClassEvaluacionOperativo t : list1)
+              {
+                  datos[i][0] = t.getId_evaluacion();
+                  datos[i][1] = t.getCodigo();
+                  datos[i][2] = t.getNombres();//+' '+t.getApellidos();
+                  datos[i][3] = t.getPuesto();
+                  datos[i][4] = t.getDepto();
+                  datos[i][5] = t.getFechaS();
+                  datos[i][6] = t.getNoEvaluacion();
+                  datos[i][7] = t.getFaceS();
+                  i++;
+              }    
+             Evaluaciones.setModel(new javax.swing.table.DefaultTableModel(
+                datos,
+                new String[]{
+                "No.","CODIGO","NOMBRE","PUESTO","DEPARTAMENTO","FECHA EVALUACION","#EVALUACION","FASE"
+             })
+             {  
+                 @Override
+             public boolean isCellEditable(int row, int column){
+             return false;
+             }
+             });
+             TableColumn columna1 = Evaluaciones.getColumn("No.");
+             columna1.setPreferredWidth(0);
+             TableColumn columna2 = Evaluaciones.getColumn("CODIGO");
+             columna2.setPreferredWidth(0);
+             TableColumn columna3 = Evaluaciones.getColumn("NOMBRE");
+             columna3.setPreferredWidth(150);
+             TableColumn columna4 = Evaluaciones.getColumn("PUESTO");
+             columna4.setPreferredWidth(150);
+             TableColumn columna5 = Evaluaciones.getColumn("DEPARTAMENTO");
+             columna5.setPreferredWidth(100);
+             TableColumn columna6 = Evaluaciones.getColumn("FECHA EVALUACION");
+             columna6.setPreferredWidth(75);
+             TableColumn columna7 = Evaluaciones.getColumn("#EVALUACION");
+             columna7.setPreferredWidth(35);
+             TableColumn columna8 = Evaluaciones.getColumn("FASE");
+             columna8.setPreferredWidth(35);
+     }
+     
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
        
@@ -312,7 +393,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
             depto = 2;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("CHIPS")) {
             depto = 3;
-        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("STRIP Y POTTING")) {
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SOLDER DIP, STRIP & POTTING")) {
             depto = 4;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("TRANSFORMADORES")) {
             depto = 5;
@@ -320,9 +401,16 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
             depto = 6;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("BODEGA")) {
             depto = 7;
-        }else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){depto = 0;}
-        System.out.println(depto);
-        ListarCodigosTerminados();
+        }
+        else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("ADMINISTRACION")) {
+            depto = 8;
+        }else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("GERENCIA")) {
+            depto = 9;
+        }else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO")){
+           depto = 10;
+        }
+        else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){depto = 0;}
+        ListarCodigosTerminadosEvalua();
 
     }//GEN-LAST:event_DEPARActionPerformed
 

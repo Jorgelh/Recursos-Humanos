@@ -1473,7 +1473,7 @@
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="EVALUACION DESEMPE&#xd1;O -TRABAJO EN EQUIPO-"/>
+    <Property name="title" type="java.lang.String" value="EVALUACION DESEMPE&#xd1;O -RESOLUCION DE CONFLICTOS-"/>
     <Property name="toolTipText" type="java.lang.String" value=""/>
   </Properties>
   <SyntheticProperties>

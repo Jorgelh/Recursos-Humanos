@@ -48,7 +48,32 @@ public class ClassEvaluacionSupervisores {
     private int TRES4;
     private int CUATRO4;
     private String NOTA;
+    private int status;
+    private int evalua;
+    private int Dept;
 
+    public int getDept() {
+        return Dept;
+    }
+
+    public void setDept(int Dept) {
+        this.Dept = Dept;
+    }
+
+    public int getEvalua() {
+        return evalua;
+    }
+
+    public void setEvalua(int evalua) {
+        this.evalua = evalua;
+    }
+    
+    public int getStatus() {
+        return status;
+    }
+    public void setStatus(int status) {
+        this.status = status;
+    }    
     public String getNOTA() {
         return NOTA;
     }

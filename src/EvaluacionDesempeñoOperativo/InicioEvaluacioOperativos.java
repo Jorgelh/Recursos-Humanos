@@ -16,14 +16,34 @@ import static sun.management.Agent.error;
  * @author jluis
  */
 public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
-
+     int usuario=0;
     /**
      * Creates new form InicioEvaluacion
      */
     public InicioEvaluacioOperativos() {
+        
         initComponents();
+        selectUsuario();
+        if (usuario == 8) {
+            imprimir.setEnabled(true);}
+        
     }
 
+    
+    public void selectUsuario(){
+     String a = System.getProperty("user.name");//usar usuario de windows
+        if (a.equals("jluis")) {
+            usuario = 8;
+        } //INFORMATICA
+        else if (a.equals("amonroy")) {
+           usuario = 8;
+        }// INSPECCION
+        else if (a.equals("glemus")) {
+           usuario = 8;
+        } // TESTING
+
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,6 +57,7 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        imprimir = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -45,7 +66,7 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
-        jButton3.setText("NUEVA EVALUACION");
+        jButton3.setText("   NUEVA EVALUACION");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -53,7 +74,7 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
         });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
-        jButton6.setText("BUSCAR Y CONTINUAR CON EVALUACION");
+        jButton6.setText("   BUSCAR Y CONTINUAR CON EVALUACION");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -61,10 +82,19 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
         });
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
-        jButton7.setText("EVALUACION TERMINADAS");
+        jButton7.setText("   EVALUACION TERMINADAS");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
+            }
+        });
+
+        imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ComponenteImagenes/Print.png"))); // NOI18N
+        imprimir.setText("   IMPRESION DE EVALUACIONES");
+        imprimir.setEnabled(false);
+        imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirActionPerformed(evt);
             }
         });
 
@@ -73,23 +103,26 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(106, 106, 106)
+                .addGap(103, 103, 103)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(115, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(imprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -102,7 +135,7 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -145,6 +178,20 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
         } catch (Exception e) {System.out.println("F "+e);}
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirActionPerformed
+        
+        ImpresionEvaluaciones ma = new ImpresionEvaluaciones();
+        Pane1.add(ma); 
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = ma.getSize();
+        ma.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ma.show();
+        try {
+            this.dispose();
+        } catch (Exception e) {System.out.println("F "+e);}
+        
+    }//GEN-LAST:event_imprimirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -182,6 +229,7 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton imprimir;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

@@ -40,11 +40,11 @@ public class dEvaluacionTrabajoEnEquipo extends javax.swing.JInternalFrame {
         this.codigo = c;
         initComponents();
         jLabel1.setText("<html><b>Los errores del equipo los asume como propios</b></html>");
-        jLabel2.setText("<html><b>Comparte información y conocimiento con sus compañeros de trabajo</b></html>");
-        jLabel3.setText("<html><b>Realiza las actividades necesarias para el logro de las metas del equipo</b></html>");
-        jLabel4.setText("<html><b>Valora el aporte de los demás miembros del equipo</b></html>");
-        jLabel5.setText("<html><b>Solicita ayuda o la ofrece cuando crea que es necesario</b></html>");
-        jLabel6.setText("<html><b>1. Trabajo en equipo: la capacidad de colaborar y a su vez cooperar con los demás formando parte de un grupo para trabajar juntos.</b></html>");
+        jLabel2.setText("<html><b>Aporta ideas entre departamentos para mejorar continuamente</b></html>");
+        jLabel3.setText("<html><b>Apoya a otros departamentos en caso de que se le solicite</b></html>");
+        jLabel4.setText("<html><b>Fomenta la fluida comunicación entre todas las partes </b></html>");
+        jLabel5.setText("<html><b>Construye una confianza entre todos las partes</b></html>");
+        jLabel6.setText("<html><b>4. Trabajo en equipo: fomentar y trabajar conjuntamente con otros departamentos, desarrollando la mejora continua.</b></html>");
         l1.setText("<html><b><center> por debajo de lo esperado <br> 0 - 50 </center></b></html>");
         l2.setText("<html><b><center> A mejorar <br> 51 - 65 </center></b></html>");
         l3.setText("<html><b><center> Aceptable <br> 66 - 84 </center></b></html>");
@@ -4508,7 +4508,7 @@ public class dEvaluacionTrabajoEnEquipo extends javax.swing.JInternalFrame {
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
        
-        TiposEvaluacion tra = new TiposEvaluacion(id_evaluacion);
+        TiposEvaluacionSupervisores tra = new TiposEvaluacionSupervisores(id_evaluacion);
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();

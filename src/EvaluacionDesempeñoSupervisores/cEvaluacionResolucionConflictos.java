@@ -8,6 +8,7 @@ package EvaluacionDesempeñoSupervisores;
 import Clases.EvaluacionOperativo.ClassEvaluacionOperativo;
 import EvaluacionDesempeñoOperativo.*;
 import BD.BD;
+import Clases.EvaluacionSupervisores.ClassEvaluacionSupervisores;
 import static Formuarios.Inicio.Pane1;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -38,12 +39,15 @@ public class cEvaluacionResolucionConflictos extends javax.swing.JInternalFrame 
         this.id_evaluacion = i;
         this.codigo = c;
         initComponents();
-        jLabel1.setText("<html><b>Los errores del equipo los asume como propios</b></html>");
-        jLabel2.setText("<html><b>Comparte información y conocimiento con sus compañeros de trabajo</b></html>");
-        jLabel3.setText("<html><b>Realiza las actividades necesarias para el logro de las metas del equipo</b></html>");
-        jLabel4.setText("<html><b>Valora el aporte de los demás miembros del equipo</b></html>");
-        jLabel5.setText("<html><b>Solicita ayuda o la ofrece cuando crea que es necesario</b></html>");
-        jLabel6.setText("<html><b>1. Trabajo en equipo: la capacidad de colaborar y a su vez cooperar con los demás formando parte de un grupo para trabajar juntos.</b></html>");
+        jLabel1.setText("<html><b>Maneja adecuadamente los conflictos y con mucha confidencialidad</b></html>");
+        jLabel2.setText("<html><b>Tiene la capacidad de identificar a los actores principales de un\n" +
+                        "conflicto</b></html>");
+        jLabel3.setText("<html><b>Trabaja junto a su equipo para resolver los conflictos</b></html>");
+        jLabel4.setText("<html><b>Acepta los diferentes puntos de vista y los toma en cuenta para\n" +
+                        "lograr acuerdos</b></html>");
+        jLabel5.setText("<html><b>Pide apoyo en el momento oportuno para resolver un conflicto</b></html>");
+        jLabel6.setText("<html><b>3. Resolución de conflictos: capacidad de determinar eficazmente las metas y prioridades de su tarea estipulando la acción, los\n" +
+                        "plazos y los recursos requeridos.</b></html>");
         l1.setText("<html><b><center> por debajo de lo esperado <br> 0 - 50 </center></b></html>");
         l2.setText("<html><b><center> A mejorar <br> 51 - 65 </center></b></html>");
         l3.setText("<html><b><center> Aceptable <br> 66 - 84 </center></b></html>");
@@ -1299,7 +1303,7 @@ public class cEvaluacionResolucionConflictos extends javax.swing.JInternalFrame 
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("EVALUACION DESEMPEÑO -TRABAJO EN EQUIPO-");
+        setTitle("EVALUACION DESEMPEÑO -RESOLUCION DE CONFLICTOS-");
         setToolTipText("");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -4466,7 +4470,7 @@ public class cEvaluacionResolucionConflictos extends javax.swing.JInternalFrame 
                  (UNO4.getText().compareTo("0") != 0 || DOS4.getText().compareTo("0")!= 0 || TRES4.getText().compareTo("0")!= 0 || CUATRO4.getText().compareTo("0")!= 0) )
          {
           try {
-            ClassEvaluacionOperativo l = new ClassEvaluacionOperativo();
+              ClassEvaluacionSupervisores l = new ClassEvaluacionSupervisores();
             l.setId_evaluacion(id_evaluacion);
             l.setUNO(Integer.parseInt(UNO.getText()));
             l.setDOS(Integer.parseInt(DOS.getText()));
@@ -4493,7 +4497,7 @@ public class cEvaluacionResolucionConflictos extends javax.swing.JInternalFrame 
             l.setTRES4(Integer.parseInt(TRES4.getText()));
             l.setCUATRO4(Integer.parseInt(CUATRO4.getText()));
             l.setNOTA(NOTA.getText());
-                Clases.EvaluacionOperativo.BDEvaluacion.insertarTrabajoEnEquipo(l);
+                Clases.EvaluacionSupervisores.InsertarEvaluacionSupervisores.insertarResolucionConflictos(l);
             JOptionPane.showMessageDialog(null, "EVALUACION TERMINADA CORRECTAMENTE");
             this.dispose();
           
@@ -4518,7 +4522,7 @@ public class cEvaluacionResolucionConflictos extends javax.swing.JInternalFrame 
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
        
-        TiposEvaluacion tra = new TiposEvaluacion(id_evaluacion);
+        TiposEvaluacionSupervisores tra = new TiposEvaluacionSupervisores(id_evaluacion);
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();

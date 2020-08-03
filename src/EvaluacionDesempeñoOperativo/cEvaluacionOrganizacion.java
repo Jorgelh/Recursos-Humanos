@@ -41,8 +41,8 @@ public class cEvaluacionOrganizacion extends javax.swing.JInternalFrame {
         jLabel1.setText("<html><b>Trabaja ordenadamente cuando esta en su puesto de trabajo</b></html>");
         jLabel2.setText("<html><b>No genera desorden invadiendo el espacio de otros compañeros</b></html>");
         jLabel3.setText("<html><b>Sabe priorizar sus actividades</b></html>");
-        jLabel4.setText("<html><b>Cuandorealiza otras actividades urgentes, saber retomarlas actividades propuestas</b></html>");
-        jLabel5.setText("<html><b>Planifica en tiempo posibles atrasos para cumplir con su trabajo cuando es solicitado/b></html>");
+        jLabel4.setText("<html><b>Cuandorealiza otras actividades urgentes, sabe retomar las actividades propuestas</b></html>");
+        jLabel5.setText("<html><b>Planifica en tiempo posibles atrasos para cumplir con su trabajo cuando es solicitado</b></html>");
         jLabel6.setText("<html><b>3.Organización: Mantener el orden de las actividades mediante una correcta toma de decisiones</b></html>");
         l1.setText("<html><b><center> por debajo de lo esperado <br> 0 - 50 </center></b></html>");
         l2.setText("<html><b><center> A mejorar <br> 51 - 65 </center></b></html>");

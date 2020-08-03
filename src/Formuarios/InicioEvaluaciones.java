@@ -7,7 +7,6 @@ package Formuarios;
 
 import EvaluacionDesempeñoOperativo.InicioEvaluacioOperativos;
 import EvaluacionDesempeñoOperativo.NuevaEvaluacion;
-import EvaluacionDesempeñoSupervisores.InicioEvaluacion;
 import static Formuarios.Inicio.Pane1;
 import java.awt.Dimension;
 
@@ -100,7 +99,7 @@ public class InicioEvaluaciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        InicioEvaluacion tra = new InicioEvaluacion();
+       /* InicioEvaluacion tra = new InicioEvaluacion();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();
@@ -109,7 +108,7 @@ public class InicioEvaluaciones extends javax.swing.JInternalFrame {
         try {
             this.dispose();
         } catch (Exception e) {System.out.println("F "+e);
-        }
+        }*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
