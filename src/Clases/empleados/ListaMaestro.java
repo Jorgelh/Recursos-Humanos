@@ -51,7 +51,8 @@ private int discapacidad;
 private String TipoDiscapa;
 private String NivelAcademico;
 private int evaluadopor;
-
+    
+     
     public int getEvaluadopor() {
         return evaluadopor;
     }

@@ -268,7 +268,7 @@ public class NuevaEvaluacion extends javax.swing.JInternalFrame {
         nuevo = new javax.swing.JButton();
 
         setClosable(true);
-        setTitle("INGRESO NUEVA EVALUACION");
+        setTitle("INGRESO NUEVA EVALUACION OPERATIVO");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }

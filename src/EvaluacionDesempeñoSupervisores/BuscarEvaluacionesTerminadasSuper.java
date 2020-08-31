@@ -36,6 +36,8 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
      int id;
      int idevaluacion;
      int depto = 10;
+     int deptousuario = 0;
+     int evalua = 1;
     /**
      * Creates new form BuscarCodigo
      */
@@ -46,9 +48,9 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
         
     }
      
-    public void selectusuario(){
-         
-             /* 1,'INSPECCION',
+    public void selectusuario() {
+
+        /* 1,'INSPECCION',
                 2,'TESTING',
                 3,'CHIPS',
                 4,'STRIP Y POTTING',
@@ -57,37 +59,79 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
                 7,'BODEGA',
                 8,'ADMINISTRACION'
                 9,'GERENCIA'*/
-         
-             String a = System.getProperty("user.name");//usar usuario de windows
-             if (a.equals("jluis")){depto=8;} //INFORMATICA
-             else if (a.equals("Inspeccion")){depto=1;}// INSPECCION
-             else if (a.equals("testing")){depto=2;} // TESTING
-             else if (a.equals("deptochips")){depto=3;}//CHIPS
-             else if (a.equals("potting")){depto=4;}  //STRIP & POTTING
-             else if (a.equals("ehernandez")){depto=5;} //TRANSFORMADORES
-             else if (a.equals("taller")){depto=6;}//TALLE
-             else if (a.equals("bodega")){depto=7;}//BODEGA 
-             else if (a.equals("amonroy")){depto=8;} //INFORMATICA
-             else if (a.equals("calidad")||a.equals("apacheco")|| a.equals("oecheverria")|| a.equals("emely")){depto=8;} // CALIDAD
-             ListarCodigosTerminados();
-             jLabel4.setText(a+" "+depto);
-   }
+        String a = System.getProperty("user.name");//usar usuario de windows
+        if (a.equals("jluis")) {
+            evalua = 367;
+            depto = 8;
+            deptousuario = 8;
+        } //INFORMATICA
+        else if (a.equals("Inspeccion")) {
+            evalua = 302;
+        }// INSPECCION
+        else if (a.equals("testing")) {
+            evalua = 822;
+        } // TESTING
+        else if (a.equals("deptochips")) {
+            evalua = 748;
+        }//CHIPS
+        else if (a.equals("potting")) {
+            evalua = 781;
+        } //STRIP & POTTING
+        else if (a.equals("ehernandez")) {
+            evalua = 533;
+        } //TRANSFORMADORES
+        else if (a.equals("taller")) {
+            evalua = 348;
+        }//TALLE
+        else if (a.equals("bodega")) {
+            evalua = 465;
+        }//BODEGA 
+        else if (a.equals("amonroy")) {
+            evalua = 920;
+            depto = 8;
+            deptousuario = 8;
+        } //INFORMATICA
+        else if (a.equals("ingenieria2")) {
+            evalua = 876;
+        } // CALIDAD 
+        else if (a.equals("glemus")) {
+            evalua = 755;
+        }//SOTANO
+        else if (a.equals("oecheverria")) {
+            evalua = 847;
+        }//SOTANO
+        else if (a.equals("apacheco")) {
+            evalua = 833;
+        }//SOTANO
+        else if (a.equals("emely")) {
+            evalua = 833;
+        }//SOTANO
+        ListarCodigosTerminadosEvalua();
+    }
     
     private void ImprimeEva(){
         id_evaluacion = (Integer.parseInt(String.valueOf(Evaluaciones.getModel().getValueAt(Evaluaciones.getSelectedRow(),0))));
           BD con= new BD();
          Connection conexion= con.getConnection();
         try {
-            JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile("\\\\SRVANATEK\\Bases de Datos\\Sistema\\Recursos Humanos\\Reportes\\EvaluacionDesempeño.jasper");
-            JasperReport jasperReport2=(JasperReport)JRLoader.loadObjectFromFile("\\\\SRVANATEK\\Bases de Datos\\Sistema\\Recursos Humanos\\Reportes\\EvaluacionDesempeño2de2.jasper");
+            JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile("\\\\SRVANATEK\\Bases de Datos\\Sistema\\Recursos Humanos\\ReportesSuper\\1_Evalu_planificacion_resultados.jasper");
+            JasperReport jasperReport2=(JasperReport)JRLoader.loadObjectFromFile("\\\\SRVANATEK\\Bases de Datos\\Sistema\\Recursos Humanos\\ReportesSuper\\2_Evalu_conflictos_trabajoequipo.jasper");
+            JasperReport jasperReport3=(JasperReport)JRLoader.loadObjectFromFile("\\\\SRVANATEK\\Bases de Datos\\Sistema\\Recursos Humanos\\ReportesSuper\\3_Evalu_organizacion_liderazgo.jasper");
+            JasperReport jasperReport4=(JasperReport)JRLoader.loadObjectFromFile("\\\\SRVANATEK\\Bases de Datos\\Sistema\\Recursos Humanos\\ReportesSuper\\4_Evalu_responsabilidad_iniciativa.jasper");
             Map parametros= new HashMap();
             parametros.put("ID", id_evaluacion);
             JasperPrint print = JasperFillManager.fillReport(jasperReport,parametros, conexion);
             JasperPrint print2 = JasperFillManager.fillReport(jasperReport2,parametros, conexion);
+            JasperPrint print3 = JasperFillManager.fillReport(jasperReport3,parametros, conexion);
+            JasperPrint print4 = JasperFillManager.fillReport(jasperReport4,parametros, conexion);
             JasperViewer view = new JasperViewer(print,false);
             JasperViewer view2 = new JasperViewer(print2,false);
+            JasperViewer view3 = new JasperViewer(print3,false);
+            JasperViewer view4 = new JasperViewer(print4,false);
             view.setVisible(true);
             view2.setVisible(true);
+            view3.setVisible(true);
+            view4.setVisible(true);
         } catch (Exception e) {System.out.println("F"+e);
            JOptionPane.showMessageDialog(null, "ERROR EJECUTAR REPORTES =  "+e);
         }
@@ -163,7 +207,7 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
 
         DEPAR.setEditable(true);
         DEPAR.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "STRIP Y POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO" }));
+        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "ADMINISTRACION", "GERENCIA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO" }));
         DEPAR.setEnabled(false);
         DEPAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,6 +283,10 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
         ArrayList<ClassEvaluacionSupervisores> result1 = BDEvaluacionSupervisores.ListarEvaluacionesTerminadasSuper(Codigotxt.getText(),depto);
         Listar(result1);  
     }
+    private void ListarCodigosTerminadosEvalua(){
+        ArrayList<ClassEvaluacionSupervisores> result1 = BDEvaluacionSupervisores.ListarEvaluacionesTerminadasSuperEvalua(Codigotxt.getText(),evalua);
+        Listar(result1);  
+    }
      private void Listar(ArrayList<ClassEvaluacionSupervisores> list1) {
          
               Object[][] datos = new Object[list1.size()][8];
@@ -286,7 +334,7 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
        
-        InicioEvaluacioOperativos tra = new InicioEvaluacioOperativos();
+        InicioEvaluacioSupervisores tra = new InicioEvaluacioSupervisores();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();
@@ -321,15 +369,13 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
             depto = 6;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("BODEGA")) {
             depto = 7;
-        }
-        else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("ADMINISTRACION")) {
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("ADMINISTRACION")) {
             depto = 8;
-        }else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("GERENCIA")) {
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("GERENCIA")) {
             depto = 9;
-        }else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO")){
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO")){
            depto = 10;
-        }
-        else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){depto = 0;}
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){depto = 0;}
         System.out.println(depto);
         ListarCodigosTerminados();
 

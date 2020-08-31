@@ -5,9 +5,8 @@
  */
 package EvaluacionDesempeñoSupervisores;
 
-import EvaluacionDesempeñoOperativo.*;
 import BD.BD;
-import Clases.EvaluacionOperativo.ClassEvaluacionOperativo;
+import Clases.EvaluacionSupervisores.ClassEvaluacionSupervisores;
 import static Formuarios.Inicio.Pane1;
 import groovyjarjarantlr.StringUtils;
 import java.awt.Color;
@@ -4462,7 +4461,7 @@ public class eEvaluacionOrganizacion extends javax.swing.JInternalFrame {
                  (UNO4.getText().compareTo("0") != 0 || DOS4.getText().compareTo("0")!= 0 || TRES4.getText().compareTo("0")!= 0 || CUATRO4.getText().compareTo("0")!= 0) )
          {
         try {
-            ClassEvaluacionOperativo l = new ClassEvaluacionOperativo();
+            ClassEvaluacionSupervisores l = new ClassEvaluacionSupervisores();
             l.setId_evaluacion(id_evaluacion);
             l.setUNO(Integer.parseInt(UNO.getText()));
             l.setDOS(Integer.parseInt(DOS.getText()));
@@ -4489,7 +4488,7 @@ public class eEvaluacionOrganizacion extends javax.swing.JInternalFrame {
             l.setTRES4(Integer.parseInt(TRES4.getText()));
             l.setCUATRO4(Integer.parseInt(CUATRO4.getText()));
             l.setNOTA(NOTA1.getText());
-                Clases.EvaluacionOperativo.BDEvaluacion.insertarOrganizacion(l);
+            Clases.EvaluacionSupervisores.InsertarEvaluacionSupervisores.insertarOrganizacion(l);
             JOptionPane.showMessageDialog(null, "EVALUACION TERMINADA CORRECTAMENTE");
             this.dispose();
         } catch (SQLException e) {

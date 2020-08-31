@@ -401,8 +401,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
             depto = 6;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("BODEGA")) {
             depto = 7;
-        }
-        else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("ADMINISTRACION")) {
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("ADMINISTRACION")) {
             depto = 8;
         }else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("GERENCIA")) {
             depto = 9;

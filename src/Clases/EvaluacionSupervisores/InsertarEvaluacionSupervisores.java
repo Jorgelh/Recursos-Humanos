@@ -118,7 +118,7 @@ public class InsertarEvaluacionSupervisores {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
-        p = cnn.prepareStatement("insert into GRESPONSABILIDAD values(IDRESPONSABILIDAD.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
+        p = cnn.prepareStatement("insert into dtrabajo_equipo values(idtrabajo_equipo.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,2,?)");
         p.setInt(1, c.getId_evaluacion());
         p.setInt(2, c.getUNO());
         p.setInt(3, c.getDOS());

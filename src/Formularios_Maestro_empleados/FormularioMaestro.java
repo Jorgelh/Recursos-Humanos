@@ -112,11 +112,11 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
         direccion1 = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        estadocivil = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         genero = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         tiposanbre = new javax.swing.JTextField();
+        EstadoCivil = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         codigo = new javax.swing.JTextField();
@@ -567,11 +567,11 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
             }
         });
         nacimiento.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                nacimientoInputMethodTextChanged(evt);
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 nacimientoCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                nacimientoInputMethodTextChanged(evt);
             }
         });
 
@@ -716,13 +716,6 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("ESTADO CIVIL:");
 
-        estadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "SOLTERO", "CASADO" }));
-        estadocivil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadocivilActionPerformed(evt);
-            }
-        });
-
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("GENERO");
 
@@ -749,17 +742,15 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(genero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(estadocivil, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(genero, 0, 257, Short.MAX_VALUE)
+                    .addComponent(tiposanbre)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(jLabel4)
                             .addComponent(jLabel11))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(tiposanbre))
+                    .addComponent(EstadoCivil))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -768,8 +759,8 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(estadocivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(EstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -777,7 +768,7 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tiposanbre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -999,7 +990,7 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
             l.setESTUDIOS_ULTIMOS(profesion.getText());
             l.setIGSS(igss.getText());
             l.setIRTRA(irtra.getText());
-            l.setESTADO_CIVIL(estadociv);
+            l.setESTADO_CIVIL(EstadoCivil.getText());
             l.setSEXO(sexo);
             l.setCUENTA_BANCO(cuentabanco.getText());
             l.setDEPARTAMENTO(depa);
@@ -1038,7 +1029,7 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
         profesion.setText("");
         igss.setText("");
         irtra.setText("");
-        estadocivil.setSelectedItem("SELECCIONAR...");
+        EstadoCivil.setText("");
         genero.setSelectedItem("SELECCIONAR...");
         Discapa.setSelectedItem("SELECCIONAR...");
         discapa.setText("");
@@ -1077,7 +1068,7 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
         if (codigo.getText().compareTo("") != 0 && nombre.getText().compareTo("") != 0
                 && dpi.getText().compareTo("") != 0 && lugarnacimiento.getText().compareTo("") != 0
                 && direccion.getText().compareTo("") != 0 && nacimiento.getDate() != (null) && nit.getText().compareTo("") != 0
-                && tel1.getText().compareTo("") != 0 && !estadocivil.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...") && !genero.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")
+                && tel1.getText().compareTo("") != 0 && EstadoCivil.getText().compareTo("")!=0 && !genero.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")
                 && !depar.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...") && puesto.getText().compareTo("") != 0 && fechain.getDate() != (null) && ordinario.getText().compareTo("") != 0
                 && bonificacion.getText().compareTo("") != 0 && !Discapa.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")) {
             VerificarCodigo();
@@ -1179,19 +1170,6 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
     private void irtraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irtraActionPerformed
         cuentabanco.requestFocus();
     }//GEN-LAST:event_irtraActionPerformed
-
-    private void estadocivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadocivilActionPerformed
-
-        if (estadocivil.getSelectedItem().toString().equalsIgnoreCase("SOLTERO")) {
-            estadociv = "S";
-        } else if (estadocivil.getSelectedItem().toString().equalsIgnoreCase("CASADO")) {
-            estadociv = "C";
-        } else if (estadocivil.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")) {
-            estadociv = "N";
-        }
-
-        genero.requestFocus();
-    }//GEN-LAST:event_estadocivilActionPerformed
 
     private void generoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generoActionPerformed
 
@@ -1322,7 +1300,7 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_irtraKeyTyped
 
     private void direccion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccion1ActionPerformed
-        estadocivil.requestFocus();
+        EstadoCivil.requestFocus();
     }//GEN-LAST:event_direccion1ActionPerformed
 
     private void tel2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tel2KeyTyped
@@ -1457,6 +1435,7 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Discapa;
+    private javax.swing.JTextField EstadoCivil;
     private javax.swing.JTextField Evaluadopor;
     private javax.swing.JLabel LabelFoto;
     private javax.swing.JTextField NivelAcademico;
@@ -1471,7 +1450,6 @@ public class FormularioMaestro extends javax.swing.JInternalFrame {
     private javax.swing.JTextField discapa;
     private javax.swing.JTextField dpi;
     private javax.swing.JTextField edad;
-    private javax.swing.JComboBox<String> estadocivil;
     private com.toedter.calendar.JDateChooser fechain;
     private javax.swing.JComboBox<String> genero;
     private javax.swing.JButton guardar;

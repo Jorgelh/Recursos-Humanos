@@ -784,17 +784,17 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="genero" alignment="1" max="32767" attributes="0"/>
+                              <Component id="genero" alignment="1" pref="257" max="32767" attributes="0"/>
+                              <Component id="tiposanbre" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="estadocivil" alignment="0" min="-2" pref="257" max="-2" attributes="0"/>
                                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="tiposanbre" alignment="0" max="32767" attributes="0"/>
+                              <Component id="EstadoCivil" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -806,8 +806,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="estadocivil" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="EstadoCivil" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="genero" min="-2" max="-2" attributes="0"/>
@@ -828,23 +828,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="ESTADO CIVIL:"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JComboBox" name="estadocivil">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
-                        <StringItem index="0" value="SELECCIONAR..."/>
-                        <StringItem index="1" value="SOLTERO"/>
-                        <StringItem index="2" value="CASADO"/>
-                      </StringArray>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="estadocivilActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
@@ -880,6 +863,8 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="tiposanbre">
+                </Component>
+                <Component class="javax.swing.JTextField" name="EstadoCivil">
                 </Component>
               </SubComponents>
             </Container>

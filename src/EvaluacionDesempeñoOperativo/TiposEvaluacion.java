@@ -202,7 +202,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
         jLabel3.setText("jLabel3");
 
         setClosable(true);
-        setTitle("EVALUACION DE DESEMPEÑO");
+        setTitle("TIPO EVALUACION DE OPERATIVOS");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }

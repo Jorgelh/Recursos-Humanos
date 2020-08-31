@@ -25,7 +25,9 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
         initComponents();
         selectUsuario();
         if (usuario == 8) {
-            imprimir.setEnabled(true);}
+            imprimir.setEnabled(true);
+            imprimir1.setEnabled(true);
+        }
         
     }
 
@@ -58,10 +60,11 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         imprimir = new javax.swing.JButton();
+        imprimir1 = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("NUEVA EVALUACION");
+        setTitle("INICIO EVALUACION OPERADORES");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -98,6 +101,15 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
             }
         });
 
+        imprimir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ComponenteImagenes/Print.png"))); // NOI18N
+        imprimir1.setText("   IMPRESION DE EVALUACIONES ANUAL");
+        imprimir1.setEnabled(false);
+        imprimir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimir1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -108,7 +120,8 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(imprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(imprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(imprimir1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(103, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -122,7 +135,9 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(imprimir1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,6 +207,21 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_imprimirActionPerformed
 
+    private void imprimir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimir1ActionPerformed
+        
+        BuscarEvaluacionesAnualesTerminadas ma = new BuscarEvaluacionesAnualesTerminadas();
+        Pane1.add(ma); 
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = ma.getSize();
+        ma.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ma.show();
+        try {
+            this.dispose();
+        } catch (Exception e) {System.out.println("F "+e);}
+        
+        
+    }//GEN-LAST:event_imprimir1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -230,6 +260,7 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton imprimir;
+    private javax.swing.JButton imprimir1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

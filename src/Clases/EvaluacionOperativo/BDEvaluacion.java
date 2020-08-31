@@ -365,5 +365,36 @@ public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesImprimir(Str
         } 
         return list;
     }
-
+    
+    
+public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesAnuales(String B,int depto) {
+                   
+        return anual("SELECT v.id_listaempleados,v.evaluacion ,e.codigo,E.NOMBRES,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,\n" +
+"E.PUESTO\n" +
+"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2  and tipo = 1  and v.face = 3 and upper(e.codigo) like upper('"+B+"%') and e.departamento = "+depto+"  order by v.id_listaempleados,v.evaluacion");
+    }
+    private static ArrayList<ClassEvaluacionOperativo> anual(String sql){
+    ArrayList<ClassEvaluacionOperativo> list = new ArrayList<ClassEvaluacionOperativo>();
+    Connection cn = BD.getConnection();
+        try {
+            ClassEvaluacionOperativo b;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()){
+                 b = new ClassEvaluacionOperativo();
+                 b.setId_listaempleados(rs.getInt("id_listaempleados"));
+                  b.setNoEvaluacion(rs.getInt("evaluacion"));
+                 b.setCodigo(rs.getInt("codigo"));
+                 b.setNombres(rs.getString("nombres"));
+                 b.setDepto(rs.getString("depto"));
+                 b.setPuesto(rs.getString("puesto"));
+                 list.add(b);
+            }
+            cn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        } 
+        return list;
+    }    
 }

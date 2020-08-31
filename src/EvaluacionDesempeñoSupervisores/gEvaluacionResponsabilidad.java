@@ -5,9 +5,9 @@
  */
 package EvaluacionDesempeñoSupervisores;
 
-import EvaluacionDesempeñoOperativo.*;
+import EvaluacionDesempeñoSupervisores.*;
 import BD.BD;
-import Clases.EvaluacionOperativo.ClassEvaluacionOperativo;
+import Clases.EvaluacionSupervisores.ClassEvaluacionSupervisores;
 import static Formuarios.Inicio.Pane1;
 import groovyjarjarantlr.StringUtils;
 import java.awt.Color;
@@ -3291,7 +3291,7 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+/*
         if((UNO.getText().compareTo("0") != 0 || DOS.getText().compareTo("0")!= 0 || TRES.getText().compareTo("0")!= 0 || CUATRO.getText().compareTo("0")!= 0) &&
             (UNO1.getText().compareTo("0") != 0 || DOS1.getText().compareTo("0")!= 0 || TRES1.getText().compareTo("0")!= 0 || CUATRO1.getText().compareTo("0")!= 0) &&
             (UNO2.getText().compareTo("0") != 0 || DOS2.getText().compareTo("0")!= 0 || TRES2.getText().compareTo("0")!= 0 || CUATRO2.getText().compareTo("0")!= 0) &&
@@ -3299,7 +3299,7 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
             (UNO4.getText().compareTo("0") != 0 || DOS4.getText().compareTo("0")!= 0 || TRES4.getText().compareTo("0")!= 0 || CUATRO4.getText().compareTo("0")!= 0) )
         {
             try {
-                ClassEvaluacionOperativo l = new ClassEvaluacionOperativo();
+                ClassEvaluacionSupervisores l = new ClassEvaluacionSupervisores();
                 l.setId_evaluacion(id_evaluacion);
                 l.setUNO(Integer.parseInt(UNO.getText()));
                 l.setDOS(Integer.parseInt(DOS.getText()));
@@ -3326,13 +3326,13 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
                 l.setTRES4(Integer.parseInt(TRES4.getText()));
                 l.setCUATRO4(Integer.parseInt(CUATRO4.getText()));
                 l.setNOTA(NOTA1.getText());
-                Clases.EvaluacionOperativo.BDEvaluacion.insertarOrganizacion(l);
+                Clases.EvaluacionSupervisores.InsertarEvaluacionSupervisores.insertarResponsabilidad(l);
                 JOptionPane.showMessageDialog(null, "EVALUACION TERMINADA CORRECTAMENTE");
                 this.dispose();
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "ERROR INGRESO EMPLEADOS" + e);
             }
-        }else{JOptionPane.showMessageDialog(null, "FALTA PARA TERMINAR LA EVALUACION");}
+        }else{JOptionPane.showMessageDialog(null, "FALTA PARA TERMINAR LA EVALUACION");}*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -3345,7 +3345,7 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
         {
 
             try {
-                ClassEvaluacionOperativo l = new ClassEvaluacionOperativo();
+                ClassEvaluacionSupervisores l = new ClassEvaluacionSupervisores();
                 l.setId_evaluacion(id_evaluacion);
                 l.setUNO(Integer.parseInt(UNO.getText()));
                 l.setDOS(Integer.parseInt(DOS.getText()));
@@ -3372,7 +3372,7 @@ public class gEvaluacionResponsabilidad extends javax.swing.JInternalFrame {
                 l.setTRES4(Integer.parseInt(TRES4.getText()));
                 l.setCUATRO4(Integer.parseInt(CUATRO4.getText()));
                 l.setNOTA(NOTA.getText());
-                Clases.EvaluacionOperativo.BDEvaluacion.insertarResponsabilidad(l);
+                Clases.EvaluacionSupervisores.InsertarEvaluacionSupervisores.insertarResponsabilidad(l);
                 JOptionPane.showMessageDialog(null, "EVALUACION TERMINADA CORRECTAMENTE");
                 this.dispose();
             } catch (SQLException e) {

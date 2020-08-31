@@ -22,6 +22,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import Formularios_Maestro_empleados.IncioMaestro;
 import ImpresionDocumentos.ImpresionDoc;
+import PRESTACIONES.CalculoIndemnización;
 
 /**
  *
@@ -50,15 +51,16 @@ public class Inicio extends javax.swing.JFrame {
 
     public void selectusuario() {
         String a = System.getProperty("user.name");//usar usuario de windows
-        if (a.equals("jluis") || a.equals("amonroy") || a.equals("glemus")||a.equals("emely")/* || a.equals("conta")||a.equals("oecheverria")||a.equals("apacheco")||a.equals("Emely")*/) {
+        if (a.equals("jluis") || a.equals("amonroy") || a.equals("glemus")/* || a.equals("conta")||a.equals("oecheverria")||a.equals("apacheco")||a.equals("Emely")*/) {
             depto = 1;
-        } else {
+        } else if (a.equals("oecheverria")||a.equals("emely")) {
             depto = 2;
-        }
+        }else{depto = 3;}
     }
     
     public void bloqueonopermitido(){
-       if(depto == 2){gestiones.setEnabled(false);empleados.setEnabled(false);supervisores.setEnabled(false);registros.setEnabled(false);rdigitales.setEnabled(false);}
+       if(depto == 3){gestiones.setEnabled(false);empleados.setEnabled(false);supervisores.setEnabled(false);registros.setEnabled(false);rdigitales.setEnabled(false);}
+       else if(depto == 2 ){gestiones.setEnabled(false);empleados.setEnabled(false);registros.setEnabled(false);rdigitales.setEnabled(false);}
     }
     
 
@@ -84,6 +86,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         empleados = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -186,6 +189,15 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenu9.setText("GESTION CODIGO EMPLEADO");
         jMenu9.setMargin(new java.awt.Insets(5, 5, 5, 5));
+
+        jMenuItem3.setText("INDEMNIZACION");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem3);
+
         gestiones.add(jMenu9);
 
         jMenu10.setText("GESTION GENERAL");
@@ -443,6 +455,17 @@ public class Inicio extends javax.swing.JFrame {
 
     }//GEN-LAST:event_supervisoresActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        CalculoIndemnización tra = new CalculoIndemnización();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+        
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -503,6 +526,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

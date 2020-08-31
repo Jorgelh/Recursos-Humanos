@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6105100000000023"/>
+	<property name="ireport.x" value="15"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="EVALUACION" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select a.nombres,a.codigo,DECODE(b.depto,1,'INSPECCION VISUAL',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION / MANTENIMIENTO') AS DEPTO,a.puesto,to_char(b.fecha,'MON-DD-YYYY')as FECHA from bevaluacion_desempeno b inner join alistaempleados a on b.id_listaempleados = a.id_listaempleados  where face = 3 and b.id_listaempleados = $P{ID} and evaluacion = $P{EVALUACION}]]>
+	</queryString>
+	<field name="NOMBRES" class="java.lang.String"/>
+	<field name="CODIGO" class="java.math.BigDecimal"/>
+	<field name="DEPTO" class="java.lang.String"/>
+	<field name="PUESTO" class="java.lang.String"/>
+	<field name="FECHA" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="-19" width="572" height="53"/>
+			</rectangle>
+			<line>
+				<reportElement x="354" y="26" width="80" height="1"/>
+			</line>
+			<line>
+				<reportElement x="92" y="3" width="225" height="1"/>
+			</line>
+			<line>
+				<reportElement x="56" y="26" width="265" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="322" y="12" width="33" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-18" y="14" width="74" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="-12" width="44" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Puesto:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="354" y="3" width="195" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="-17" y="-11" width="115" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre del empleado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="437" y="11" width="40" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="477" y="25" width="72" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="97" y="-18" width="220" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMBRES}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="56" y="5" width="266" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEPTO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="357" y="-18" width="192" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PUESTO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="5" width="77" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FECHA}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="482" y="4" width="73" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODIGO}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>

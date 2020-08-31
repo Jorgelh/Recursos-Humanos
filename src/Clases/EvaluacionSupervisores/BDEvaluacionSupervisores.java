@@ -25,7 +25,7 @@ public class BDEvaluacionSupervisores {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
-        p = cnn.prepareStatement("insert into BEVALUACION_DESEMPENO values(id_evaluacion.nextval,?,?,1,?,?,2,?,?)");
+        p = cnn.prepareStatement("insert into BEVALUACION_DESEMPENO values(id_evaluacion.nextval,?,?,1,?,?,2,1,?,?)");
         p.setInt(1, c.getId_listaempleados());
         p.setDate(2, new java.sql.Date(c.getFecha().getTime()));
         p.setInt(3, c.getFace());
@@ -125,6 +125,13 @@ public static ClassEvaluacionSupervisores buscarEmpleado(int id) throws SQLExcep
 "E.PUESTO,TO_CHAR(V.FECHA,'dd/mm/yy') as FECHA,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE,v.evaluacion \n" +
 "FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2 and v.tipo = 2 and e.departamento = "+depto+" and upper(e.codigo) like upper('"+B+"%') order by v.id_evaluacion");
     }
+ 
+  public static ArrayList<ClassEvaluacionSupervisores> ListarEvaluacionesTerminadasSuperEvalua(String B,int evalua) {
+                   
+        return SQL1("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,\n" +
+"E.PUESTO,TO_CHAR(V.FECHA,'dd/mm/yy') as FECHA,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE,v.evaluacion \n" +
+"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2 and v.tipo = 2 and v.evaluadopor = "+evalua+" and upper(e.codigo) like upper('"+B+"%') order by v.id_evaluacion");
+    }
     private static ArrayList<ClassEvaluacionSupervisores> SQL1(String sql){
     ArrayList<ClassEvaluacionSupervisores> list = new ArrayList<ClassEvaluacionSupervisores>();
     Connection cn = BD.getConnection();
@@ -189,7 +196,37 @@ public static ClassEvaluacionSupervisores buscarEmpleadoIDEvaluacionSuper(int id
         }
         return null;
     }       
-    
+  
+ public static ArrayList<ClassEvaluacionSupervisores> ListarEvaluacionesAnualesSuper(String B,int depto) {
+                   
+        return anual("SELECT v.id_listaempleados,v.evaluacion ,e.codigo,E.NOMBRES,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,\n" +
+"E.PUESTO\n" +
+"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2  and tipo = 2  and v.face = 3 and upper(e.codigo) like upper('"+B+"%') and e.departamento = "+depto+"  order by v.id_listaempleados,v.evaluacion");
+    }
+    private static ArrayList<ClassEvaluacionSupervisores> anual(String sql){
+    ArrayList<ClassEvaluacionSupervisores> list = new ArrayList<ClassEvaluacionSupervisores>();
+    Connection cn = BD.getConnection();
+        try {
+            ClassEvaluacionSupervisores b;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()){
+                 b = new ClassEvaluacionSupervisores();
+                 b.setId_listaempleados(rs.getInt("id_listaempleados"));
+                  b.setNoEvaluacion(rs.getInt("evaluacion"));
+                 b.setCodigo(rs.getInt("codigo"));
+                 b.setNombres(rs.getString("nombres"));
+                 b.setDepto(rs.getString("depto"));
+                 b.setPuesto(rs.getString("puesto"));
+                 list.add(b);
+            }
+            cn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        } 
+        return list;
  
+    }
  
 }

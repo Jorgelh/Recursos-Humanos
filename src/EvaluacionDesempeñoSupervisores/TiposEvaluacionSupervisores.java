@@ -160,7 +160,7 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
                 estado4 = 1;
             }
             Statement stmt5 = con.createStatement();
-            ResultSet rs5 = stmt5.executeQuery("select  COALESCE(sum(estado),0) as estado from EORIGANIZACION where id_evaluacion = " + id_evaluacion);
+            ResultSet rs5 = stmt5.executeQuery("select  COALESCE(sum(estado),0) as estado from EORGANIZACION where id_evaluacion = " + id_evaluacion);
             rs5.next();
             int c5 = rs5.getInt("estado");
             if (c5 == 1) {
@@ -231,6 +231,7 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         DEPTO = new javax.swing.JTextField();
         fechaF = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
 
@@ -240,6 +241,7 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
             }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosing(evt);
@@ -470,6 +472,13 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton1.setText("SALIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -483,7 +492,10 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(101, 101, 101)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(280, 280, 280)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -495,7 +507,9 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -526,7 +540,8 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_planificacionActionPerformed
 
     private void OrganizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrganizacionActionPerformed
-        if (estado3 == 0){
+          System.out.println("estado = "+estado5);        
+        if (estado5 == 0){
             
             eEvaluacionOrganizacion ma = new eEvaluacionOrganizacion(id_evaluacion,Integer.parseInt(CODIGO.getText()));
             Pane1.add(ma);
@@ -539,7 +554,7 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_OrganizacionActionPerformed
 
     private void LiderazgoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LiderazgoActionPerformed
-        if (estado2 == 0){
+        if (estado6 == 0){
             fEvaluacionLiderazgo ma = new fEvaluacionLiderazgo(id_evaluacion,Integer.parseInt(CODIGO.getText()));
             Pane1.add(ma);
             Dimension desktopSize = Pane1.getSize();
@@ -552,7 +567,7 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_LiderazgoActionPerformed
 
     private void OrientaResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrientaResultadosActionPerformed
-        if (estado4 == 0){
+        if (estado2 == 0){
             bEvaluacionOrientacionAresultados ma = new bEvaluacionOrientacionAresultados(id_evaluacion,Integer.parseInt(CODIGO.getText()));
             Pane1.add(ma);
             Dimension desktopSize = Pane1.getSize();
@@ -583,7 +598,7 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void ResolucionConflictosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResolucionConflictosActionPerformed
-        
+         if (estado3 == 0){
         cEvaluacionResolucionConflictos tra = new cEvaluacionResolucionConflictos(id_evaluacion,Integer.parseInt(CODIGO.getText()));
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
@@ -591,10 +606,11 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
         tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         tra.show(); 
         this.dispose();
+         }
     }//GEN-LAST:event_ResolucionConflictosActionPerformed
 
     private void TrabajoEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrabajoEquipoActionPerformed
-       
+         if (estado4 == 0){
         dEvaluacionTrabajoEnEquipo tra = new dEvaluacionTrabajoEnEquipo(id_evaluacion,Integer.parseInt(CODIGO.getText()));
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
@@ -602,10 +618,11 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
         tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         tra.show(); 
         this.dispose();
+         }
     }//GEN-LAST:event_TrabajoEquipoActionPerformed
 
     private void IniciativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciativaActionPerformed
-        
+         if (estado8 == 0){
         hEvaluacionIniciativa tra = new hEvaluacionIniciativa(id_evaluacion,Integer.parseInt(CODIGO.getText()));
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
@@ -613,10 +630,11 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
         tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         tra.show(); 
         this.dispose();
+         }
     }//GEN-LAST:event_IniciativaActionPerformed
 
     private void ResponsabilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResponsabilidadActionPerformed
-        
+         if (estado7 == 0){
         gEvaluacionResponsabilidad tra = new gEvaluacionResponsabilidad(id_evaluacion,Integer.parseInt(CODIGO.getText()));
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
@@ -624,7 +642,23 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
         tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         tra.show(); 
         this.dispose();
+         }
     }//GEN-LAST:event_ResponsabilidadActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+             this.dispose();
+        InicioEvaluacioSupervisores tra = new InicioEvaluacioSupervisores();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+      
+       
+    }//GEN-LAST:event_formInternalFrameClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -641,6 +675,7 @@ public class TiposEvaluacionSupervisores extends javax.swing.JInternalFrame {
     private javax.swing.JButton Responsabilidad;
     private javax.swing.JButton TrabajoEquipo;
     private com.toedter.calendar.JDateChooser fechaF;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

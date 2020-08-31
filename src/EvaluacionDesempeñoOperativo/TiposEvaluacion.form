@@ -10,7 +10,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="EVALUACION DE DESEMPE&#xd1;O"/>
+    <Property name="title" type="java.lang.String" value="TIPO EVALUACION DE OPERATIVOS"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>

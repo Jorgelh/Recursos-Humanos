@@ -127,7 +127,7 @@ public class NuevaEvaluacionSupervisores extends javax.swing.JInternalFrame {
 
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select nvl(MIN(b.estado),'2') as ESTADO from bevaluacion_desempeno b inner join alistaempleados a on b.id_listaempleados = a.id_listaempleados where a.codigo=" + CODIGO.getText());
+            ResultSet rs = stmt.executeQuery("select nvl(MIN(b.estado),'2') as ESTADO from bevaluacion_desempeno b inner join alistaempleados a on b.id_listaempleados = a.id_listaempleados where  b.tipo = 2 and a.codigo=" + CODIGO.getText());
             rs.next();
             int c = rs.getInt("ESTADO");
             if (c >= 2 ) {
@@ -220,6 +220,7 @@ public class NuevaEvaluacionSupervisores extends javax.swing.JInternalFrame {
             l.setFecha(fechaEvaluacion.getDate());
             l.setNoEvaluacion(evaluacion);
             l.setDept(dept);
+            l.setEvalua(evalua);
             Clases.EvaluacionSupervisores.BDEvaluacionSupervisores.insertarEvaluacionSuper(l);
             JOptionPane.showMessageDialog(null, "EVALUACION ASIGNADA");
             crearEvaluacionesSuper();
