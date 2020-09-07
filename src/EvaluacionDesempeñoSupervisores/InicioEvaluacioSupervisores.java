@@ -99,7 +99,7 @@ public class InicioEvaluacioSupervisores extends javax.swing.JInternalFrame {
         });
 
         imprimir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ComponenteImagenes/Print.png"))); // NOI18N
-        imprimir1.setText("   IMPRESION DE EVALUACIONES");
+        imprimir1.setText("   IMPRESION DE EVALUACION ANUAL");
         imprimir1.setEnabled(false);
         imprimir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

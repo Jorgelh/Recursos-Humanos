@@ -51,8 +51,16 @@ private int discapacidad;
 private String TipoDiscapa;
 private String NivelAcademico;
 private int evaluadopor;
+private String fechadebaja;
+
+    public String getFechadebaja() {
+        return fechadebaja;
+    }
+
+    public void setFechadebaja(String fechadebaja) {
+        this.fechadebaja = fechadebaja;
+    }
     
-     
     public int getEvaluadopor() {
         return evaluadopor;
     }

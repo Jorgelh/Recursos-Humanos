@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.3310000000000566"/>
+	<property name="ireport.zoom" value="1.3310000000000584"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<scriptlet name="scriptlet1" class="net.sf.jasperreports.engine.JRDefaultScriptlet"/>
@@ -150,7 +150,7 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 			<staticText>
 				<reportElement x="392" y="-5" width="144" height="15"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Versión 4]]></text>
+				<text><![CDATA[Versión 5]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="387" y="46" width="165" height="17"/>
@@ -287,7 +287,7 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 				<reportElement x="1" y="117" width="267" height="24"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="1" y="188" width="555" height="48"/>
+				<reportElement x="2" y="188" width="555" height="48"/>
 			</rectangle>
 			<rectangle>
 				<reportElement x="269" y="32" width="23" height="13" backcolor="#999999"/>
@@ -566,18 +566,12 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 				<reportElement x="365" y="141" width="23" height="13" backcolor="#999999"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="5" y="188" width="133" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="2" y="168" width="133" height="20"/>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[COMENTARIO (Opcional)]]></text>
 			</staticText>
-			<line>
-				<reportElement x="139" y="207" width="416" height="1"/>
-			</line>
-			<line>
-				<reportElement x="1" y="222" width="554" height="1"/>
-			</line>
 			<rectangle>
 				<reportElement x="456" y="165" width="100" height="20"/>
 			</rectangle>
@@ -1029,19 +1023,13 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 			<rectangle>
 				<reportElement x="1" y="480" width="555" height="53"/>
 			</rectangle>
-			<line>
-				<reportElement x="1" y="512" width="555" height="1"/>
-			</line>
 			<staticText>
-				<reportElement x="7" y="480" width="133" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="1" y="460" width="133" height="20"/>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[COMENTARIO (Opcional)]]></text>
 			</staticText>
-			<line>
-				<reportElement x="140" y="497" width="416" height="1"/>
-			</line>
 			<staticText>
 				<reportElement x="540" y="31" width="8" height="14"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -1514,34 +1502,14 @@ Firma de]]></text>
 				<reportElement x="432" y="533" width="116" height="20"/>
 			</rectangle>
 			<textField>
-				<reportElement x="5" y="205" width="547" height="20"/>
+				<reportElement x="2" y="188" width="554" height="48"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOTARORGANI}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="140" y="480" width="415" height="17"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{NARESPO}.toString()]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="140" y="188" width="409" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{NAORGANI}.toString()]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="1" y="224" width="552" height="17"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{NA1ORGANI}.toString()]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="7" y="495" width="545" height="20"/>
+				<reportElement x="0" y="480" width="556" height="53"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOTARESPO}.toString()]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="2" y="513" width="554" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{NA1RESPO}.toString()]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

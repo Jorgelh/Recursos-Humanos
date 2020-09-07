@@ -48,6 +48,33 @@ public class ConsultasEmpleados {
         return list;
 }
     
+public static ArrayList<ListaMaestro> ListarEmpleadosdeBaja(String codigo, String nombre) {
+    return SQLempleadosbaja("select codigo,nombres,puesto,decode(departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACIO / MANTENIMIENTO') as departamento from alistaempleados where  UPPER(codigo) LIKE UPPER('"+codigo+"%') and UPPER(nombres) LIKE UPPER('"+nombre+"%') and estado = 2");
+    }
+    
+    private static ArrayList<ListaMaestro> SQLempleadosbaja(String sql1){
+    ArrayList<ListaMaestro> list = new ArrayList<ListaMaestro>();
+    Connection cn = BD.getConnection();
+        try {
+            ListaMaestro t;
+            Statement stmt = cn.createStatement();
+            ResultSet r = stmt.executeQuery(sql1);
+            while (r.next()){
+                 t = new ListaMaestro();
+                 t.setCODIGO(r.getInt("codigo"));
+                 t.setNOMBRES(r.getString("nombres"));
+                 t.setPUESTO(r.getString("puesto"));
+                 t.setDepto(r.getString("departamento"));
+                 list.add(t);
+            }
+            cn.close();
+        } catch (Exception e) {
+            System.out.println("error consulta"+e);
+            return null;
+        } 
+        return list;
+}    
+    
     
     
     

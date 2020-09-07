@@ -154,7 +154,7 @@ public class IngresoEmpleado {
         try {
             PreparedStatement ps = null;
 
-            ps = cnn.prepareStatement("select id_listaempleados,CODIGO,NOMBRES,APELLIDOS,to_char(F_NACIMIENTO,'dd/mm/yyyy') as F_NACIMIENTO,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,CORREO_ELECTRO,ESTUDIOS_ULTIMOS,ESTUDIOS_ACTUALES,IGSS,IRTRA,ESTADO_CIVIL,DECODE(SEXO,'F','FEMENINO','M','MASCULINO') AS SEXO,CUENTA_BANCO,DECODE(DEPARTAMENTO,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MATENIMIENTO') AS DEPTO,PUESTO,to_char(FECHA_INGRESO,'dd/mm/yy') as FECHA_INGRESO,ORDINARIO,BONIFICACION,DISCAPACIDAD,TIPODISCA,NIVELACADEMICO,EVALUADOPOR FROM alistaempleados  where codigo = ?");
+            ps = cnn.prepareStatement("select id_listaempleados,CODIGO,NOMBRES,APELLIDOS,to_char(F_NACIMIENTO,'dd/mm/yyyy') as F_NACIMIENTO,to_char(FECHA_BAJA,'dd/mm/yyyy') as FECHABAJA ,MOTIVO_BAJA,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,CORREO_ELECTRO,ESTUDIOS_ULTIMOS,ESTUDIOS_ACTUALES,IGSS,IRTRA,ESTADO_CIVIL,DECODE(SEXO,'F','FEMENINO','M','MASCULINO') AS SEXO,CUENTA_BANCO,DECODE(DEPARTAMENTO,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MATENIMIENTO') AS DEPTO,PUESTO,to_char(FECHA_INGRESO,'dd/mm/yy') as FECHA_INGRESO,ORDINARIO,BONIFICACION,DISCAPACIDAD,TIPODISCA,NIVELACADEMICO,EVALUADOPOR FROM alistaempleados  where codigo = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -190,6 +190,8 @@ public class IngresoEmpleado {
                 p.setTipoDiscapa(rs.getString("TIPODISCA"));
                 p.setNivelAcademico(rs.getString("NIVELACADEMICO"));
                 p.setEvaluadopor(rs.getInt("EVALUADOPOR"));
+                p.setFechadebaja(rs.getString("FECHABAJA"));
+                p.setMOTIVO_BAJA(rs.getString("MOTIVO_BAJA"));
                 cnn.close();
                 ps.close();
                 return p;
@@ -204,9 +206,22 @@ public class IngresoEmpleado {
         return null;
 
     }
-    
-    
-    
-    
+
+  
+    public static boolean DardeBajaEmpleado(ListaMaestro t) throws SQLException{
+        Connection cn = BD.getConnection();
+        PreparedStatement ps = null;
+        ps = cn.prepareStatement("UPDATE ALISTAEMPLEADOS SET FECHA_BAJA = ?,MOTIVO_BAJA = ?,ESTADO = 2 WHERE CODIGO ="+t.getCODIGO());
+        ps.setDate(1,new java.sql.Date(t.getFECHA_BAJA().getTime()));    
+        ps.setString(2, t.getMOTIVO_BAJA());
+        int rowsUpdated = ps.executeUpdate();
+        cn.close();
+        ps.close();
+        if (rowsUpdated > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
 }

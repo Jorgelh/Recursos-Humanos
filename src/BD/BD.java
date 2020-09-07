@@ -19,10 +19,10 @@ public class BD {
         Connection cn = null;
         try {
             Class.forName("oracle.jdbc.OracleDriver");
-            /*String url = "jdbc:oracle:thin:@192.168.0.2:1521:orcl";
+            String url = "jdbc:oracle:thin:@192.168.0.2:1521:orcl";
             String user = "rrhh";
-            String password = "campana";*/
-            String url = "jdbc:oracle:thin:@192.168.0.39:1521:xe";
+            String password = "campana";
+            /*String url = "jdbc:oracle:thin:@192.168.0.39:1521:xe";
             String user = "rrhh";
             String password = "campana";
             /*String url = "jdbc:oracle:thin:@localhost:1521:xe";

@@ -151,6 +151,8 @@ public class ImpresionEvaluacionesSuper extends javax.swing.JInternalFrame {
             JasperViewer view4 = new JasperViewer(print4,false);
             view.setVisible(true);
             view2.setVisible(true);
+            view3.setVisible(true);
+            view4.setVisible(true);
         } catch (Exception e) {System.out.println("F"+e);
            JOptionPane.showMessageDialog(null, "ERROR EJECUTAR REPORTES =  "+e);
         }
@@ -365,8 +367,6 @@ public class ImpresionEvaluacionesSuper extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
     private void ListarCodigosNoImprime(){
         ArrayList<ClassEvaluacionSupervisores> result1 = BDEvaluacionReportesImpresionesSuper.ListarEvaluacionesNoImprimir(Codigotxt.getText(),depto,face.getText(),evaluacion.getText());
         Listar(result1);  
