@@ -220,7 +220,7 @@ public class BuscarCodigoSuper extends javax.swing.JInternalFrame {
 
         DEPAR.setEditable(true);
         DEPAR.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "ADMINISTRACION", "GERENCIA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO" }));
+        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "ADMINISTRACION", "GERENCIA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO", "MOLDING" }));
         DEPAR.setEnabled(false);
         DEPAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,7 +347,7 @@ public class BuscarCodigoSuper extends javax.swing.JInternalFrame {
         TableColumn columna7 = Evaluaciones.getColumn("#EVALUACION");
         columna7.setPreferredWidth(35);
         TableColumn columna8 = Evaluaciones.getColumn("FASE");
-        columna8.setPreferredWidth(35);
+        columna8.setPreferredWidth(35); 
     }
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
@@ -396,7 +396,10 @@ public class BuscarCodigoSuper extends javax.swing.JInternalFrame {
             depto = 9;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO")) {
             depto = 10;
-        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")) {
+        }else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("MOLDING")){
+           depto = 11;
+        } 
+        else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")) {
             depto = 0;
         }
         System.out.println(depto);

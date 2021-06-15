@@ -207,7 +207,7 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
 
         DEPAR.setEditable(true);
         DEPAR.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "ADMINISTRACION", "GERENCIA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO" }));
+        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "ADMINISTRACION", "GERENCIA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO", "MOLDING" }));
         DEPAR.setEnabled(false);
         DEPAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,7 +375,10 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
             depto = 9;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO")){
            depto = 10;
-        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){depto = 0;}
+        }else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("MOLDING")){
+           depto = 11;
+        } 
+        else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){depto = 0;}
         System.out.println(depto);
         ListarCodigosTerminados();
 

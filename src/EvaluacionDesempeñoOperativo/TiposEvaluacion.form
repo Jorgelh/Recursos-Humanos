@@ -101,10 +101,10 @@
                       </Group>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="responsabilidad" pref="163" max="32767" attributes="0"/>
+                          <Component id="responsabilidad" max="32767" attributes="0"/>
                           <Component id="orientacionResultados" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="8" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

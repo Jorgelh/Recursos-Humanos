@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.6105100000000103"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="648"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\jluis\\Documents\\NetBeansProjects\\Recursos-Humanos\\src\\EvaluacionAnual\\"]]></defaultValueExpression>
 	</parameter>
@@ -22,7 +22,7 @@
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados = $P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,50),
+,50.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
@@ -35,7 +35,7 @@ DECODE(greatest(
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,65),
+,65.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
@@ -48,7 +48,7 @@ DECODE(greatest(
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,84),
+,84.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
@@ -79,7 +79,7 @@ DECODE(greatest(
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,50),
+,50.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
@@ -92,7 +92,7 @@ DECODE(greatest(
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,65),
+,65.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
@@ -105,7 +105,7 @@ DECODE(greatest(
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,84),
+,84.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
@@ -137,7 +137,7 @@ DECODE(greatest(
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,50),
+,50.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
@@ -150,7 +150,7 @@ DECODE(greatest(
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,65),
+,65.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
@@ -163,7 +163,7 @@ DECODE(greatest(
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,84),
+,84.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
@@ -194,7 +194,7 @@ DECODE(greatest(
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,50),
+,50.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad o  on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
@@ -207,7 +207,7 @@ DECODE(greatest(
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,65),
+,65.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
@@ -220,7 +220,7 @@ DECODE(greatest(
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-,84),
+,84.99),
 ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad o on b.id_evaluacion = o.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))

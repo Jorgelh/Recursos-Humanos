@@ -53,7 +53,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
 
     private void actualizarEstado() {
 
-        System.out.println("FE " + FechaProxima);
+        //System.out.println("FE " + FechaProxima);
 
         if (estado1 == 1 && estado2 == 1 && estado3 == 1 && estado4 == 1) {
 
@@ -83,8 +83,8 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
                 Connection con = BD.getConnection();
                 Statement stmt = con.createStatement();
                 Statement st = con.createStatement();
-                ResultSet rs = stmt.executeQuery("update BEVALUACION_DESEMPENO set estado = 2 where tipo = 1 and id_evaluacion =" + id_evaluacion);
-                ResultSet r = st.executeQuery("update BEVALUACION_DESEMPENO set estado = 1,fecha = '" + FechaProxima + "' where tipo = 1 and estado = 0 and id_listaempleados =" + id_listaempleados + "  and face = " + (face + 1) + " and evaluacion =" + no_evaluacion);
+                ResultSet rs = stmt.executeQuery("update BEVALUACION_DESEMPENO set estado = 2, SYSTEMDATE = to_date(SYSDATE,'dd/mm/yy') where tipo = 1 and id_evaluacion =" + id_evaluacion);
+                ResultSet r = st.executeQuery("update BEVALUACION_DESEMPENO set estado = 1,fecha = '" + FechaProxima + "',SYSTEMDATE = to_date(SYSDATE,'dd/mm/yy')  where tipo = 1 and estado = 0 and id_listaempleados =" + id_listaempleados + "  and face = " + (face + 1) + " and evaluacion =" + no_evaluacion);
                 rs.close();
                 r.close();
                 stmt.close();
@@ -495,7 +495,7 @@ public class TiposEvaluacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_PUESTOActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        InicioEvaluacioOperativos tra = new InicioEvaluacioOperativos();
+        BuscarCodigo tra = new BuscarCodigo();
         Pane1.add(tra);
         Dimension desktopSize = Pane1.getSize();
         Dimension FrameSize = tra.getSize();

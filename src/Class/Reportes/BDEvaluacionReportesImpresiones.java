@@ -317,14 +317,15 @@ public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesImprimir(Str
                    
         return IMPRE("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,\n" +
 "E.PUESTO,TO_CHAR(V.FECHA,'dd/mm/yy') as FECHA,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE,v.evaluacion \n" +
-"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2 and tipo = 1 and upper(e.codigo) like upper('"+B+"%') and upper(v.face) like upper('"+a+"%') and upper(v.evaluacion) like upper('"+c+"%') and imprime = 2 order by v.id_evaluacion");
+"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2 and tipo = 1 and upper(e.codigo) like upper('"+B+"%') and upper(v.face) like upper('"+a+"%') and upper(v.evaluacion) like upper('"+c+"%')   and imprime = 2 order by v.id_evaluacion");
     }
 
-public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesNoImprimir(String B,int depto,String a,String c) {
+public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesNoImprimir(String B,int depto,String a,String c,String f,String d) {
                    
         return IMPRE("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO') as DEPTO,\n" +
 "E.PUESTO,TO_CHAR(V.FECHA,'dd/mm/yy') as FECHA,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE,v.evaluacion \n" +
-"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2 and tipo = 1 and upper(e.codigo) like upper('"+B+"%') and upper(v.face) like upper('"+a+"%') and upper(v.evaluacion) like upper('"+c+"%') and imprime = 1 order by v.id_evaluacion");
+"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 2 and tipo = 1 and upper(e.codigo) like upper('"+B+"%') and upper(v.face) like upper('"+a+"%') and upper(v.evaluacion) like upper('"+c+"%') and upper(v.fecha) like upper('"+f+"%') and "+
+" upper (decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO')) like upper('"+d+"%')   and imprime = 1 order by v.id_evaluacion");
     }
     private static ArrayList<ClassEvaluacionOperativo> IMPRE(String sql){
     ArrayList<ClassEvaluacionOperativo> list = new ArrayList<ClassEvaluacionOperativo>();

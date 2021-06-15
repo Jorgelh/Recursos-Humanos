@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.771561000000073"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="2.593742460100108"/>
+	<property name="ireport.x" value="681"/>
+	<property name="ireport.y" value="155"/>
 	<scriptlet name="scriptlet1" class="net.sf.jasperreports.engine.JRDefaultScriptlet"/>
 	<parameter name="ID" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select l.nombres||' '||l.apellidos as nombre,l.codigo,(select nombres from alistaempleados where codigo = e.evaluadopor) as Evaluado ,(select puesto from alistaempleados where codigo = e.evaluadopor) as cargo  ,l.puesto,
-DECODE(l.departamento,1,'INSPECCION VISUAL',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION / MANTENIMIENTO') AS DEPTO,
+DECODE(l.departamento,1,'INSPECCION VISUAL',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION / MANTENIMIENTO',11,'MOLDING') AS DEPTO,
 to_char(e.fecha,'MON-DD-YYYY')as FECHA, e.face,o.p1,o.p2,o.p3,o.p4,o.p5,o.p6,o.p7,o.p8,o.p9,o.p10,o.p11,o.p12,o.p13,o.p14,o.p15,o.p16,o.p17,o.p18,o.p19,o.p20,
 ROUND((o.p1+o.p2+o.p3+o.p4+o.p5+o.p6+o.p7+o.p8+o.p9+o.p10+o.p11+o.p12+o.p13+o.p14+o.p15+o.p16+o.p17+o.p18+o.p19+o.p20)/5,0) as PROMEDIO,
 t.p1 as t1,t.p2 as t2,t.p3 as t3,t.p4 as t4,t.p5 as t5,t.p6 as t6,t.p7 as t7,t.p8 as t8,t.p9 as t9,t.p10 as t10,t.p11 as t11,t.p12 as t12,t.p13 as t13,t.p14 as t14,t.p15 as t15,t.p16 as t16,t.p17 as t17,t.p18 as t18,t.p19 as t19,t.p20 as t20,
@@ -182,7 +182,7 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 				<reportElement x="18" y="2" width="554" height="51"/>
 			</rectangle>
 			<line>
-				<reportElement x="131" y="23" width="217" height="1"/>
+				<reportElement x="131" y="23" width="202" height="1"/>
 			</line>
 			<rectangle>
 				<reportElement x="18" y="57" width="209" height="49"/>
@@ -201,7 +201,7 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 				<reportElement x="501" y="60" width="71" height="26"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="354" y="8" width="44" height="16"/>
+				<reportElement x="336" y="8" width="44" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -248,7 +248,7 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 				<text><![CDATA[Puesto:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="93" y="44" width="255" height="1"/>
+				<reportElement x="93" y="44" width="240" height="1"/>
 			</line>
 			<staticText>
 				<reportElement x="22" y="30" width="71" height="15"/>
@@ -258,14 +258,14 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 				<text><![CDATA[Departamento:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="355" y="30" width="33" height="15"/>
+				<reportElement x="338" y="30" width="33" height="15"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="394" y="23" width="170" height="1"/>
+				<reportElement x="374" y="23" width="195" height="1"/>
 			</line>
 			<staticText>
 				<reportElement x="501" y="61" width="71" height="26"/>
@@ -273,10 +273,10 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 				<text><![CDATA[Destacado]]></text>
 			</staticText>
 			<line>
-				<reportElement x="389" y="44" width="82" height="1"/>
+				<reportElement x="374" y="44" width="97" height="1"/>
 			</line>
 			<line>
-				<reportElement x="507" y="45" width="57" height="1"/>
+				<reportElement x="507" y="45" width="62" height="1"/>
 			</line>
 			<staticText>
 				<reportElement x="284" y="59" width="70" height="27"/>
@@ -328,24 +328,24 @@ inner join alistaempleados l on l.id_listaempleados = e.id_listaempleados where 
 				<text><![CDATA[85 - 100]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="135" y="4" width="210" height="20"/>
+				<reportElement x="135" y="4" width="198" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMBRE}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="97" y="25" width="248" height="20"/>
+				<reportElement x="97" y="25" width="235" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEPTO}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="396" y="3" width="174" height="20"/>
+				<reportElement x="378" y="3" width="186" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{PUESTO}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="26" width="81" height="20"/>
+				<reportElement x="378" y="26" width="81" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{FECHA}.toString()]]></textFieldExpression>
 			</textField>

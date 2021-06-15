@@ -35,6 +35,8 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
      int idevaluacion;
      int depto = 10;
      int evalua;
+     String eva;
+     int control = 0;
      
     /**
      * Creates new form BuscarCodigo
@@ -42,7 +44,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
     public BuscarEvaluacionesTerminadas() {
         initComponents();
         selectusuario();
-        if (depto == 8) {DEPAR.setEnabled(true); }
+        if (control == 1) {DEPAR.setEnabled(true);fechaas.setEnabled(true); }
     }
      
     public void selectusuario() {
@@ -58,48 +60,49 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
                 9,'GERENCIA'*/
         String a = System.getProperty("user.name");//usar usuario de windows
         if (a.equals("jluis")) {
-            evalua = 367;
-            depto = 8;
+           
+            control = 1;
+           
         } //INFORMATICA
         else if (a.equals("Inspeccion")) {
-            evalua = 302;
+            eva = "302";
         }// INSPECCION
         else if (a.equals("testing")) {
-            evalua = 822;
+            eva = "822";
         } // TESTING
         else if (a.equals("deptochips")) {
-            evalua = 748;
+            eva = "748";
         }//CHIPS
         else if (a.equals("potting")) {
-            evalua = 781;
+            eva = "781";
         } //STRIP & POTTING
         else if (a.equals("ehernandez")) {
-            evalua = 533;
+            eva = "533";
         } //TRANSFORMADORES
         else if (a.equals("taller")) {
-            evalua = 348;
+            eva = "348,701";
         }//TALLE
         else if (a.equals("bodega")) {
-            evalua = 465;
+            eva = "465";
         }//BODEGA 
         else if (a.equals("amonroy")) {
-            evalua = 920;
-            depto = 8;
+          //  eva = "920";
+            control = 1;
         } //INFORMATICA
         else if (a.equals("ingenieria2")) {
-            evalua = 876;
+            eva = "876,465";
         } // CALIDAD 
         else if (a.equals("glemus")) {
-            evalua = 755;
+            eva = "755";
         }//SOTANO
         else if (a.equals("oecheverria")) {
-            evalua = 847;
+            eva = "847";
         }//SOTANO
         else if (a.equals("apacheco")) {
-            evalua = 833;
+            eva = "833";
         }//SOTANO
         else if (a.equals("emely")) {
-            evalua = 833;
+            eva = "833";
         }//SOTANO
         ListarCodigosTerminados();
     }
@@ -142,6 +145,8 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
         DEPAR = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        fechaas = new javax.swing.JTextField();
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -193,7 +198,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
         });
 
         DEPAR.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO" }));
+        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO", "MOLDING" }));
         DEPAR.setEnabled(false);
         DEPAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,30 +211,41 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
 
         jLabel4.setText("jLabel4");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("FECHA");
+
+        fechaas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        fechaas.setEnabled(false);
+        fechaas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fechaasKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Codigotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DEPAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(195, 195, 195)
                 .addComponent(jLabel4)
                 .addGap(64, 64, 64))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(Codigotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(fechaas, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(DEPAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,15 +254,21 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4))
-                .addGap(18, 51, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Codigotxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(DEPAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGap(21, 21, 21)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Codigotxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fechaas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DEPAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -266,7 +288,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
     
     
     private void ListarCodigosTerminados(){
-        ArrayList<ClassEvaluacionOperativo> result1 = BDEvaluacion.ListarEvaluacionesTerminadas(Codigotxt.getText(),evalua);
+        ArrayList<ClassEvaluacionOperativo> result1 = BDEvaluacion.ListarEvaluacionesTerminadas(Codigotxt.getText(),evalua,eva,fechaas.getText());
         Listar(result1);  
     }
      private void Listar(ArrayList<ClassEvaluacionOperativo> list1) {
@@ -315,7 +337,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
      }
      
       private void ListarCodigosTerminadosEvalua(){
-        ArrayList<ClassEvaluacionOperativo> result1 = BDEvaluacion.ListarEvaluacionesTerminadasEvalua(Codigotxt.getText(),depto);
+        ArrayList<ClassEvaluacionOperativo> result1 = BDEvaluacion.ListarEvaluacionesTerminadasEvalua(Codigotxt.getText(),depto,fechaas.getText());
         Listar1(result1);  
     }
      private void Listar1(ArrayList<ClassEvaluacionOperativo> list1) {
@@ -383,7 +405,11 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_EvaluacionesMouseClicked
 
     private void CodigotxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CodigotxtKeyReleased
-        ListarCodigosTerminados();
+         
+           if(control == 1)
+           {ListarCodigosTerminadosEvalua(); System.out.println("TEST1");
+           }else    
+           {ListarCodigosTerminados(); System.out.println("TEST2");}
     }//GEN-LAST:event_CodigotxtKeyReleased
 
     private void DEPARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DEPARActionPerformed
@@ -408,19 +434,28 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
         }else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO")){
            depto = 10;
         }
+        else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("MOLDING")){
+           depto = 11;
+        }
         else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){depto = 0;}
         ListarCodigosTerminadosEvalua();
 
     }//GEN-LAST:event_DEPARActionPerformed
 
+    private void fechaasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaasKeyReleased
+      ListarCodigosTerminadosEvalua();
+    }//GEN-LAST:event_fechaasKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Codigotxt;
     private javax.swing.JComboBox<String> DEPAR;
     private javax.swing.JTable Evaluaciones;
+    private javax.swing.JTextField fechaas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

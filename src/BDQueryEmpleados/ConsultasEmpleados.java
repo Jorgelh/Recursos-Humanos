@@ -22,7 +22,7 @@ public class ConsultasEmpleados {
     
     
     public static ArrayList<ListaMaestro> ListarEmpleados(String codigo, String nombre) {
-    return SQLtrabajos("select codigo,nombres,puesto,decode(departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACIO / MANTENIMIENTO') as departamento from alistaempleados where  UPPER(codigo) LIKE UPPER('"+codigo+"%') and UPPER(nombres) LIKE UPPER('"+nombre+"%') and estado = 1");
+    return SQLtrabajos("select codigo,nombres,puesto,decode(departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACIO / MANTENIMIENTO',11,'MOLDING') as departamento from alistaempleados where  UPPER(codigo) LIKE UPPER('"+codigo+"%') and UPPER(nombres) LIKE UPPER('"+nombre+"%') and estado = 1 order by codigo");
     }
     
     private static ArrayList<ListaMaestro> SQLtrabajos(String sql1){
@@ -49,7 +49,7 @@ public class ConsultasEmpleados {
 }
     
 public static ArrayList<ListaMaestro> ListarEmpleadosdeBaja(String codigo, String nombre) {
-    return SQLempleadosbaja("select codigo,nombres,puesto,decode(departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACIO / MANTENIMIENTO') as departamento from alistaempleados where  UPPER(codigo) LIKE UPPER('"+codigo+"%') and UPPER(nombres) LIKE UPPER('"+nombre+"%') and estado = 2");
+    return SQLempleadosbaja("select codigo,nombres,puesto,decode(departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACIO / MANTENIMIENTO',11,'MOLDING') as departamento from alistaempleados where  UPPER(codigo) LIKE UPPER('"+codigo+"%') and UPPER(nombres) LIKE UPPER('"+nombre+"%') and estado = 2");
     }
     
     private static ArrayList<ListaMaestro> SQLempleadosbaja(String sql1){
@@ -89,7 +89,7 @@ public static ArrayList<ListaMaestro> ListarEmpleadosdeBaja(String codigo, Strin
         try {
             PreparedStatement ps = null;
 
-            ps = cnn.prepareStatement("select id_listaempleados,CODIGO,NOMBRES,APELLIDOS,to_char(F_NACIMIENTO,'dd/mm/yy') as F_NACIMIENTO,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,CORREO_ELECTRO,ESTUDIOS_ULTIMOS,IGSS,IRTRA,ESTADO_CIVIL,SEXO,CUENTA_BANCO,DECODE(DEPARTAMENTO,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MATENIMIENTO') AS DEPTO,PUESTO,to_char(FECHA_INGRESO,'dd/mm/yy') as FECHA_INGRESO,ORDINARIO,BONIFICACION,DISCAPACIDAD,TIPODISCA,NIVELACADEMICO,EVALUADOPOR FROM alistaempleados  where codigo = ?");
+            ps = cnn.prepareStatement("select id_listaempleados,CODIGO,NOMBRES,APELLIDOS,to_char(F_NACIMIENTO,'dd/mm/yy') as F_NACIMIENTO,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,CORREO_ELECTRO,ESTUDIOS_ULTIMOS,IGSS,IRTRA,ESTADO_CIVIL,SEXO,CUENTA_BANCO,DECODE(DEPARTAMENTO,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MATENIMIENTO',11,'MOLDING') AS DEPTO,PUESTO,to_char(FECHA_INGRESO,'dd/mm/yy') as FECHA_INGRESO,ORDINARIO,BONIFICACION,DISCAPACIDAD,TIPODISCA,NIVELACADEMICO,EVALUADOPOR FROM alistaempleados  where codigo = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {

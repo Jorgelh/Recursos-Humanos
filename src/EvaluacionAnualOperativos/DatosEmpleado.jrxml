@@ -10,7 +10,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select a.nombres,a.codigo,DECODE(b.depto,1,'INSPECCION VISUAL',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION / MANTENIMIENTO') AS DEPTO,a.puesto,to_char(b.fecha,'MON-DD-YYYY')as FECHA from bevaluacion_desempeno b inner join alistaempleados a on b.id_listaempleados = a.id_listaempleados  where face = 3 and b.id_listaempleados = $P{ID} and evaluacion = $P{EVALUACION}]]>
+		<![CDATA[select a.nombres,a.codigo,DECODE(b.depto,1,'INSPECCION VISUAL',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION / MANTENIMIENTO',11,'MOLDING') AS DEPTO,a.puesto,to_char(b.fecha,'MON-DD-YYYY')as FECHA from bevaluacion_desempeno b inner join alistaempleados a on b.id_listaempleados = a.id_listaempleados  where face = 3 and b.id_listaempleados = $P{ID} and evaluacion = $P{EVALUACION}]]>
 	</queryString>
 	<field name="NOMBRES" class="java.lang.String"/>
 	<field name="CODIGO" class="java.math.BigDecimal"/>

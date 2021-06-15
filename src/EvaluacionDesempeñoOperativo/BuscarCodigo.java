@@ -36,6 +36,7 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
     int depto = 10;
     int deptousuario = 0;
     int evalua=1;
+    String eva;
 
     /**
      * Creates new form BuscarCodigo
@@ -62,50 +63,55 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
                 9,'GERENCIA'*/
         String a = System.getProperty("user.name");//usar usuario de windows
         if (a.equals("jluis")) {
-            evalua = 367;
-            depto = 8;
-            deptousuario = 8;
-        } //INFORMATICA
+              
+           //eva = "920";
+            
+          // eva = "348,701";
+           depto = 8;
+           deptousuario = 8;
+            //eva = "302";
+        }   //INFORMATICA
+       
         else if (a.equals("Inspeccion")) {
-            evalua = 302;
+            eva = "302";
         }// INSPECCION
         else if (a.equals("testing")) {
-            evalua = 822;
+            eva = "822";
         } // TESTING
         else if (a.equals("deptochips")) {
-            evalua = 748;
+            eva = "748";
         }//CHIPS
         else if (a.equals("potting")) {
-            evalua = 781;
+            eva = "781";
         } //STRIP & POTTING
         else if (a.equals("ehernandez")) {
-            evalua = 533;
+            eva = "533";
         } //TRANSFORMADORES
         else if (a.equals("taller")) {
-            evalua = 348;
+            eva = "348,701";
         }//TALLE
         else if (a.equals("bodega")) {
-            evalua = 465;
+            eva = "465";
         }//BODEGA 
         else if (a.equals("amonroy")) {
-            evalua = 920;
+            //eva = "920";
             depto = 8;
             deptousuario = 8;
         } //INFORMATICA
         else if (a.equals("ingenieria2")) {
-            evalua = 876;
-        } // CALIDAD 
+            eva = "876,465";
+        }// CALIDAD 
         else if (a.equals("glemus")) {
-            evalua = 755;
+            eva = "755";
         }//SOTANO
         else if (a.equals("oecheverria")) {
-            evalua = 847;
+            eva = "847";
         }//SOTANO
         else if (a.equals("apacheco")) {
-            evalua = 833;
+            eva = "833";
         }//SOTANO
         else if (a.equals("emely")) {
-            evalua = 833;
+            eva = "833";
         }//SOTANO
         ListarCodigosPendientesEvalua();
     }
@@ -212,7 +218,7 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
         jLabel3.setText("DEPARTAMENTO");
 
         DEPAR.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "ADMINISTRACION", "GERENCIA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO" }));
+        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "ADMINISTRACION", "GERENCIA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO", "MOLDING" }));
         DEPAR.setEnabled(false);
         DEPAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,7 +247,7 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel2)
@@ -295,7 +301,7 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
     }
     
     private void ListarCodigosPendientesEvalua() {
-        ArrayList<ClassEvaluacionOperativo> result2 = BDEvaluacion.ListarEvaluacionesPendientesEvalua(Codigotxt.getText(), evalua);
+        ArrayList<ClassEvaluacionOperativo> result2 = BDEvaluacion.ListarEvaluacionesPendientesEvalua(Codigotxt.getText(), evalua,eva);
         Listar(result2);
     }
 
@@ -364,7 +370,12 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_EvaluacionesMouseClicked
 
     private void CodigotxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CodigotxtKeyReleased
-        ListarCodigosPendientes();
+       
+        if(deptousuario == 8){
+            ListarCodigosPendientes();
+        }else{
+        ListarCodigosPendientesEvalua();
+        }
     }//GEN-LAST:event_CodigotxtKeyReleased
 
     private void DEPARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DEPARActionPerformed
@@ -388,7 +399,10 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
             depto = 9;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO")) {
             depto = 10;
-        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")) {
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("MOLDING")) { 
+            depto = 11;
+        }
+        else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){
             depto = 0;
         }
         ListarCodigosPendientes();

@@ -202,7 +202,7 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="11">
+              <StringArray count="12">
                 <StringItem index="0" value="SELECCIONAR..."/>
                 <StringItem index="1" value="INSPECCION"/>
                 <StringItem index="2" value="TESTING"/>
@@ -214,6 +214,7 @@
                 <StringItem index="8" value="ADMINISTRACION"/>
                 <StringItem index="9" value="GERENCIA"/>
                 <StringItem index="10" value="TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO"/>
+                <StringItem index="11" value="MOLDING"/>
               </StringArray>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>

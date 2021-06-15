@@ -22,6 +22,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import Formularios_Maestro_empleados.IncioMaestro;
 import ImpresionDocumentos.ImpresionDoc;
+import Indicadores.Indicadores;
 import PRESTACIONES.CalculoIndemnización;
 
 /**
@@ -94,6 +95,7 @@ public class Inicio extends javax.swing.JFrame {
         evaluaciones = new javax.swing.JMenu();
         operativos = new javax.swing.JMenuItem();
         supervisores = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
         registros = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -250,6 +252,16 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         evaluaciones.add(supervisores);
+
+        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1481834876_tick_16.png"))); // NOI18N
+        jMenuItem14.setText("INDICADOR EVALUACIONES");
+        jMenuItem14.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        evaluaciones.add(jMenuItem14);
 
         jMenuBar1.add(evaluaciones);
 
@@ -466,6 +478,15 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        Indicadores tra = new Indicadores();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -525,6 +546,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

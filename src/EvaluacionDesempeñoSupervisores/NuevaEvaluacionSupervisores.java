@@ -213,7 +213,9 @@ public class NuevaEvaluacionSupervisores extends javax.swing.JInternalFrame {
 
     private void guardarEvaluacion() {
         try {
+            departamento();
             ValidarNodeEvaluacion();
+            
             ClassEvaluacionSupervisores l = new ClassEvaluacionSupervisores();
             l.setId_listaempleados(idlistaempleado);
             l.setFace(face);

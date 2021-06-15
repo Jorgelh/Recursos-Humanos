@@ -58,7 +58,7 @@
                           <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
@@ -370,7 +370,7 @@
                 <Component class="javax.swing.JComboBox" name="depar">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="11">
+                      <StringArray count="12">
                         <StringItem index="0" value="SELECCIONAR..."/>
                         <StringItem index="1" value="INSPECCION"/>
                         <StringItem index="2" value="TESTING"/>
@@ -382,6 +382,7 @@
                         <StringItem index="8" value="ADMINISTRACION"/>
                         <StringItem index="9" value="GERENCIA"/>
                         <StringItem index="10" value="TECNOLOGIA DE LA INFORMACION/MATENIMIENTO"/>
+                        <StringItem index="11" value="MOLDING"/>
                       </StringArray>
                     </Property>
                   </Properties>
