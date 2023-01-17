@@ -69,14 +69,14 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
           // eva = "348,701";
            depto = 8;
            deptousuario = 8;
-            //eva = "302";
+           // eva = "533";
         }   //INFORMATICA
        
         else if (a.equals("Inspeccion")) {
             eva = "302";
         }// INSPECCION
         else if (a.equals("testing")) {
-            eva = "822";
+            eva = "661";
         } // TESTING
         else if (a.equals("deptochips")) {
             eva = "748";
@@ -112,6 +112,9 @@ public class BuscarCodigo extends javax.swing.JInternalFrame {
         }//SOTANO
         else if (a.equals("emely")) {
             eva = "833";
+        }//SOTANO
+        else if (a.equals("calidad")) {
+            depto = 8;
         }//SOTANO
         ListarCodigosPendientesEvalua();
     }

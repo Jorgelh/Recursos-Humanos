@@ -104,6 +104,9 @@ public class BuscarEvaluacionesAnualesTerminadas extends javax.swing.JInternalFr
         else if (a.equals("emely")) {
             evalua = 833;
         }//SOTANO
+        else if (a.equals("calidad")) {
+            depto = 8;
+        }//SOTANO
         ListarEvaluacionesAnualesTerminados();
     }
     

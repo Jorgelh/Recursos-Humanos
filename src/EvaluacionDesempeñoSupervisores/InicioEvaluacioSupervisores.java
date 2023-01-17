@@ -44,7 +44,10 @@ public class InicioEvaluacioSupervisores extends javax.swing.JInternalFrame {
         }// INSPECCION
         else if (a.equals("glemus")) {
            usuario = 8;
-        } // TESTING
+        } // conta
+        else if (a.equals("calidad")) {
+           usuario = 8;
+        } 
 
 }
   

@@ -105,6 +105,9 @@ public class BuscarEvaluacionesAnualesTerminadasSuper extends javax.swing.JInter
         else if (a.equals("emely")) {
             evalua = 833;
         }//SOTANO
+         else if (a.equals("calidad")) {
+            depto = 8;
+        }//SOTANO
         ListarEvaluacionesAnualesTerminados();
     }
     

@@ -63,12 +63,13 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
            
             control = 1;
            
+          
         } //INFORMATICA
         else if (a.equals("Inspeccion")) {
             eva = "302";
         }// INSPECCION
         else if (a.equals("testing")) {
-            eva = "822";
+            eva = "661,822";
         } // TESTING
         else if (a.equals("deptochips")) {
             eva = "748";
@@ -103,6 +104,9 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
         }//SOTANO
         else if (a.equals("emely")) {
             eva = "833";
+        }//SOTANO
+        else if (a.equals("calidad")) {
+            control = 1;
         }//SOTANO
         ListarCodigosTerminados();
     }
@@ -198,7 +202,7 @@ public class BuscarEvaluacionesTerminadas extends javax.swing.JInternalFrame {
         });
 
         DEPAR.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO", "MOLDING" }));
+        DEPAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "INSPECCION", "TESTING", "CHIPS", "SOLDER DIP, STRIP & POTTING", "TRANSFORMADORES", "TALLER", "BODEGA", "ADMINISTRACION", "TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO", "MOLDING" }));
         DEPAR.setEnabled(false);
         DEPAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

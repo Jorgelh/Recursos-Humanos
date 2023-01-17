@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.9487171000000019"/>
-	<property name="ireport.x" value="12"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="ID" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -10,124 +10,158 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select round(((((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)) 
-         +
+		<![CDATA[select round(((
          ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
         +
-        ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+       
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-        +
-        ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+		+	
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
         (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)))/4),2)
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		)/4),2)
         as total,
- case when (select round(((((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)) 
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)))/4),2)
-                from dual) >=0 AND 
+		
+      case when (select round(((
+		
+         ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+        +
+        
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		
+		)/4),2)from dual) >=0 AND 
                 
-                (select round(((((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)) 
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =6 and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)))/4),2)from dual)
-                <=50 THEN 'DECISION DE ALTA DIRECCION'  
-                WHEN
-                (select round(((((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)) 
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)))/4),2)
-                from dual) >=51 AND 
-                
-                (select round(((((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)) 
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)))/4),2)from dual)
-                <=65 THEN 'CAPACITACION PARA MEJORA DE RENDIMIENTO'
-                 WHEN
-                 (select round(((((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)) 
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)))/4),2)
-                from dual) >=66 AND 
-                
-                (select round(((((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)) 
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
-                +
-                ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
-                (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3)))/4),2)from dual)
-                <=100 THEN 'APROBADO'
-                END AS RESULTADO
+        (select round(((
+		
+         ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+       
+        +
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		)/4),2) from dual)<=50 THEN 'DECISION DE ALTA DIRECCION'  
+        WHEN
+        (select round(((
+        ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+        +
+        
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))		
+		)/4),2)from dual)
+	     >=51 AND 
+         
+         (select round(((
+		
+         ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+        +
+       
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		
+		)/4),2)from dual)
+        <=65 THEN 'CAPACITACION PARA MEJORA DE RENDIMIENTO'
+         WHEN
+         (select round(((
+		
+         ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+        +
+       
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+	
+		)/4),2)from dual)
+		>=66 AND     
+        (select round(((
+		
+         ((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join borientacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+        +
+        
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join dtrabajo_equipo d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join eorganizacion d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+		+
+		
+		((select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.2 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 1) +
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.3 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 2)+
+        (select (p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15+p16+p17+p18+p19+p20)/5*0.5 as total from bevaluacion_desempeno b inner join gresponsabilidad d on b.id_evaluacion = d.id_evaluacion where b.id_listaempleados =$P{ID} and b.evaluacion = $P{EVALUACION} and b.face = 3))
+				
+		)/4),2)from dual)
+         <=100 THEN 'APROBADO'
+				END AS RESULTADO
                 FROM DUAL]]>
 	</queryString>
 	<field name="TOTAL" class="java.math.BigDecimal"/>

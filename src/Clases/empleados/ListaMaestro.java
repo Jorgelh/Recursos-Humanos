@@ -52,7 +52,15 @@ private String TipoDiscapa;
 private String NivelAcademico;
 private int evaluadopor;
 private String fechadebaja;
+private int marcaje;
 
+    public int getMarcaje() {
+        return marcaje;
+    }
+
+    public void setMarcaje(int marcaje) {
+        this.marcaje = marcaje;
+    }
     public String getFechadebaja() {
         return fechadebaja;
     }

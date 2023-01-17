@@ -134,6 +134,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         LabelFoto = new javax.swing.JLabel();
+        MARCAJE = new javax.swing.JCheckBox();
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -701,6 +702,8 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
                     .addContainerGap()))
         );
 
+        MARCAJE.setText("MARCAJE");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -710,11 +713,16 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(MARCAJE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -729,18 +737,21 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(MARCAJE)
+                        .addGap(49, 49, 49))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -802,6 +813,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
             NivelAcademico.setText(p.getNivelAcademico());
             discapa.setText(p.getTipoDiscapa());
             evaluadopor.setText(String.valueOf(p.getEvaluadopor()));
+            if(p.getMarcaje() == 1){MARCAJE.setSelected(true);}else{MARCAJE.setSelected(false);}
             if(p.getDiscapacidad() == 1){Discapa.setSelectedItem("SI");}else if(p.getDiscapacidad() == 2){Discapa.setSelectedItem("NO");}else{Discapa.setSelectedItem("SELECCIONAR...");}
               try {
                 String sql = "select fotografia from alistaempleados where codigo = " + codigoin;
@@ -882,6 +894,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
             l.setEvaluadopor(Integer.parseInt(evaluadopor.getText()));
             l.setFOTOGRAFIA(foto);
             l.setLongitudBytes(longitudBytes);
+            if(MARCAJE.isSelected()){l.setMarcaje(1);}else{l.setMarcaje(2);}
             IngresoEmpleado.ActualizarEmpleado(l);
             JOptionPane.showMessageDialog(null, "EMPLEADO ACTUALIZADO...");
             limpiar();
@@ -921,7 +934,8 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
             l.setDiscapacidad(disca);
             l.setTipoDiscapa(discapa.getText());
             l.setNivelAcademico(NivelAcademico.getText());
-             l.setEvaluadopor(Integer.parseInt(evaluadopor.getText()));
+            l.setEvaluadopor(Integer.parseInt(evaluadopor.getText()));
+            if(MARCAJE.isSelected()){l.setMarcaje(1);}else{l.setMarcaje(2);}
             IngresoEmpleado.ActualizarEmpleadoSinfoto(l);
             JOptionPane.showMessageDialog(null, "EMPLEADO ACTUALIZADO...");
             limpiar();
@@ -1139,6 +1153,7 @@ public class FormularioMaestroEditar extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> Discapa;
     private javax.swing.JTextField EstadoCivil;
     private javax.swing.JLabel LabelFoto;
+    private javax.swing.JCheckBox MARCAJE;
     private javax.swing.JTextField NivelAcademico;
     private javax.swing.JTextField bonificacion;
     private javax.swing.JTextField codigo;

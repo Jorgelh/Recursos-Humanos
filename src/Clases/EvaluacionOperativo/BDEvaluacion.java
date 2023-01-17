@@ -108,7 +108,7 @@ public static ClassEvaluacionOperativo buscarEmpleado(int id) throws SQLExceptio
                    
         return SQL1("SELECT v.id_evaluacion,e.codigo,E.NOMBRES,E.APELLIDOS,decode(e.departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'SOLDER DIP, STRIP & POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MANTENIMIENTO',11,'MOLDING') as DEPTO,\n" +
 "E.PUESTO,TO_CHAR(V.FECHA,'MON-DD-YYYY') as FECHA,v.evaluacion,decode(v.face,1,'FASE 1',2,'FASE 2',3,'FASE 3') as FASE \n" +
-"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 1 and v.tipo = 1 and v.depto = "+depto+" and upper(e.codigo) like upper('"+a+"%') and v.systemdate<>to_date(sysdate,'dd/mm/yy') order by e.codigo");
+"FROM alistaempleados E INNER JOIN bevaluacion_desempeno V ON e.id_listaempleados = v.id_listaempleados where v.estado = 1 and v.tipo = 1 and v.depto = "+depto+" and upper(e.codigo) like upper('"+a+"%')  order by e.codigo"); //and v.systemdate<>to_date(sysdate,'dd/mm/yy')
     }
  
  public static ArrayList<ClassEvaluacionOperativo> ListarEvaluacionesPendientesEvalua(String a ,int evalua,String eva) {

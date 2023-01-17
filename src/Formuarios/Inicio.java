@@ -24,6 +24,12 @@ import Formularios_Maestro_empleados.IncioMaestro;
 import ImpresionDocumentos.ImpresionDoc;
 import Indicadores.Indicadores;
 import PRESTACIONES.CalculoIndemnización;
+import Reloj.Asistencia_Dia;
+import Reloj.Asistencia_Dia_Permisos;
+import Reloj.Faltas_Dia;
+import Reloj.HorasExtrasFecha;
+import Reloj.HorasExtrasPorEmpleado;
+import Reloj.ListadoGeneralAsistenciaRangoFechas;
 
 /**
  *
@@ -54,7 +60,7 @@ public class Inicio extends javax.swing.JFrame {
         String a = System.getProperty("user.name");//usar usuario de windows
         if (a.equals("jluis") || a.equals("amonroy") || a.equals("glemus")/* || a.equals("conta")||a.equals("oecheverria")||a.equals("apacheco")||a.equals("Emely")*/) {
             depto = 1;
-        } else if (a.equals("oecheverria")||a.equals("emely")) {
+        } else if (a.equals("oecheverria")||a.equals("emely")|| a.equals("calidad")) {
             depto = 2;
         }else{depto = 3;}
     }
@@ -92,6 +98,13 @@ public class Inicio extends javax.swing.JFrame {
         empleados = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuItem20 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
         evaluaciones = new javax.swing.JMenu();
         operativos = new javax.swing.JMenuItem();
         supervisores = new javax.swing.JMenuItem();
@@ -228,6 +241,65 @@ public class Inicio extends javax.swing.JFrame {
         empleados.add(jMenuItem12);
 
         jMenuBar1.add(empleados);
+
+        jMenu1.setText("RELOJ DE MARCAJE");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        jMenuItem15.setText("REPORTE FALTAS POR DIA");
+        jMenuItem15.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem15);
+
+        jMenuItem16.setText("ASISTENCIA POR DIA");
+        jMenuItem16.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem16);
+
+        jMenuItem20.setText("ASISTENCIA POR DIA INCOMPLETO");
+        jMenuItem20.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem20);
+
+        jMenuItem17.setText("HORAS EXTRAS POR DIA");
+        jMenuItem17.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem17);
+
+        jMenuItem18.setText("REPORTE INGRESO Y SALIDAS POR EMPLEADO");
+        jMenuItem18.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem18);
+
+        jMenuItem19.setText("REPORTE INGRESOS Y SALIDAS ");
+        jMenuItem19.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem19);
+
+        jMenuBar1.add(jMenu1);
 
         evaluaciones.setText("EVALUACIONES");
         evaluaciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -487,6 +559,60 @@ public class Inicio extends javax.swing.JFrame {
         tra.show();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        Faltas_Dia tra = new Faltas_Dia();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        Asistencia_Dia tra = new Asistencia_Dia();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        HorasExtrasFecha tra = new HorasExtrasFecha();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        HorasExtrasPorEmpleado tra = new HorasExtrasPorEmpleado();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        Asistencia_Dia_Permisos tra = new  Asistencia_Dia_Permisos();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        ListadoGeneralAsistenciaRangoFechas tra = new  ListadoGeneralAsistenciaRangoFechas();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -535,6 +661,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu evaluaciones;
     private javax.swing.JMenu gestiones;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu7;
@@ -547,7 +674,13 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

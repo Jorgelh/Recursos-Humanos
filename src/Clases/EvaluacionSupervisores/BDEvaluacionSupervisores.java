@@ -25,7 +25,7 @@ public class BDEvaluacionSupervisores {
         
         Connection cnn = BD.getConnection();
         PreparedStatement p = null;
-        p = cnn.prepareStatement("insert into BEVALUACION_DESEMPENO values(id_evaluacion.nextval,?,?,1,?,?,2,1,?,?)");
+        p = cnn.prepareStatement("insert into BEVALUACION_DESEMPENO values(id_evaluacion.nextval,?,?,1,?,?,2,1,?,?,sysdate)");
         p.setInt(1, c.getId_listaempleados());
         p.setDate(2, new java.sql.Date(c.getFecha().getTime()));
         p.setInt(3, c.getFace());

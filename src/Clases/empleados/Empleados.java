@@ -16,7 +16,16 @@ public class Empleados {
     private String puesto;
     private int estado;
     private int depto;
+    private String Departamento;
 
+    public String getDepartamento() {
+        return Departamento;
+    }
+
+    public void setDepartamento(String Departamento) {
+        this.Departamento = Departamento;
+    }
+    
     public int getDepto() {
         return depto;
     }

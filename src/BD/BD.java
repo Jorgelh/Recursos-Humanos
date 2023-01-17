@@ -19,17 +19,20 @@ public class BD {
         Connection cn = null;
         try {
             Class.forName("oracle.jdbc.OracleDriver");
+           
             String url = "jdbc:oracle:thin:@192.168.0.2:1521:orcl";
             String user = "rrhh";
             String password = "campana";
-            /*String url = "jdbc:oracle:thin:@192.168.0.39:1521:xe";
+            cn= DriverManager.getConnection(url, user, password);
+            /*String url = "jdbc:oracle:thin:@192.168.0.22:1521:xe";
             String user = "rrhh";
-            String password = "campana";
+            String password = "campana";*/
             /*String url = "jdbc:oracle:thin:@localhost:1521:xe";
             String user = "rrhh"; 
             String password = "campana";*/
             cn= DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException e) {
+            
             cn=null;
             JOptionPane.showMessageDialog(null,"ERROR DE CONEXION DE BASE DE DATOS CONTACTE AL ADMINISTRADOR DEL SISTEMA" +e);
         } catch (SQLException e) {

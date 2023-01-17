@@ -43,7 +43,9 @@ public class InicioEvaluacioOperativos extends javax.swing.JInternalFrame {
         else if (a.equals("glemus")) {
            usuario = 8;
         } // TESTING
-
+        else if (a.equals("calidad")) {
+           usuario = 8;
+        } 
 }
     
     /**

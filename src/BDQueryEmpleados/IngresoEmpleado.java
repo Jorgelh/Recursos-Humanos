@@ -26,8 +26,8 @@ public class IngresoEmpleado {
         p = cnn.prepareStatement("insert into ALISTAEMPLEADOS" 
                 + "(ID_LISTAEMPLEADOS,CODIGO,NOMBRES,APELLIDOS,F_NACIMIENTO,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,"
                 + " CORREO_ELECTRO,ESTUDIOS_ULTIMOS,IGSS,IRTRA,ESTADO_CIVIL,SEXO,CUENTA_BANCO,DEPARTAMENTO,PUESTO,"
-                + " FECHA_INGRESO,ORDINARIO,BONIFICACION,FOTOGRAFIA,DISCAPACIDAD,TIPODISCA,NIVELACADEMICO,ESTADO,EVALUADOPOR) "
-                + "values (IDEMPLEADO.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?)");
+                + " FECHA_INGRESO,ORDINARIO,BONIFICACION,FOTOGRAFIA,DISCAPACIDAD,TIPODISCA,NIVELACADEMICO,ESTADO,EVALUADOPOR,MARCAJE) "
+                + "values (IDEMPLEADO.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?)");
         p.setInt(1, c.getCODIGO());
         p.setString(2, c.getNOMBRES());
         p.setString(3, c.getAPELLIDOS());
@@ -55,6 +55,7 @@ public class IngresoEmpleado {
         p.setString(25, c.getTipoDiscapa());
         p.setString(26, c.getNivelAcademico());
         p.setInt(27, c.getEvaluadopor());
+        p.setInt(28, c.getMarcaje());
         p.executeUpdate();
         cnn.close();
         p.close();
@@ -68,7 +69,7 @@ public class IngresoEmpleado {
         PreparedStatement p = null;
         p = cnn.prepareStatement("update ALISTAEMPLEADOS set CODIGO =?, NOMBRES = ?,APELLIDOS = ?,F_NACIMIENTO = ?,DPI = ?,DPIEXTENDIDO = ?,DIRECCION = ?,NIT = ?,TELEFONO = ?,T_SANGRE = ?,"
                 + " CORREO_ELECTRO = ?,ESTUDIOS_ULTIMOS = ?,IGSS = ?,IRTRA = ?,ESTADO_CIVIL = ?,SEXO = ?,CUENTA_BANCO = ?,DEPARTAMENTO = ?,PUESTO = ?,"
-                + " FECHA_INGRESO = ?,ORDINARIO = ?,BONIFICACION = ?,FOTOGRAFIA = ?,DISCAPACIDAD = ?, TIPODISCA = ?, NIVELACADEMICO = ?,EVALUADOPOR = ? where id_listaempleados="+c.getID_LISTAEMPLEADOS());
+                + " FECHA_INGRESO = ?,ORDINARIO = ?,BONIFICACION = ?,FOTOGRAFIA = ?,DISCAPACIDAD = ?, TIPODISCA = ?, NIVELACADEMICO = ?,EVALUADOPOR = ?, MARCAJE = ? where id_listaempleados="+c.getID_LISTAEMPLEADOS());
         p.setInt(1, c.getCODIGO());
         p.setString(2, c.getNOMBRES());
         p.setString(3, c.getAPELLIDOS());
@@ -96,6 +97,7 @@ public class IngresoEmpleado {
         p.setString(25, c.getTipoDiscapa());
         p.setString(26, c.getNivelAcademico());
         p.setInt(27, c.getEvaluadopor());
+        p.setInt(28, c.getMarcaje());
         p.executeUpdate();
         cnn.close();
         p.close();
@@ -108,7 +110,7 @@ public class IngresoEmpleado {
         PreparedStatement p = null;
         p = cnn.prepareStatement("update ALISTAEMPLEADOS set CODIGO =?, NOMBRES = ?,APELLIDOS = ?,F_NACIMIENTO = ?,DPI = ?,DPIEXTENDIDO = ?,DIRECCION = ?,NIT = ?,TELEFONO = ?,T_SANGRE = ?,"
                 + " CORREO_ELECTRO = ?,ESTUDIOS_ULTIMOS = ?,IGSS = ?,IRTRA = ?,ESTADO_CIVIL = ?,SEXO = ?,CUENTA_BANCO = ?,DEPARTAMENTO = ?,PUESTO = ?,"
-                + " FECHA_INGRESO = ?,ORDINARIO = ?,BONIFICACION = ? ,DISCAPACIDAD = ?,TIPODISCA = ?, NIVELACADEMICO = ?, EVALUADOPOR = ? where id_listaempleados="+c.getID_LISTAEMPLEADOS());
+                + " FECHA_INGRESO = ?,ORDINARIO = ?,BONIFICACION = ? ,DISCAPACIDAD = ?,TIPODISCA = ?, NIVELACADEMICO = ?, EVALUADOPOR = ?, MARCAJE = ? where id_listaempleados="+c.getID_LISTAEMPLEADOS());
         p.setInt(1, c.getCODIGO());
         p.setString(2, c.getNOMBRES());
         p.setString(3, c.getAPELLIDOS());
@@ -135,6 +137,7 @@ public class IngresoEmpleado {
         p.setString(24, c.getTipoDiscapa());
         p.setString(25, c.getNivelAcademico());
         p.setInt(26, c.getEvaluadopor());
+        p.setInt(27, c.getMarcaje());
         p.executeUpdate();
         cnn.close();
         p.close();
@@ -154,7 +157,12 @@ public class IngresoEmpleado {
         try {
             PreparedStatement ps = null;
 
-            ps = cnn.prepareStatement("select id_listaempleados,CODIGO,NOMBRES,APELLIDOS,to_char(F_NACIMIENTO,'dd/mm/yyyy') as F_NACIMIENTO,to_char(FECHA_BAJA,'dd/mm/yyyy') as FECHABAJA ,MOTIVO_BAJA,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,CORREO_ELECTRO,ESTUDIOS_ULTIMOS,ESTUDIOS_ACTUALES,IGSS,IRTRA,ESTADO_CIVIL,DECODE(SEXO,'F','FEMENINO','M','MASCULINO') AS SEXO,CUENTA_BANCO,DECODE(DEPARTAMENTO,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MATENIMIENTO',11,'MOLDING') AS DEPTO,PUESTO,to_char(FECHA_INGRESO,'dd/mm/yy') as FECHA_INGRESO,ORDINARIO,BONIFICACION,DISCAPACIDAD,TIPODISCA,NIVELACADEMICO,EVALUADOPOR FROM alistaempleados  where codigo = ?");
+            ps = cnn.prepareStatement("select id_listaempleados,CODIGO,NOMBRES,APELLIDOS,to_char(F_NACIMIENTO,'dd/mm/yyyy') as F_NACIMIENTO,to_char(FECHA_BAJA,'dd/mm/yyyy') as FECHABAJA ,"
+                    + "MOTIVO_BAJA,DPI,DPIEXTENDIDO,DIRECCION,NIT,TELEFONO,T_SANGRE,CORREO_ELECTRO,ESTUDIOS_ULTIMOS,ESTUDIOS_ACTUALES,IGSS,IRTRA,ESTADO_CIVIL,"
+                    + "DECODE(SEXO,'F','FEMENINO','M','MASCULINO') AS SEXO,CUENTA_BANCO,"
+                    + "DECODE(NVL(DEPARTAMENTO,0),0,'SELECCIONAR...',1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACION/MATENIMIENTO',11,'MOLDING') AS DEPTO,"
+                    + "PUESTO,to_char(FECHA_INGRESO,'dd/mm/yy') as FECHA_INGRESO,ORDINARIO,BONIFICACION,DISCAPACIDAD,TIPODISCA,NIVELACADEMICO,EVALUADOPOR,MARCAJE FROM alistaempleados  where codigo = ?");
+                        
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -192,6 +200,7 @@ public class IngresoEmpleado {
                 p.setEvaluadopor(rs.getInt("EVALUADOPOR"));
                 p.setFechadebaja(rs.getString("FECHABAJA"));
                 p.setMOTIVO_BAJA(rs.getString("MOTIVO_BAJA"));
+                p.setMarcaje(rs.getInt("MARCAJE"));
                 cnn.close();
                 ps.close();
                 return p;
@@ -211,7 +220,7 @@ public class IngresoEmpleado {
     public static boolean DardeBajaEmpleado(ListaMaestro t) throws SQLException{
         Connection cn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("UPDATE ALISTAEMPLEADOS SET FECHA_BAJA = ?,MOTIVO_BAJA = ?,ESTADO = 2 WHERE CODIGO ="+t.getCODIGO());
+        ps = cn.prepareStatement("UPDATE ALISTAEMPLEADOS SET FECHA_BAJA = ?,MOTIVO_BAJA = ?,ESTADO = 2,MARCAJE = 2 WHERE CODIGO ="+t.getCODIGO());
         ps.setDate(1,new java.sql.Date(t.getFECHA_BAJA().getTime()));    
         ps.setString(2, t.getMOTIVO_BAJA());
         int rowsUpdated = ps.executeUpdate();

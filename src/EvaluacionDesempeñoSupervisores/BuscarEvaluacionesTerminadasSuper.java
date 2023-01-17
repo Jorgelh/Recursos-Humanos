@@ -106,6 +106,9 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
         else if (a.equals("emely")) {
             evalua = 833;
         }//SOTANO
+        else if (a.equals("calidad")) {
+            depto = 8;
+        }//SOTANO
         ListarCodigosTerminadosEvalua();
     }
     
@@ -157,6 +160,7 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
         jLabel4 = new javax.swing.JLabel();
 
         setClosable(true);
+        setTitle("Evaluaciones terminadas Supervisores");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -361,7 +365,7 @@ public class BuscarEvaluacionesTerminadasSuper extends javax.swing.JInternalFram
             depto = 2;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("CHIPS")) {
             depto = 3;
-        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("STRIP Y POTTING")) {
+        } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("SOLDER DIP, STRIP & POTTING")) {
             depto = 4;
         } else if (DEPAR.getSelectedItem().toString().equalsIgnoreCase("TRANSFORMADORES")) {
             depto = 5;
