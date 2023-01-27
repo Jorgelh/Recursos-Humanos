@@ -130,7 +130,7 @@ public class ImpresionEvaluaciones extends javax.swing.JInternalFrame {
 
     private void ImprimeEva(){
         //id_evaluacion = (Integer.parseInt(String.valueOf(NoImprime.getModel().getValueAt(NoImprime.getSelectedRow(),0))));
-          BD con= new BD();
+         BD con= new BD();
          Connection conexion= con.getConnection();
         try {
             JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile("\\\\SRVANATEK\\Bases de Datos\\Sistema\\Recursos Humanos\\Reportes\\EvaluacionDesempeñoImprimir.jasper");

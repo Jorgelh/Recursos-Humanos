@@ -6,6 +6,7 @@
 package BDreloj;
 
 import BD.BD;
+import Clases.empleados.Empleados;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -203,8 +204,104 @@ public static void IngresoDatosRelojingresoEspecial(ClassReloj c) throws SQLExce
         ps.execute();
         cnn.close();
         ps.close();
-    }      
+    }
+
+public static ArrayList<Empleados> ListarEmpleadosCodigo(String f) {
+
+         //return consultanombreSQL("select codigo,nombre,puesto from empleados where upper(puesto) like upper('"+f+"%')");
+         return consultanombreSQL("select codigo,nombre,puesto from alistaempleados where  upper(codigo) like upper('"+f+"%') AND CARNET is null and estado = 1 and marcaje = 1");
+    }
+public static ArrayList<Empleados> ListarEmpleadosCarnet(String f, String a) {
+
+         return consultanombreSQL("select codigo,nombres,puesto from alistaempleados where  upper(NOMBRES) like upper('"+f+"%') and upper(codigo) like upper('"+a+"%') AND CARNET is null and estado = 1 and marcaje = 1");
+    }
+ public static ArrayList<Empleados> ListarEmpleadosAgregadosCarnet() {
+
+         //return consultanombreSQL("select codigo,nombre,puesto from empleados where upper(puesto) like upper('"+f+"%')");
+         return consultanombreSQL("select codigo,nombres,puesto from alistaempleados where CARNET = 1 and estado = 1");
+    }
+ 
+ private static ArrayList<Empleados> consultanombreSQL(String sql) {
+        ArrayList<Empleados> list = new ArrayList<Empleados>();
+        Connection cn = BD.getConnection();
+        try {
+            Empleados c;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                c = new Empleados();
+                c.setCodigo(rs.getInt("codigo"));
+                c.setNombre(rs.getString("nombres")); 
+                c.setPuesto(rs.getString("puesto"));
+                list.add(c);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error Consulta producto por nombre " + e);
+            return null;
+        }
+        return list;
+    }
     
+ public static boolean agregaralistaCarnet(Empleados f) throws SQLException {
+        Connection cnn = BD.getConnection();
+        PreparedStatement ps = null;
+        ps = cnn.prepareStatement("update alistaempleados set carnet = 1 where codigo=" + f.getCodigo());
+        //ps.setInt(1, f.getCodigo());
+        int rowsUpdated = ps.executeUpdate();
+        cnn.close();
+        ps.close();
+        if (rowsUpdated > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } 
+ 
+ public static boolean EliminarlistaCarnet(Empleados f) throws SQLException {
+        Connection cnn = BD.getConnection();
+        PreparedStatement ps = null;
+        ps = cnn.prepareStatement("update alistaempleados set carnet = null where codigo=" + f.getCodigo());
+        //ps.setInt(1, f.getCodigo());
+        int rowsUpdated = ps.executeUpdate();
+        cnn.close();
+        ps.close();
+        if (rowsUpdated > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }  
+
+
+public static boolean eleminartododelistaCarnet() throws SQLException {
+        Connection cnn = BD.getConnection();
+        PreparedStatement ps = null;
+        ps = cnn.prepareStatement("update alistaempleados set carnet = null");
+        int rowsUpdated = ps.executeUpdate();
+        cnn.close();
+        ps.close();
+        if (rowsUpdated > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }      
+   
+public static boolean agregartodoalistaReloj(Empleados f) throws SQLException {
+        Connection cnn = BD.getConnection();
+        PreparedStatement ps = null;
+        ps = cnn.prepareStatement("update alistaempleados set estado=?");
+        ps.setInt(1, f.getEstado());
+        int rowsUpdated = ps.executeUpdate();
+        cnn.close();
+        ps.close();
+        if (rowsUpdated > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }      
     
   
 }

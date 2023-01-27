@@ -29,6 +29,7 @@ import Reloj.Asistencia_Dia_Permisos;
 import Reloj.Faltas_Dia;
 import Reloj.HorasExtrasFecha;
 import Reloj.HorasExtrasPorEmpleado;
+import Reloj.ListaEmpleadosCarnet;
 import Reloj.ListadoGeneralAsistenciaRangoFechas;
 
 /**
@@ -105,6 +106,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
+        jMenuItem21 = new javax.swing.JMenuItem();
         evaluaciones = new javax.swing.JMenu();
         operativos = new javax.swing.JMenuItem();
         supervisores = new javax.swing.JMenuItem();
@@ -298,6 +300,15 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem19);
+
+        jMenuItem21.setText("IMPRESION DE CARNET DE MARCAJE");
+        jMenuItem21.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem21);
 
         jMenuBar1.add(jMenu1);
 
@@ -613,6 +624,15 @@ public class Inicio extends javax.swing.JFrame {
         tra.show();
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+       ListaEmpleadosCarnet tra = new  ListaEmpleadosCarnet();
+        Pane1.add(tra);
+        Dimension desktopSize = Pane1.getSize();
+        Dimension FrameSize = tra.getSize();
+        tra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        tra.show();
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -681,6 +701,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
+    private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

@@ -8,8 +8,6 @@ package EvaluacionDesempeñoOperativo;
 
 import java.awt.Dimension;
 import static Formuarios.Inicio.Pane1;
-import static sun.management.Agent.error;
-//mport java.awt.Panel;
 
 /**
  *

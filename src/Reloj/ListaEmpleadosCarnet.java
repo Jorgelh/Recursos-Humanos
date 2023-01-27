@@ -3,28 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Formuarios;
+package Reloj;
 
+import BD.BD;
 import java.util.ArrayList;
 import Clases.empleados.Empleados;
-import BD.*;
+import BDreloj.QuerysReloj;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author jluis
  */
-public class ListaEmpleados extends javax.swing.JInternalFrame {
+public class ListaEmpleadosCarnet extends javax.swing.JInternalFrame {
     int depto;
     
     /**
      * Creates new form Empleados
      */
-    public ListaEmpleados() {
+    public ListaEmpleadosCarnet() {
         initComponents();
         TablaNombre();
         TablaAgregado();
-        agregartododepto.setEnabled(false);
+        
     }
 
     /**
@@ -41,7 +50,7 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
             int codigo = (Integer.parseInt(String.valueOf(empleados.getModel().getValueAt(empleados.getSelectedRow(), 0))));
             Empleados m = new Empleados();
             m.setCodigo(codigo);
-            Consultas.agregaralista(m);
+            QuerysReloj.agregaralistaCarnet(m);
             /* System.out.println("1 = "+compo);
                System.out.println("2 = "+id_trabajo);
                System.out.println("1 = "+(Integer.parseInt(CANTIDAD.getText())*cantidad));*/
@@ -60,7 +69,7 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
             int codigo = (Integer.parseInt(String.valueOf(empleadosagregados.getModel().getValueAt(empleadosagregados.getSelectedRow(), 0))));
             Empleados m = new Empleados();
             m.setCodigo(codigo);
-            Consultas.Eliminarlista(m);
+            QuerysReloj.EliminarlistaCarnet(m);
             TablaNombre();
             TablaAgregado();
         } catch (Exception e) {
@@ -69,9 +78,24 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
 
     }
     
-    
-    
-    
+    private void ImprimeCarnet(){
+
+      BD con= new BD();
+         Connection conexion= con.getConnection();
+        try {
+            JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile("W:\\Sistema\\Recursos Humanos\\Vigente\\InicioCarnet.jasper");
+            
+            Map parametros= new HashMap();
+            parametros.put("ID", 2);
+            JasperPrint print = JasperFillManager.fillReport(jasperReport,parametros, conexion);
+            JasperViewer view = new JasperViewer(print,false);
+            view.setVisible(true);
+        } catch (Exception e) {System.out.println("F"+e);
+           JOptionPane.showMessageDialog(null, "ERROR EJECUTAR REPORTES =  "+e);
+        }        
+        
+    }    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -79,12 +103,9 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         codigos = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        agregartododepto = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         empleados = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -92,8 +113,7 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
         empleadosagregados = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        departamento = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         nombre = new javax.swing.JTextField();
 
@@ -110,6 +130,9 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
             }
         });
         codigos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                codigosKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 codigosKeyTyped(evt);
             }
@@ -117,21 +140,6 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("CODIGOS");
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("BUSCAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        agregartododepto.setText("AGREGAR TODO DEPTO");
-        agregartododepto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregartododeptoActionPerformed(evt);
-            }
-        });
 
         empleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -149,14 +157,8 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(empleados);
 
-        jButton4.setText("CANCELAR");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("LISTADO DE TODOS LOS EMPLEADOS");
 
         jButton6.setText("AGREGAR TODA LA LISTA");
@@ -172,22 +174,15 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(agregartododepto)
-                        .addGap(45, 45, 45)
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(229, 229, 229)
                         .addComponent(jButton6)
-                        .addGap(52, 52, 52)
-                        .addComponent(jButton4)
-                        .addGap(0, 97, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(213, 213, 213)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,12 +191,9 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(agregartododepto)
-                    .addComponent(jButton4)
-                    .addComponent(jButton6))
-                .addGap(21, 21, 21))
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         empleadosagregados.setModel(new javax.swing.table.DefaultTableModel(
@@ -220,6 +212,7 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(empleadosagregados);
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jButton5.setText("ELIMINAR TODOS");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,24 +221,37 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("LISTADO DE EMPLEADOS AGREGADOS PARA LISTADOS");
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("LISTADO DE EMPLEADOS AGREGADOS PARA IMPRESION DE CARNET");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ComponenteImagenes/Print.png"))); // NOI18N
+        jButton1.setText("IMPRIMIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(108, 108, 108))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(201, 201, 201))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(jButton5)
+                .addGap(59, 59, 59)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,32 +260,21 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(20, 20, 20))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("DEPARTAMENTO");
-
-        departamento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        departamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "ADMINISTRACION", "BODEGA", "CHIPS", "INSPECCION VISUAL", "MANTENIMIENTO", "SOLDER DIP", "TESTING", "TRANSFORMADORES" }));
-        departamento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                departamentoMouseClicked(evt);
-            }
-        });
-        departamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                departamentoActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("NOMBRE");
 
         nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nombreKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nombreKeyTyped(evt);
             }
@@ -290,41 +285,30 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(departamento, javax.swing.GroupLayout.Alignment.LEADING, 0, 268, Short.MAX_VALUE)
-                            .addComponent(codigos, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nombre))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))))
+                .addGap(61, 61, 61)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(codigos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                    .addComponent(nombre))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(codigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(codigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(departamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -332,7 +316,7 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -350,88 +334,31 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void codigosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codigosKeyTyped
- 
+      
     }//GEN-LAST:event_codigosKeyTyped
 
     private void codigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigosActionPerformed
-        departamento.setSelectedItem("SELECCIONAR...");
-        agregartododepto.setEnabled(false);
-        nombre.setText("");
-        TablaCodigos();
+        
     }//GEN-LAST:event_codigosActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        
         try {
             Empleados m = new Empleados();
-            m.setEstado(1);
-            Consultas.eleminartododelista(m);
+            QuerysReloj.eleminartododelistaCarnet();
         } catch (Exception e) {System.out.println("error al eliminar de la lista"+e);
         }
        codigos.setText("");
        nombre.setText("");
-       departamento.setSelectedItem("SELECCIONAR...");
-       agregartododepto.setEnabled(false);
        TablaNombre();
        TablaAgregado();
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        departamento.setSelectedItem("SELECCIONAR...");
-        agregartododepto.setEnabled(false);
-        nombre.setText("");
-        TablaCodigos();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoActionPerformed
-         
-        if (departamento.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")) {
-             depto = 0;
-        }else if (departamento.getSelectedItem().toString().equalsIgnoreCase("ADMINISTRACION")){
-             depto = 1;
-        }else if (departamento.getSelectedItem().toString().equalsIgnoreCase("BODEGA")){
-             depto = 2;
-        }else if (departamento.getSelectedItem().toString().equalsIgnoreCase("CHIPS")){
-             depto = 3;
-        }else if (departamento.getSelectedItem().toString().equalsIgnoreCase("INSPECCION VISUAL")){
-             depto = 4;
-        }else if (departamento.getSelectedItem().toString().equalsIgnoreCase("MANTENIMIENTO")){
-             depto = 5;
-        }else if (departamento.getSelectedItem().toString().equalsIgnoreCase("SOLDER DIP")){
-             depto = 6;
-        }else if (departamento.getSelectedItem().toString().equalsIgnoreCase("TESTING")){
-             depto = 7;
-        }else if (departamento.getSelectedItem().toString().equalsIgnoreCase("TRANSFORMADORES")){
-             depto = 8;
-        }
-        TablaDepartamento();
-        agregartododepto.setEnabled(true);
-    
-    }//GEN-LAST:event_departamentoActionPerformed
-
     private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
-        departamento.setSelectedItem("SELECCIONAR...");
-        agregartododepto.setEnabled(false);
-        codigos.setText("");
-        TablaNombre();
-    }//GEN-LAST:event_nombreKeyTyped
-
-    private void departamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_departamentoMouseClicked
-       codigos.setText("");
-       nombre.setText("");
-    }//GEN-LAST:event_departamentoMouseClicked
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
        
-       codigos.setText("");
-       nombre.setText("");
-       departamento.setSelectedItem("SELECCIONAR...");
-       agregartododepto.setEnabled(false);
-       TablaNombre();
-       TablaAgregado();
-       agregartododepto.setEnabled(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+       
+    }//GEN-LAST:event_nombreKeyTyped
 
     private void empleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empleadosMouseClicked
         
@@ -445,24 +372,6 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_empleadosMouseClicked
 
-    private void agregartododeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregartododeptoActionPerformed
-        
-        try {
-            Empleados m = new Empleados();
-            m.setDepto(depto);
-            Consultas.agregardepto(m);
-        } catch (Exception e) {System.out.println("error al agregar todo el departamento  "+e);
-        }
-       TablaNombre();
-       TablaAgregado();
-       
-       codigos.setText("");
-       nombre.setText("");
-       departamento.setSelectedItem("SELECCIONAR...");
-       agregartododepto.setEnabled(false);
-    
-    }//GEN-LAST:event_agregartododeptoActionPerformed
-
     private void empleadosagregadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empleadosagregadosMouseClicked
          if (evt.getClickCount() > 1) {
             
@@ -475,35 +384,37 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
        
         try {
             Empleados m = new Empleados();
-            m.setEstado(2);
-            Consultas.agregartodoalista(m);
-        } catch (Exception e) {System.out.println("error al agregar todo el departamento  "+e);
+            m.setEstado(1);
+            QuerysReloj.agregartodoalistaReloj(m);
+        } catch (Exception e) {System.out.println("error al agregar todo el departamento"+e);
         }
        TablaNombre();
        TablaAgregado();
        codigos.setText("");
        nombre.setText("");
-       departamento.setSelectedItem("SELECCIONAR...");
-       agregartododepto.setEnabled(false);
        
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
-     private void TablaCodigos() {
+    private void codigosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codigosKeyReleased
+         TablaNombre();
+    }//GEN-LAST:event_codigosKeyReleased
 
-        ArrayList<Empleados> result = Consultas.ListarEmpleadosCodigo(codigos.getText());
-        recagarTabla(result);
-    }
+    private void nombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyReleased
+        TablaNombre();
+    }//GEN-LAST:event_nombreKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      ImprimeCarnet();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
      
-    private void TablaDepartamento() {
-
-        ArrayList<Empleados> result = Consultas.ListarEmpleadosDepto(depto);
-        recagarTabla(result);
-    } 
+  
     
     private void TablaNombre(){
 
-        ArrayList<Empleados> result = Consultas.ListarEmpleadosNombre(nombre.getText());
+        ArrayList<Empleados> result = QuerysReloj.ListarEmpleadosCarnet(nombre.getText(),codigos.getText());
         recagarTabla(result);
     }
      
@@ -531,7 +442,7 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
  
     private void TablaAgregado(){
 
-        ArrayList<Empleados> result = Consultas.ListarEmpleadosAgregados();
+        ArrayList<Empleados> result = QuerysReloj.ListarEmpleadosAgregadosCarnet();
         recagarTablaAgregados(result);
     }
      
@@ -584,24 +495,20 @@ public class ListaEmpleados extends javax.swing.JInternalFrame {
         //</editor-fold>
 java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListaEmpleados().setVisible(true);
+                new ListaEmpleadosCarnet().setVisible(true);
             }
         });
         /* Create and display the form */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton agregartododepto;
     private javax.swing.JTextField codigos;
-    private javax.swing.JComboBox<String> departamento;
     private javax.swing.JTable empleados;
     private javax.swing.JTable empleadosagregados;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

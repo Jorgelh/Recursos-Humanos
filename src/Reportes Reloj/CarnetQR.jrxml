@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Carnet" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3093c744-900a-4e70-a72c-2ed7c62659e0">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Recursos Humanos\RRHH.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Codigo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT FOTOGRAFIA,
+	NOMBRES,
+	decode(departamento,1,'INSPECCION',2,'TESTING',3,'CHIPS',4,'STRIP Y POTTING',5,'TRANSFORMADORES',6,'TALLER',7,'BODEGA',8,'ADMINISTRACION',9,'GERENCIA',10,'TECNOLOGIA DE LA INFORMACIO / MANTENIMIENTO',11,'MOLDING') as Departamento ,
+	case when codigo > 1000 then ''||CODIGO else  '0'||CODIGO end as CODIGO,puesto
+FROM ALISTAEMPLEADOS
+WHERE 
+	 ALISTAEMPLEADOS.CODIGO = $P{Codigo}]]>
+	</queryString>
+	<field name="FOTOGRAFIA" class="java.io.InputStream">
+		<property name="com.jaspersoft.studio.field.name" value="FOTOGRAFIA"/>
+		<property name="com.jaspersoft.studio.field.label" value="FOTOGRAFIA"/>
+	</field>
+	<field name="NOMBRES" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOMBRES"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOMBRES"/>
+	</field>
+	<field name="DEPARTAMENTO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DEPARTAMENTO"/>
+		<property name="com.jaspersoft.studio.field.label" value="DEPARTAMENTO"/>
+	</field>
+	<field name="CODIGO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CODIGO"/>
+		<property name="com.jaspersoft.studio.field.label" value="CODIGO"/>
+	</field>
+	<field name="PUESTO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PUESTO"/>
+		<property name="com.jaspersoft.studio.field.label" value="PUESTO"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="252" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="180" height="250" uuid="c6552fda-42b8-4bc8-8eed-01dc7795df91"/>
+			</rectangle>
+			<image>
+				<reportElement x="10" y="178" width="88" height="66" uuid="66c0e646-b454-48f6-843f-8ee646e1cf48"/>
+				<imageExpression><![CDATA[$F{FOTOGRAFIA}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="58" width="50" height="20" uuid="bf5ea451-c77f-4a8d-8182-041e2948227e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="126" width="80" height="15" uuid="27bc7d39-33ad-49a1-b5bc-3681575753f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="41" width="41" height="18" uuid="b49b768f-eeeb-4d30-872c-1b5a58bfd82c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="75" width="180" height="21" uuid="018a1938-d0dd-4e47-a3da-db872b33f58a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRES}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="140" width="180" height="28" uuid="70746d8d-c38c-4c84-bc3b-e12168f3a1e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPARTAMENTO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="43" width="127" height="16" uuid="612352b3-6de8-4f81-b572-9359fc400668"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CODIGO}.toString()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="10" y="10" width="159" height="31" uuid="52588976-ad11-4854-b4f2-4dbd0c85bffc"/>
+				<imageExpression><![CDATA["C:/Users/jluis/Desktop/ELET.JPG"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="2" y="96" width="43" height="14" uuid="156596b3-327b-41d6-9970-3bd3b51be15e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Puesto:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="110" width="180" height="14" uuid="e62be4d2-5095-4d24-92f2-e89dc6db12a5"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PUESTO}.toString()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="113" y="191" width="57" height="50" uuid="63fb37ea-b7c5-4e36-88f2-c24bd40778f5"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
+    new com.google.zxing.qrcode.QRCodeWriter().encode(
+            $F{FOTOGRAFIA}, com.google.zxing.BarcodeFormat.QR_CODE, 200, 200))]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>
