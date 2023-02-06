@@ -83,7 +83,7 @@ public class ListaEmpleadosCarnet extends javax.swing.JInternalFrame {
       BD con= new BD();
          Connection conexion= con.getConnection();
         try {
-            JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile("W:\\Sistema\\Recursos Humanos\\Vigente\\InicioCarnet.jasper");
+            JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile("\\\\srvanatek\\bases de datos\\Sistema\\Recursos Humanos\\Vigente\\InicioCarnet.jasper");
             
             Map parametros= new HashMap();
             parametros.put("ID", 2);

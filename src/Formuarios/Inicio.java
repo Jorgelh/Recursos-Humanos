@@ -57,7 +57,7 @@ public class Inicio extends javax.swing.JFrame {
         bloqueonopermitido();
         }
 
-    public void selectusuario() {
+   public void selectusuario() {
         String a = System.getProperty("user.name");//usar usuario de windows
         if (a.equals("jluis") || a.equals("amonroy") || a.equals("glemus")/* || a.equals("conta")||a.equals("oecheverria")||a.equals("apacheco")||a.equals("Emely")*/) {
             depto = 1;

@@ -218,7 +218,7 @@ public static ArrayList<Empleados> ListarEmpleadosCarnet(String f, String a) {
  public static ArrayList<Empleados> ListarEmpleadosAgregadosCarnet() {
 
          //return consultanombreSQL("select codigo,nombre,puesto from empleados where upper(puesto) like upper('"+f+"%')");
-         return consultanombreSQL("select codigo,nombres,puesto from alistaempleados where CARNET = 1 and estado = 1");
+         return consultanombreSQL("select codigo,nombres,puesto from alistaempleados where CARNET =1 and estado = 1 and marcaje = 1");
     }
  
  private static ArrayList<Empleados> consultanombreSQL(String sql) {
@@ -291,7 +291,7 @@ public static boolean eleminartododelistaCarnet() throws SQLException {
 public static boolean agregartodoalistaReloj(Empleados f) throws SQLException {
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("update alistaempleados set estado=?");
+        ps = cnn.prepareStatement("update alistaempleados set carnet=?");
         ps.setInt(1, f.getEstado());
         int rowsUpdated = ps.executeUpdate();
         cnn.close();
